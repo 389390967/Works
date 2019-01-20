@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+</head>
+
+<body>
+    <div class="nav-main">
+        <div class="nav-box">
+            <!-- 一级导航 -->
+            <div class="nav">
+                <ul class="nav-ul">
+                    <li><a href="index.html" class="home"><span>主页</span></a></li>
+                    <li><a href="#" class="develop"><span>作品</span></a></li>
+                    <li><a href="#" class="wechat"><span>HTML + CSS</span></a></li>
+                    <li><a href="#" class="case"><span>JAVASCRIPT</span></a></li>
+                    <li><a href="#" class="news"><span>前端组件</span></a></li>
+                    <li><a href="#" class="contact"><span>微信小程序</span></a></li>
+                </ul>
+            </div>
+
+            <!-- 二级菜单 -->
+            <div class="nav-slide">
+                <div class="nav-slide-o"></div>
+
+                <!-- 作品 -->
+                <div class="nav-slide-o">
+                    <ul>
+                        <li><a href="#"><span>导航栏</span></a></li>
+                        <li><a href="#"><span>图片切换</span></a></li>
+                        <li><a href="#"><span>瀑布流</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- HTML + CSS -->
+                <div class="nav-slide-o">
+                    <ul>
+                        <li><a href="#"><span>HTML + CSS</span></a></li>
+                        <li><a href="#"><span>HTML5 + CSS3</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- JAVASCRIPT -->
+                <div class="nav-slide-o"></div>
+
+                <!-- 前端组件 -->
+                <div class="nav-slide-o">
+                    <ul>
+                        <li><a href="#"><span>React</span></a></li>
+                        <li><a href="#"><span>Vue</span></a></li>
+                        <li><a href="#"><span>Angular</span></a></li>
+                        <li><a href="#"><span>Bootstrap</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap"></div>
+
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var thisTime;
+        $('.nav-ul li').mouseleave(function(even) {
+            thisTime = setTimeout(thisMouseOut, 1000);
+        });
+
+        function thisMouseOut() {
+            $('.nav-slide').removeClass('hover');
+        }
+
+        $('.nav-ul li').mouseenter(function() {
+            clearTimeout(thisTime);
+            var thisUB = $('.nav-ul li').index($(this));
+            if ($.trim($('.nav-slide-o').eq(thisUB).html()) != "") {
+                $('.nav-slide').addClass('hover');
+                $('.nav-slide-o').hide();
+                $('.nav-slide-o').eq(thisUB).show();
+            } else {
+                $('.nav-slide').removeClass('hover');
+            }
+
+        });
+
+        $('.nav-slide').mouseenter(function() {
+            clearTimeout(thisTime);
+            $('.nav-slide').addClass('hover');
+        });
+
+        $('.nav-slide').mouseleave(function() {
+            $('.nav-slide').removeClass('hover');
+        })
+
+    })
+    </script>
+</body>
+
+</html>
