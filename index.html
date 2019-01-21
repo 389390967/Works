@@ -3,105 +3,184 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>主页</title>
+    <title>Ethan's website</title>
     <link rel="shortcut icon" href="img/ico.ico">
     <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-</head>
+    <style>
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100%;
+        background: #111213;
+        color: #fff;
+    }
+
+    .nav * {
+        color: #fff;
+    }
+
+    .nav>li>a {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        width: 100px;
+        line-height: 100px;
+        text-align: center;
+        -webkit-transition: all .5s;
+        -moz-transition: all .5s;
+        -o-transition: all .5s;
+        transition: all .5s;
+    }
+
+    .nav>li>a:hover {
+        background: #357dd7;
+    }
+
+    .nav>li>a:before {
+        position: absolute;
+        top: 0;
+        left: -240px;
+        z-index: 1;
+        width: 200px;
+        height: 100%;
+        background: #629feb;
+        content: '';
+        -webkit-transition: all .5s;
+        -moz-transition: all .5s;
+        -o-transition: all .5s;
+        transition: all .5s;
+        -webkit-transform: skew(45deg, 0);
+        -moz-transform: skew(45deg, 0);
+        -o-transform: skew(45deg, 0);
+        transform: skew(45deg, 0);
+        -ms-transform: skew(45deg, 0);
+    }
+
+    .nav>li>a:hover:before {
+        left: -50px;
+    }
+
+    .nav>li>a>span {
+        position: relative;
+        z-index: 1;
+    }
+
+    .nav>li>ul {
+        position: fixed;
+        top: 0;
+        left: 100px;
+        display: none;
+        width: 160px;
+        background: inherit;
+    }
+
+    .nav>li:hover>ul {
+        display: block;
+        animation: showMenu .5s;
+    }
+
+    .nav>li>ul>li>a {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        padding: 0 20px;
+        text-align: center;
+        line-height: 50px;
+        -webkit-transition: all .5s;
+        -moz-transition: all .5s;
+        -o-transition: all .5s;
+        transition: all .5s;
+    }
+
+    .nav>li>ul>li>a:hover {
+        background: #357dd7;
+    }
+
+    .nav>li>ul>li>a:before {
+        position: absolute;
+        top: 0px;
+        left: -340px;
+        width: 200%;
+        height: 100%;
+        background: #629feb;
+        content: '';
+        -webkit-transition: all .5s;
+        -moz-transition: all .5s;
+        -o-transition: all .5s;
+        transition: all .5s;
+        -webkit-transform: skew(45deg, 0);
+        -moz-transform: skew(45deg, 0);
+        -o-transform: skew(45deg, 0);
+        transform: skew(45deg, 0);
+        -ms-transform: skew(45deg, 0);
+    }
+
+    .nav>li>ul>li>a:hover {
+        background: #357dd7;
+    }
+
+    .nav>li>ul>li>a:hover:before {
+        left: -136px;
+    }
+
+    .nav>li>ul>li>a>span {
+        position: relative;
+    }
+
+    @keyframes showMenu {
+        from {
+            opacity: 0;
+            filter: Alpha(opacity=0);
+        }
+
+        to {
+            opacity: 1;
+            filter: Alpha(opacity=100);
+        }
+    }
+    </style>
 </head>
 
 <body>
-    <div class="nav-main">
-        <div class="nav-box">
-            <!-- 一级导航 -->
-            <div class="nav">
-                <ul class="nav-ul">
-                    <li><a href="index.html" class="home"><span>主页</span></a></li>
-                    <li><a href="#" class="develop"><span>作品</span></a></li>
-                    <li><a href="#" class="wechat"><span>HTML + CSS</span></a></li>
-                    <li><a href="#" class="case"><span>JAVASCRIPT</span></a></li>
-                    <li><a href="#" class="news"><span>前端组件</span></a></li>
-                    <li><a href="#" class="contact"><span>微信小程序</span></a></li>
+    <div class="header">
+        <ul class="nav">
+            <li>
+                <a href="javascript:;"><span>CSS</span></a>
+                <ul>
+                    <li><a href="javascript:;"><span>background</span></a></li>
+                    <li><a href="javascript:;"><span>background</span></a></li>
+                    <li><a href="javascript:;"><span>background</span></a></li>
+                    <li><a href="javascript:;"><span>background</span></a></li>
                 </ul>
-            </div>
-
-            <!-- 二级菜单 -->
-            <div class="nav-slide">
-                <div class="nav-slide-o"></div>
-
-                <!-- 作品 -->
-                <div class="nav-slide-o">
-                    <ul>
-                        <li><a href="#"><span>导航栏</span></a></li>
-                        <li><a href="#"><span>图片切换</span></a></li>
-                        <li><a href="#"><span>瀑布流</span></a></li>
-                    </ul>
-                </div>
-
-                <!-- HTML + CSS -->
-                <div class="nav-slide-o">
-                    <ul>
-                        <li><a href="#"><span>HTML + CSS</span></a></li>
-                        <li><a href="#"><span>HTML5 + CSS3</span></a></li>
-                    </ul>
-                </div>
-
-                <!-- JAVASCRIPT -->
-                <div class="nav-slide-o"></div>
-
-                <!-- 前端组件 -->
-                <div class="nav-slide-o">
-                    <ul>
-                        <li><a href="#"><span>React</span></a></li>
-                        <li><a href="#"><span>Vue</span></a></li>
-                        <li><a href="#"><span>Angular</span></a></li>
-                        <li><a href="#"><span>Bootstrap</span></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+            </li>
+            <li>
+                <a href="javascript:;"><span>练霓裳</span></a>
+                <ul>
+                    <li><a href="javascript:;"><span>background</span></a></li>
+                    <li><a href="javascript:;"><span>background</span></a></li>
+                    <li><a href="javascript:;"><span>background</span></a></li>
+                    <li><a href="javascript:;"><span>background</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;"><span>练霓裳</span></a>
+            </li>
+            <li>
+                <a href="javascript:;"><span>练霓裳</span></a>
+                <ul>
+                    <li><a href="javascript:;"><span>background</span></a></li>
+                    <li><a href="javascript:;"><span>background</span></a></li>
+                    <li><a href="javascript:;"><span>background</span></a></li>
+                    <li><a href="javascript:;"><span>background</span></a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;"><span>练霓裳</span></a>
+            </li>
+        </ul>
     </div>
-
-    <div class="wrap">
-       
-    </div>
-    
-    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript">
-    $(function() {
-        var thisTime;
-        $('.nav-ul li').mouseleave(function(even) {
-            thisTime = setTimeout(thisMouseOut, 1000);
-        });
-
-        function thisMouseOut() {
-            $('.nav-slide').removeClass('hover');
-        }
-
-        $('.nav-ul li').mouseenter(function() {
-            clearTimeout(thisTime);
-            var thisUB = $('.nav-ul li').index($(this));
-            if ($.trim($('.nav-slide-o').eq(thisUB).html()) != "") {
-                $('.nav-slide').addClass('hover');
-                $('.nav-slide-o').hide();
-                $('.nav-slide-o').eq(thisUB).show();
-            } else {
-                $('.nav-slide').removeClass('hover');
-            }
-
-        });
-
-        $('.nav-slide').mouseenter(function() {
-            clearTimeout(thisTime);
-            $('.nav-slide').addClass('hover');
-        });
-
-        $('.nav-slide').mouseleave(function() {
-            $('.nav-slide').removeClass('hover');
-        })
-
-    })
-    </script>
 </body>
 
 </html>
