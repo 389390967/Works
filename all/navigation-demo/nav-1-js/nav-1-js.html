@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>导航栏-原生js展现二级菜单</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css">
+    <style>
+    .header{background:#5CACEE;}
+    .nav{height:50px;}
+    .nav *{color:#fff;}
+    .nav>li{position:relative;float:left;width:130px;background:#5CACEE;}
+    .nav>li>a{position:relative;width:100%;text-align:center;line-height:50px;transition:color .5s;transform:translateZ(0);}
+    .nav>li>a:hover{color:#5CACEE;}
+    .nav>li>a:before{position:absolute;top:0;right:0;bottom:0;left:0;z-index:-1;width:100%;height:50px;background:#fff;content:'';transition:transform .5s ease-out;transform:scaleY(0);transform-origin:50% 100% 0;}
+    .nav>li>a:hover:before{transition-timing-function:cubic-bezier(.52,1.64,.37,.66);transform:scaleY(1);}
+    .nav>li>ul{position:absolute;top:50px;left:0;overflow:hidden;width:100%;height:0;background:inherit;}
+    /*.nav>li:hover>ul{display:block;}*/
+    .nav>li>ul>li>a{width:100%;border-top:1px solid #fff;text-align:center;line-height:40px;transition:all .3s;}
+    .nav>li>ul>li>a:hover{background:#fff;color:#5CACEE;}
+    </style>
+    <script>
+    window.onload = function(argument) {
+        function nav(liH) {
+            var nav = document.getElementById('nav');
+            var navChlids = nav.childNodes;
+            var navLi = [];
+            for (var i = 0; i < navChlids.length; i++) {
+                if (navChlids[i].nodeName == 'LI') {
+                    navLi.push(navChlids[i])
+                }
+            }
+
+            for (var i = 0; i < navLi.length; i++) {
+                navLi[i].timer = null;
+                navLi[i].setUlHei = 0;
+
+                navLi[i].onmouseenter = function(event) {
+                    addHeight(this);
+                };
+
+                navLi[i].onmouseleave = function(event) {
+                    reduceHeight(this);
+                };
+            }
+
+            function addHeight(oLi) {
+                clearInterval(oLi.timer);
+                var ul = oLi.getElementsByTagName('ul');
+
+                if (ul.length == 1) {
+                    var liLen = ul[0].getElementsByTagName('li').length;
+                    var ulHei = liLen * liH;
+                    oLi.timer = setInterval(function(argument) {
+                        ul[0].style.height = oLi.setUlHei + 'px';
+                        oLi.setUlHei == ulHei ? clearInterval(oLi.timer) : oLi.setUlHei++;
+                    }, 5);
+                }
+            }
+
+            function reduceHeight(oLi) {
+                clearInterval(oLi.timer);
+
+                var ul = oLi.getElementsByTagName('ul');
+                if (ul.length == 1) {
+                    var liLen = ul[0].getElementsByTagName('li').length;
+
+                    oLi.timer = setInterval(function(argument) {
+                        ul[0].style.height = oLi.setUlHei + 'px';
+                        oLi.setUlHei == 0 ? clearInterval(oLi.timer) : oLi.setUlHei--;
+                    }, 5);
+                }
+            }
+        }
+        nav(41);
+    }
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="ctn">
+            <ul class="nav" id="nav">
+                <li>
+                    <a href="javascript:;">练霓裳</a>
+                    <ul>
+                        <li><a href="javascript:;">玉罗刹</a></li>
+                        <li><a href="javascript:;">白发魔女</a></li>
+                        <li><a href="javascript:;">陕南巨盗</a></li>
+                        <li><a href="javascript:;">凌慕华之徒</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">卓一航</a>
+                    <ul>
+                        <li><a href="javascript:;">武当派掌门弟子</a></li>
+                        <li><a href="javascript:;">卓继贤之子</a></li>
+                        <li><a href="javascript:;">紫阳道长之徒</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">铁珊瑚</a>
+                </li>
+                <li>
+                    <a href="javascript:;">岳鸣珂</a>
+                    <ul>
+                        <li><a href="javascript:;">晦明禅师</a></li>
+                        <li><a href="javascript:;">熊廷弼参赞</a></li>
+                        <li><a href="javascript:;">霍天都之徒</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">铁飞龙</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="ctn">
+        <ul class="note">
+            <li>思路</li>
+            <li>开始把二级菜单的高height设为0，然后通过js去改变它的高height，将它显示或隐藏。</li>
+        </ul>
+        <ul class="note">
+            <li>childNodes 子节点</li>
+            <li>1、childNodes 属性返回节点的子节点集合，这里有个小坑：返回来的<span class="orange">只是一个类似数组的集合并不是一个数组所以并不拥有数组的一些方法</span>。</li>
+            <li>2、执行nav()的时候就获得<code>&lt;ul id='nav'&gt;</code>下所有的子字节<span class="orange">（不包含孙节点）</span>：[text, li, text, li, text, li, text, li, text, li, text]。</li>
+            <li>3、因为<code>&lt;ul id='nav'&gt;</code>下的子节点<code>&lt;li&gt;</code>之间有回车所以返回来的集合中会出现"text"子节点，所以要通过for循环遍历把<code>&lt;li&gt;</code>取出来，push到一个新的数组。</li>
+            <li>4、遍历新的得到的数组navLi，给数组下每个<code>&lt;li&gt;</code>添加addHeight和reduceHeight两个方法，同时添加timer和setUlHei两个属性。</li>
+            <li>5、为了数组navLi下每个<code>&lt;li&gt;</code>执行自己的addHeight和reduceHeight方法时<span class="orange">改变的是自己高</span>，所以每个<code>&lt;li&gt;</code>必须添加timer和setUlHei这两个属性。</li>
+            <li>6、执行addHeight和reduceHeight方法时,一开始就执行clearInterval(oLi.timer)是为了<span class="orange">当下拉菜单的高改变到一半</span>的时候，鼠标事件就发生了变化，例如由onmouseenter变成了onmouseleave或者由onmouseleave变成了onmouseenter。由onmouseenter变成了onmouseleave, clearInterval(oLi.timer)的作用就是先停止高(setUlHei)增加,再执行高(setUlHei)的减少。</li>
+        </ul>
+    </div>
+</body>
+
+</html>

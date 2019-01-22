@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>导航栏-纯css展现二级菜单</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css">
+    <style>
+    .header{background:#5CACEE;}
+    .nav{height:50px;}
+    .nav *{color:#fff;}
+    .nav>li{position:relative;float:left;width:130px;background:#5CACEE;}
+    .nav>li>a{position:relative;width:100%;text-align:center;line-height:50px;transition:color .5s;transform:translateZ(0);}
+    .nav>li>a:hover{color:#5CACEE;}
+    .nav>li>a:before{position:absolute;top:0;right:0;bottom:0;left:0;z-index:-1;width:100%;height:50px;background:#fff;content:'';transition:transform .5s ease-out;transform:scaleY(0);transform-origin:50% 0;}
+    .nav>li>a:hover:before{transition-timing-function:cubic-bezier(.52,1.64,.37,.66);transform:scaleY(1);}
+    .nav>li>ul{position:absolute;top:50px;left:0;display:none;width:100%;background:inherit;}
+    .nav>li:hover>ul{display:block;animation:showMenu .5s;}
+    .nav>li>ul>li>a{width:100%;border-top:1px solid #fff;text-align:center;line-height:40px;transition:all .3s;}
+    .nav>li>ul>li>a:hover{background:#fff;color:#5CACEE;}
+
+    @keyframes showMenu{
+    	from{
+    		opacity: 0;
+    		filter: Alpha(opacity = 0);
+    	}
+    	to{
+    		opacity: 1;
+    		filter: Alpha(opacity = 100);
+    	}
+    }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="ctn">
+            <ul class="nav">
+                <li>
+                    <a href="javascript:;">练霓裳</a>
+                    <ul>
+                        <li><a href="javascript:;">玉罗刹</a></li>
+                        <li><a href="javascript:;">白发魔女</a></li>
+                        <li><a href="javascript:;">陕南巨盗</a></li>
+                        <li><a href="javascript:;">凌慕华之徒</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">卓一航</a>
+                    <ul>
+                        <li><a href="javascript:;">武当派掌门弟子</a></li>
+                        <li><a href="javascript:;">卓继贤之子</a></li>
+                        <li><a href="javascript:;">紫阳道长之徒</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">铁珊瑚</a>
+                </li>
+                <li>
+                    <a href="javascript:;">岳鸣珂</a>
+                    <ul>
+                        <li><a href="javascript:;">晦明禅师</a></li>
+                        <li><a href="javascript:;">熊廷弼参赞</a></li>
+                        <li><a href="javascript:;">霍天都之徒</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">铁飞龙</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="ctn">
+        <ul class="note">
+            <li>transition 过渡</li>
+            <li>Internet Explorer 9 以及更早版本的浏览器不支持 transition 属性。</li>
+            <li>默认值：all 0 ease 0</li>
+            <li>transtion-property 当:hover发生时要过渡的CSS属性。</li>
+            <li>transtion-duration 过渡效果需要花费的时间（以秒或毫秒计）。</li>
+            <li>transtion-timing-function 过渡效果的速度曲线。</li>
+            <li>transtion-delay 设置过渡效果延迟多久开始（以秒或毫秒计）。</li>
+        </ul>
+        <ul class="note">
+            <li>transform 改变</li>
+            <li>Internet Explorer 9 支持替代的 -ms-transform 属性（仅适用于 2D 转换）。</li>
+            <li>Safari 和 Chrome 支持替代的 -webkit-transform 属性（3D 和 2D 转换）。</li>
+            <li>Opera 只支持 2D 转换。</li>
+        </ul>
+        <ul class="note">
+            <li>transform-scaleY() scale:比例</li>
+            <li>通过设置 Y 轴的值来改变元素高度的比例。</li>
+            <li>例如：元素写了这个样式后{height:100px;transform-scaleY(2)}，高度将变成了200px。</li>
+        </ul>
+        <ul class="note">
+            <li>transform-translateZ()</li>
+            <li>translate的本义是转化、翻译，这让我很难理解。本例子transform-translateZ(0)的作用等同于z-index(0)。</li>
+        </ul>
+        <ul class="note">
+            <li>transform-origin 改变的起点</li>
+            <li>该属性必须与 transform 属性一同使用。</li>
+            <li>默认值：50% 50% 0</li>
+            <li>transform-origin: x-axis y-axis z-axis（axis：轴）。</li>
+            <li>本导航栏的:hover效果是设置了transform-origin: 50% 0; 即transform-scaleY(0)变到transform-scaleY(1)的起点是元素的顶部，元素的高度比例<span class="orange">由顶部改变至底部</span>。</li>
+            <li>如果是设置了transform-origin: 50% 100%; 即transform-scaleY(0)变到transform-scaleY(1)的起点是元素的底部，元素的高度比例<span class="orange">由底部改变至顶部</span>。</li>
+            <li>如果是设置了transform-origin: 50% 50%; 即transform-scaleY(0)变到transform-scaleY(1)的起点是元素的中部，元素的高度比例<span class="orange">由中部改变至顶部和底部</span>。</li>
+        </ul>
+        <ul class="note">
+            <li>cubic-bezier(x1,y1,x2,y2) 三次贝塞尔曲线</li>
+            <li>
+                <img class="middle" style="margin-right:20px;" src="img/bezier.jpg" alt="">
+                <p class="inline-block middle">
+                    <a href="http://xuanfengge.com/easeing/ceaser/" target="_blank">在线生成工具 </a><br>
+                    <a href="http://yisibl.github.io/cubic-bezier/" target="_blank"> 中文版在线预览 </a><br>
+                    <a href="http://cubic-bezier.com/" target="_blank">英文版在线预览</a><br>
+                    起始点固定值为A(0,0),<br>
+                    终止点固定值为D(1,1),<br>
+                    剩下的中间两点B(x1,y1),C(x2,y2)<br>
+                    也就是所要动态操控的两个点了,对应cubic-bezier (x1,y1,x2,y2)中的四个参数,<br>
+                    <span class="orange">x1值越小和y1值越大起始速速就越快</span><br>
+                    <span class="orange">x2值越小和y2值越大结束速速就越慢</span><br>
+                    通过改变B,C两点的坐标值来动态生成一条贝塞尔曲线表示动画中的速度变化。<br>
+                    linear 对应自定义cubic-bezier(0,0,1,1)，效果为匀速直线（即B=A,C=D）；<br>
+                    ease 对应自定义cubic-bezier(.25,.1,.25,1),效果为先慢后快再慢；<br>
+                    ease-in 对应自定义cubic-bezier(.42,0,1,1),效果为先慢后快；<br>
+                    ease-out 对应自定义cubic-bezier(0,0,.58,1),效果为先快后慢；<br>
+                    ease-in-out 对应自定义cubic-bezier(.42,0,.58,1),效果为先慢后快再慢。
+                </p>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -6,181 +6,48 @@
     <title>Ethan's website</title>
     <link rel="shortcut icon" href="img/ico.ico">
     <link rel="stylesheet" type="text/css" href="css/common.css">
-    <style>
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100px;
-        height: 100%;
-        background: #111213;
-        color: #fff;
-    }
-
-    .nav * {
-        color: #fff;
-    }
-
-    .nav>li>a {
-        position: relative;
-        display: block;
-        overflow: hidden;
-        width: 100px;
-        line-height: 100px;
-        text-align: center;
-        -webkit-transition: all .5s;
-        -moz-transition: all .5s;
-        -o-transition: all .5s;
-        transition: all .5s;
-    }
-
-    .nav>li>a:hover {
-        background: #357dd7;
-    }
-
-    .nav>li>a:before {
-        position: absolute;
-        top: 0;
-        left: -240px;
-        z-index: 1;
-        width: 200px;
-        height: 100%;
-        background: #629feb;
-        content: '';
-        -webkit-transition: all .5s;
-        -moz-transition: all .5s;
-        -o-transition: all .5s;
-        transition: all .5s;
-        -webkit-transform: skew(45deg, 0);
-        -moz-transform: skew(45deg, 0);
-        -o-transform: skew(45deg, 0);
-        transform: skew(45deg, 0);
-        -ms-transform: skew(45deg, 0);
-    }
-
-    .nav>li>a:hover:before {
-        left: -50px;
-    }
-
-    .nav>li>a>span {
-        position: relative;
-        z-index: 1;
-    }
-
-    .nav>li>ul {
-        position: fixed;
-        top: 0;
-        left: 100px;
-        display: none;
-        width: 160px;
-        background: inherit;
-    }
-
-    .nav>li:hover>ul {
-        display: block;
-        animation: showMenu .5s;
-    }
-
-    .nav>li>ul>li>a {
-        position: relative;
-        display: block;
-        overflow: hidden;
-        padding: 0 20px;
-        text-align: center;
-        line-height: 50px;
-        -webkit-transition: all .5s;
-        -moz-transition: all .5s;
-        -o-transition: all .5s;
-        transition: all .5s;
-    }
-
-    .nav>li>ul>li>a:hover {
-        background: #357dd7;
-    }
-
-    .nav>li>ul>li>a:before {
-        position: absolute;
-        top: 0px;
-        left: -340px;
-        width: 200%;
-        height: 100%;
-        background: #629feb;
-        content: '';
-        -webkit-transition: all .5s;
-        -moz-transition: all .5s;
-        -o-transition: all .5s;
-        transition: all .5s;
-        -webkit-transform: skew(45deg, 0);
-        -moz-transform: skew(45deg, 0);
-        -o-transform: skew(45deg, 0);
-        transform: skew(45deg, 0);
-        -ms-transform: skew(45deg, 0);
-    }
-
-    .nav>li>ul>li>a:hover {
-        background: #357dd7;
-    }
-
-    .nav>li>ul>li>a:hover:before {
-        left: -136px;
-    }
-
-    .nav>li>ul>li>a>span {
-        position: relative;
-    }
-
-    @keyframes showMenu {
-        from {
-            opacity: 0;
-            filter: Alpha(opacity=0);
-        }
-
-        to {
-            opacity: 1;
-            filter: Alpha(opacity=100);
-        }
-    }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 
 <body>
-    <div class="header">
-        <ul class="nav">
-            <li>
-                <a href="javascript:;"><span>CSS</span></a>
-                <ul>
-                    <li><a href="javascript:;"><span>background</span></a></li>
-                    <li><a href="javascript:;"><span>background</span></a></li>
-                    <li><a href="javascript:;"><span>background</span></a></li>
-                    <li><a href="javascript:;"><span>background</span></a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;"><span>练霓裳</span></a>
-                <ul>
-                    <li><a href="javascript:;"><span>background</span></a></li>
-                    <li><a href="javascript:;"><span>background</span></a></li>
-                    <li><a href="javascript:;"><span>background</span></a></li>
-                    <li><a href="javascript:;"><span>background</span></a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;"><span>练霓裳</span></a>
-            </li>
-            <li>
-                <a href="javascript:;"><span>练霓裳</span></a>
-                <ul>
-                    <li><a href="javascript:;"><span>background</span></a></li>
-                    <li><a href="javascript:;"><span>background</span></a></li>
-                    <li><a href="javascript:;"><span>background</span></a></li>
-                    <li><a href="javascript:;"><span>background</span></a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;"><span>练霓裳</span></a>
-            </li>
-        </ul>
-    </div>
+    <ul class="nav-1">
+        <li>
+            <a href="javascript:;"><span>HTML+CSS</span></a>
+            <ul class="nav-2">
+                <li>
+                    <a href="javascript:;"><span>background</span></a>
+                    <ul class="nav-3">
+                        <li><a href="all/css-demo/background/linear-gradient.html">linear-gradient</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;"><span>JAVASCRIPT</span></a>
+            <ul class="nav-2">
+                <li>
+                    <a href="javascript:;"><span>JAVASCRIPT</span></a>
+                    <ul class="nav-3">
+                        <li><a href="javascript:;">JAVASCRIPT</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;"><span>Dome</span></a>
+            <ul class="nav-2">
+                <li>
+                    <a href="javascript:;"><span>导航栏</span></a>
+                    <ul class="nav-3">
+                        <li><a href="all/navigation-demo/nav-1-css/nav-1-css.html">导航栏-纯css展现二级菜单</a></li>
+                        <li><a href="all/navigation-demo/nav-1-js/nav-1-js.html">导航栏-原生js展现二级菜单</a></li>
+                        <li><a href="all/navigation-demo/side-nav-1/side-nav-1.html">侧导航栏-3D展现二级菜单</a></li>
+                        <li><a href="all/navigation-demo/side-nav-2/side-nav-2.html">侧导航栏-淡出展现二三级菜单</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 </body>
 
 </html>

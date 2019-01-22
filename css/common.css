@@ -3,13 +3,13 @@
 li,ol,ul{list-style:none;}
 table{border-collapse:collapse;}
 img{border:0;}
-body,html{height:100%;background-color: #313131;}
+body,html{height:100%;background-color:#313131;color:#fff;}
 a{display:inline-block;color:#5CACEE;text-decoration:none;transition:color .5s;}
 a:hover{color:#FFA54F;}
 .clearfix:after,.container:after,.ctn:after,.ctn-big:after{clear:both;display:table;content:"";}
 .ctn{margin:0 auto;width:1200px;}
 .note{padding:20px 0;}
-.note>li{line-height:28px;}
+.note>li{font-size:16px;line-height:32px;}
 .note>li:nth-child(1){font-size:20px;}
 
 /*display*/
@@ -20,7 +20,7 @@ a:hover{color:#FFA54F;}
 .inline-block{display:inline-block;}
 
 /*color*/
-.blue{color:##5CACEE}
+.blue{color:#5CACEE}
 .orange{color:#FFA54F;}
 
 /*float*/
