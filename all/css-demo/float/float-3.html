@@ -8,45 +8,23 @@
     <link rel="stylesheet" type="text/css" href="../../../css/common.css">
     <style>
     body {
-        font-size: 14px;
-        background-color: #DDF3F7;
         color: #333;
     }
 
-    a {
-        color: #0082CB;
-        text-decoration: none;
-    }
-
-    p {
-        margin: 0;
-    }
-
-    img {
-        border: 0;
-    }
-
-    .mib_body {
-        width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .mib_x {
-        margin-bottom: 10px;
-        background-color: #fff;
-    }
-
-    .mib_list {
-        padding: 20px;
-    }
-
-    .mib_resize {
+    .list {
         overflow: auto;
+        margin-bottom: 10px;
+        padding: 20px;
+        background-color: #fff;
         resize: both;
     }
 
-    .mib_vip {
+    .avatar {
+        float: left;
+        margin-right: 20px;
+    }
+
+    .sina-vip-ico {
         display: inline-block;
         width: 11px;
         height: 10px;
@@ -54,26 +32,21 @@
         background: url(data:image/gif;base64,R0lGODlhCwAKAJEDAPyZCveDBuJmBP///yH5BAEAAAMALAAAAAALAAoAAAIdhD1zopgTXgMpsBdylVCPK2UCKI0j95hoRa0NVwAAOw==);
     }
 
-    .mib_head_a {
-        float: left;
-        margin-right: 20px;
-    }
-
-    /* 下面这个是固定布局写法 */
-    .mib_cell {
+    /* --下面这个是固定布局写法-- */
+    .list-text {
         display: table-cell;
         *display: inline-block;
         width: 2000px;
         *width: auto;
     }
 
-    .mib_sms {
+    .list-text-p {
         line-height: 22px;
         padding-bottom: 6px;
         font-size: 14px;
     }
 
-    .mib_select {
+    .select {
         width: 80px;
         padding: 5px;
         font-size: 100%;
@@ -82,41 +55,40 @@
 </head>
 
 <body>
-    <div id="mibBody" class="mib_body">
-        <div class="mib_x mib_resize">
-            <div class="mib_list">
-                <a href="http://t.sina.com.cn/xuruoxuan" class="mib_head_a">
-					<img id="mibHeadImg" title="徐若瑄VIVIAN" src="http://img.mukewang.com/53e2e9470001dfd200500050.jpg">
-				</a>
-                <div class="mib_cell">
-                    <p class="mib_sms"><a title="徐若瑄VIVIAN" href="#">徐若瑄VIVIAN<i title="新浪认证" class="mib_vip"></i></a>：一個人的晚餐！茶泡飯！飯、飯、飯… 今日不減肥，先把病治好再說！ 我認真吃完這，燒就會退了吧？！ 開動啦~~~~~~~~~~~~~~~~~~</p>
-                    <div class="feed_img"><img src="http://img.mukewang.com/53e2e9b10001948000890120.jpg" height="120"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="mib_x">
-                <div class="mib_list">
-                    <p class="mib_sms">
-                        选择头像的宽度：<select id="minSelect" class="mib_select">
-                            <option value="56px">56px</option>
-                            <option value="70px">70px</option>
-                            <option value="84px">84px</option>
-                            <option value="100px">100px</option>
-                        </select>
-                    </p>
-                </div>
+    <div class="ctn">
+        <div class="list">
+            <a href="#" class="avatar"><img id="avatarImg" title="哈哈哈" src="../../../img/ico.ico"></a>
+
+            <div class="list-text">
+                <p class="list-text-p">
+                    <a title="哈哈哈" href="#">哈哈哈<i class="sina-vip-ico" title="新浪认证"></i></a>：节什叫品个织般要，百山儿再还类引般，料询完位类志。龙总日回社家文派商当数持六音，热十电后活总丽小口员打动。根化是如积，青却维什变，村受众。 加法深那命水量同，成管京五能圆组，整F秃连1想。电深属界易族战，阶管通知低写年，什9青奔各。单社事都几发她东，连空的解置几，给象丽给听自。场整维别关眼按种电，毛府养眼你向定，至连-者越越霸。 计体情式越领除，加构传置求，完7热R董。机劳此起入证步类土，由口设一整上江，龙者该兵文集电。
+                </p>
+                <div><img width="200" src="../../../img/1.jpg"></div>
             </div>
         </div>
-        <script>
-        var ele_mibSelect = document.getElementById("minSelect"),
-            ele_mibHeadImg = document.getElementById("mibHeadImg");
 
-        if (ele_mibSelect && ele_mibHeadImg) {
-            ele_mibSelect.onchange = function() {
-                ele_mibHeadImg.style.width = this.value;
-            };
-        }
-        </script>
+        <div class="list">
+            <p class="list-text-p">
+                选择头像的宽度：
+                <select class="select" id="select">
+                    <option value="32px">32px</option>
+                    <option value="64px">64px</option>
+                    <option value="128px">128px</option>
+                    <option value="256px">256px</option>
+                </select>
+            </p>
+        </div>
+    </div>
+    <script>
+    var select = document.getElementById("select"),
+        avatarImg = document.getElementById("avatarImg");
+
+    if (select && avatarImg) {
+        select.onchange = function() {
+            avatarImg.style.width = this.value;
+        };
+    }
+    </script>
 </body>
 
 </html>
