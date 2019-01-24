@@ -12,6 +12,11 @@ a:hover{color:#FFA54F;}
 .note>li{font-size:16px;line-height:32px;}
 .note>li:nth-child(1){font-size:20px;}
 
+/*btn*/
+.btn{padding:5px 10px;border:1px solid;color:#fff;cursor:pointer;}
+.btn-blue{background:#5CACEE;}
+.btn-orange{background:#FFA54F;}
+
 /*position*/
 .fixed-right-bottom{position:fixed;right:0;bottom:0;z-index:99;}
 

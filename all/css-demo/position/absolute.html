@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>position-absolute</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    .ctn{margin-bottom:50px;}
+    .box{padding:10px;background-color:#f0f0f0;}
+    img{width:500px;}
+    #btn1,#btn2{position:absolute;top:136px;left:50%;margin-left:-800px; }
+
+    </style>
+</head>
+
+<body>
+	<div class="ctn">
+	    <div class="box"><img id="img1" src="../../../img/1.jpg"></div>
+	    <button class="btn btn-blue" id="btn1">图片添加absolute属性</button>
+    </div>
+
+	<div class="ctn" style="position:absolute;top:354px;left:50%;margin-left:-600px;">
+		<div class="box" id="box"><img src="../../../img/1.jpg"></div>
+	    <button class="btn btn-blue" id="btn2">容器添加absolute属性</button>
+	</div>
+
+	<div class="ctn" style="position:absolute;top:708px;left:50%;margin-left:-600px;">
+		<ul class="note">
+			<li>absolute特性</li>
+			<li>absolute和float一样对父容器具有<span class="orange">破坏性</span>，会导致父容器高度塌陷</li>
+			<li>absolute和float一样对子元素具有<span class="orange">包裹性</span>、<span class="orange">隔绝性</span></li>
+		</ul>
+	</div>
+
+    <script>
+    var img1 = document.getElementById("img1"), btn1 = document.getElementById("btn1");
+    if (img1 != null && btn1 != null) {
+    	btn1.onclick = function() {
+    		if (this.absolute) {
+    			img1.style.position = "";
+    			this.innerHTML = "图片添加absolute属性";
+    			this.absolute = false;
+    		} else {
+    			img1.style.position = "absolute";
+    			this.innerHTML = "图片删除absolute属性";
+    			this.absolute = true;
+    		}
+    	};
+    }
+
+    var box = document.getElementById("box"), btn2 = document.getElementById("btn2");
+    if (box != null && btn2 != null) {
+    	btn2.onclick = function() {
+    		if (this.absolute) {
+    			box.style.position = "";
+    			this.innerHTML = "容器添加absolute属性";
+    			this.absolute = false;
+    		} else {
+    			box.style.position = "absolute";
+    			this.innerHTML = "容器删除absolute属性";
+    			this.absolute = true;
+    		}
+    	};
+    }
+    </script>
+</body>
+
+</html>
