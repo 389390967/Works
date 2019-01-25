@@ -30,11 +30,11 @@
         <div class="drop-down-box">
             <div class="drop-down">
                 <ul class="drop-down-result" id="result">
-                    <li><a href="absolute-1.html" target="_black">absolute-破坏性、包裹性</a></li>
-                    <li><a href="absolute-2.html" target="_black">absolute-脱离文档</a></li>
-                    <li><a href="absolute-3.html" target="_black">absolute-超越overflow</a></li>
-                    <li><a href="absolute-4.html" target="_black">absolute-去浮动特性</a></li>
-                    <li><a href="absolute-5.html" target="_black">absolute-去浮动特性</a></li>
+                    <li><a href="absolute-1.html">absolute-破坏性、包裹性</a></li>
+                    <li><a href="absolute-2.html">absolute-脱离文档</a></li>
+                    <li><a href="absolute-3.html">absolute-超越overflow</a></li>
+                    <li><a href="absolute-4.html">absolute-去浮动特性</a></li>
+                    <li><a href="absolute-5.html">absolute-去浮动特性</a></li>
                 </ul>
                 <input class="drop-down-input" id="searchInput" placeholder="搜索">
                 <a class="drop-down-btn" href="javascript:;">&#8594;</a>
@@ -55,12 +55,12 @@
                 }
             };
 
-            searchInput.onblur = function() {
-                if (this.value == "") {
-                    this.parentNode.className = "drop-down";
-                }
-                result.style.display = "none";
-            };
+            // searchInput.onblur = function() {
+            //     if (this.value == "") {
+            //         this.parentNode.className = "drop-down";
+            //     }
+            //     result.style.display = "none";
+            // };
 
             // IE7为避免浮动的不良影响而包装DIV
             if (!document.querySelector) {
