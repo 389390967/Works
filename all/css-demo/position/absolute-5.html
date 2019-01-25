@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>absolute-位置跟随特性</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    img {
+        height: 200px;
+    }
+    </style>
+</head>
+
+<body>
+    <img src="../../../img/kobe-1.jpg">
+    <div><img src="../../../img/kobe-3.jpg"></div><!-- 多加一层div是为了兼容IE7 -->
+    <img src="../../../img/kobe-2.jpg">
+    <p>
+        <button class="btn btn-blue" id="blockBtn">第2张图片应用display:block</button>
+        <button class="btn btn-blue" id="absoluteBtn">第2张图片应用position:absolute脱离文档流</button>
+    </p>
+    <script>
+    var blockBtn = document.getElementById("blockBtn"),
+        absoluteBtn = document.getElementById("absoluteBtn"),
+        img2 = document.getElementsByTagName("img")[1];
+    if (blockBtn && absoluteBtn && img2) {
+        var value_init_absolute = absoluteBtn.innerText;
+        absoluteBtn.onclick = function() {
+            if (this.innerText == value_init_absolute) {
+                img2.style.position = "absolute";
+                this.innerText = "第2张图片撤销position:absolute";
+            } else {
+                img2.style.position = "";
+                this.innerText = value_init_absolute;
+            }
+        };
+
+        var value_init_block = blockBtn.innerText;
+        blockBtn.onclick = function() {
+            if (this.innerText == value_init_block) {
+                img2.style.display = "block";
+                this.innerText = "第2张图片撤销display:block";
+            } else {
+                img2.style.display = "";
+                this.innerText = value_init_block;
+            }
+        };
+    }
+    </script>
+</body>
+
+</html>

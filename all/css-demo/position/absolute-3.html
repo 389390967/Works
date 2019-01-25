@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>absolute-超越overflow</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    body {
+        height: auto;
+    }
+
+	.ctn{
+		display: flex;
+		margin-top: 50px;
+	}
+	
+    .scroll {
+        overflow: hidden;
+        margin: 0 auto;
+        width: 500px;
+        height: 300px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        box-shadow: 0 0 3px rgba(0, 0, 0, .35);
+    }
+
+    .close {
+        position: absolute;
+        margin: -18px 0 0 482px;
+    }
+
+    img {
+        display: block;
+        margin: 10px;
+        width: 300px;
+    }
+    </style>
+</head>
+
+<body>
+	<div class="ctn">
+	    <div class="scroll">
+	        <a class="close close-blue" href="javascript:" title="关闭">X</a>
+	        <img src="../../../img/kobe-3.jpg">
+		</div>
+
+	    <div class="scroll" style="overflow:auto;">
+	        <a class="close close-blue" href="javascript:" title="关闭">X</a>
+	        <img src="../../../img/kobe-3.jpg">
+		</div>
+	</div>
+
+	<div class="ctn">
+		<ul class="note">
+			<li>absolute-超越overflow</li>
+			<li>父级元素不能有position属性</li>
+			<li>元素自己本身不能通过top,right,bottom,left来定位，而是通过margin来定位</li>
+		</ul>
+	</div>
+</body>
+
+</html>

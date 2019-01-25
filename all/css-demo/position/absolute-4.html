@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>absolute-去浮动特性</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    img {
+        width: 200px;
+    }
+    </style>
+</head>
+
+<body>
+    <img src="../../../img/kobe-1.jpg">
+    <img src="../../../img/kobe-2.jpg">
+    <img src="../../../img/kobe-3.jpg">
+    <p>
+        <button class="btn btn-blue" id="floatBtn">第2张图片添加float:left</button>
+        <button class="btn btn-blue" id="absoluteBtn">第2张图片添加position:absolute</button>
+    </p>
+
+    <ul class="note">
+    	<li>absolute-去浮动特性</li>
+    	<li>absolute和float不能同时存在，absolute特性会覆盖float特性（去浮动）</li>
+    </ul>
+    <script>
+    var floatBtn = document.getElementById("floatBtn"),
+        absoluteBtn = document.getElementById("absoluteBtn"),
+        img2 = document.getElementsByTagName("img")[1];
+
+    if (floatBtn && absoluteBtn && img2) {
+        var value_init = absoluteBtn.innerText;
+        absoluteBtn.onclick = function() {
+            if (this.innerText == value_init) {
+                img2.style.position = "absolute";
+                this.innerText = "第2张图片删除position:absolute";
+            } else {
+                img2.style.position = "";
+                this.innerText = value_init;
+            }
+        };
+
+        floatBtn.onclick = function() {
+            img2.style["cssFloat" in this.style ? "cssFloat" : "styleFloat"] = "left";
+        };
+    }
+    </script>
+</body>
+
+</html>

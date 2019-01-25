@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>absolute-脱离文档</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    	img{width:200px;}
+    </style>
+</head>
+
+<body>
+    <img src="../../../img/kobe-1.jpg">
+    <img src="../../../img/kobe-2.jpg">
+    <img src="../../../img/kobe-3.jpg">
+    <p>
+        <bottom class='btn btn-blue' id="btn">第2张图片添加position:absolute脱离文档</bottom>
+    </p>
+    <script>
+    var btn = document.getElementById("btn"),
+        img2 = document.getElementsByTagName("img")[1];
+    if (btn && img2) {
+        var value_init = btn.innerText;
+        btn.onclick = function() {
+            if (this.innerText == value_init) {
+                img2.style.position = "absolute";
+                this.innerText = "第2张图片删除position:absolute";
+            } else {
+                img2.style.position = "";
+                this.innerText = value_init;
+            }
+        };
+    }
+    </script>
+</body>
+
+</html>
