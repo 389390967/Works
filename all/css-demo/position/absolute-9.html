@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>absolute-注册页面实例</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    body{color:#333;}
+    .regist-head{padding-left:30px;background:#be3948;color:#fff;font-size:18px;line-height:60px;}
+    .regist-body{margin:auto;padding:100px 0;width:600px;}
+    .regist-group{overflow:hidden;margin-top:20px;}
+    .regist-title{float:left;width:70px;line-height:40px;} 
+    .regist-star{position:absolute;margin-left:-1em;height:40px;color:#f30;line-height:44px;}/*--重点--*/
+
+    .regist-cell{display:table-cell;*display:inline-block;}
+    .regist-input{margin-right:10px;width:260px;border:1px solid #d0d6d9;vertical-align:top;line-height:38px;}
+    .regist-input-code{width:130px;}
+    .regist-code{display:inline-block;width:115px;background:#5CACEE;color:#fff;text-align:center;text-transform:uppercase;letter-spacing:3px;font-size:18px;line-height:40px;}
+
+    .regist-remark{position:absolute;color:#666;line-height:40px;}/*--重点--*/
+    .regist-warn{padding-left:20px;color:#be3948;}
+    .regist-warn>.icon-warn{position:absolute;margin-left:-20px;height:40px;}/*--重点--*/
+
+    .regist-btn{display:inline-block;margin-top:20px;width:160px;background:#39b94e;color:#fff;text-align:center;line-height:40px;}
+    </style>
+</head>
+
+<body>
+    <div class="ctn bg-white">
+        <div class="regist-head">注册</div>
+
+        <div class="regist-body">
+            <div class="regist-group">
+                <div class="regist-title"><span class="regist-star">*</span>登录邮箱</div>
+                <div class="regist-cell">
+                    <input class="regist-input" type="email"><!-- 
+                     --><span class="regist-remark regist-warn"><i class="icon-warn"></i>邮箱格式不准确（演示）</span>
+                </div>
+            </div>
+
+            <div class="regist-group">
+                <div class="regist-title"><span class="regist-star">*</span>登录密码</div>
+                <div class="regist-cell">
+                    <input class="regist-input" type="password"><!-- 
+                     --><span class="regist-remark">请输入6-16位密码，区分大小写，不能使用空格</span>
+                </div>
+            </div>
+
+            <div class="regist-group">
+                <div class="regist-title"><span class="regist-star">*</span>用户昵称</div>
+                <div class="regist-cell">
+                    <input class="regist-input" type="text-align" maxlength="6"><!-- 
+                     --><span class="regist-remark">昵称长度不能超过6位</span>
+                </div>
+            </div>
+
+            <div class="regist-group">
+                <div class="regist-title">手机号码</div>
+                <div class="regist-cell">
+                    <input class="regist-input" type="tel" maxlength="11"><!-- 
+                     --><span class="regist-remark">昵称长度不能超过11位</span>
+                </div>
+            </div>
+
+            <div class="regist-group">
+                <div class="regist-title"><span class="regist-star">*</span>验 证 码</div>
+                <div class="regist-cell">
+                    <input class="regist-input regist-input-code">
+                    <div class="regist-code">dfsafa</div>
+                </div>
+            </div>
+
+            <div class="regist-group">
+                <div class="regist-title">&nbsp;</div>
+                <div class="regist-cell">
+                    <input type="checkbox" checked style="vertical-align:-2px;">
+                    <span>我已阅读并同意<a href="#">协议</a>。</span>
+                    <p>
+                        <a class="regist-btn" href="javascript:;">立即注册</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

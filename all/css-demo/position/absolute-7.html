@@ -2,12 +2,13 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>absolute-实例不依赖relative的下拉框定位</title>
+	<title>absolute-不依赖relative的下拉框定位</title>
 	<link rel="shortcut icon" href="../../../img/ico.ico">
 	<link rel="stylesheet" href="../../../css/common.css">
 	<style>
+	body{background-color:#fff;}
 	.ctn{overflow:hidden;padding-bottom:300px;}
-	.drop-down-box{float:left;margin-top:20px;width:260px;}
+	.drop-down-box{float:left;margin:20px;width:260px;}
 
 	.drop-down{overflow:hidden;border:1px solid #e6e8e9;background-color:#fff;box-shadow:0 0 2px #d5d7d8;}
 	.drop-down.focus{border-color:#2ea7e0;}
@@ -19,7 +20,7 @@
 	.drop-down-btn{float:right;overflow:hidden;width:38px;height:38px;background-color:#CCC;text-align:center;font-size:24px;line-height:34px;}
 	.focus .drop-down-btn{background-color:#5CACEE;color:#fff;}
 
-	.drop-down-result{position:absolute;display:none;margin:39px 0 0 0;width:260px;border:1px solid #e6e8e9;background-color:#fff;box-shadow:0 0 2px #d5d7d8;}
+	.drop-down-result{position:absolute;display:none;margin:39px 0 0 -1px;width:260px;border:1px solid #e6e8e9;background-color:#fff;box-shadow:0 0 2px #d5d7d8;}
 	.drop-down-result a{display:block;padding:0 10px;background-color:#ccc;line-height:30px;}
 	.drop-down-result a:hover{background-color:#fff;}
 	</style>

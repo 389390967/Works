@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>absolute-实例不依赖relative的图标定位</title>
+    <title>absolute-不依赖relative的图标定位</title>
     <link rel="shortcut icon" href="../../../img/ico.ico">
     <link rel="stylesheet" href="../../../css/common.css">
     <style>
@@ -14,8 +14,8 @@
 
     .list{float:left;margin:15px;width:280px;border-radius:0 0 1px 1px;background-color:#fff;box-shadow:0 1px 2px #c5c5c5;}
     .list-img-box{background-color:#6396F1;}
-    .recommend-ico{position:absolute;padding:0 8px;background-color:#f60;color:#fff;font-size:12px;line-height:18px;}
-    .vip-ico{position:absolute;margin-left:-36px;width:36px;background-image:linear-gradient(red 50%,#fff 50%);text-align:center;line-height:18px;}
+    .top-left-ico{position:absolute;padding:0 8px;background-color:#f60;color:#fff;font-size:12px;line-height:18px;}
+    .top-right-ico{position:absolute;margin-left:-36px;width:36px;background-image:linear-gradient(red 50%,#fff 50%);text-align:center;line-height:18px;}
 
     .list-h{text-align:center;font-weight:400;line-height:50px;}
     .list-info{overflow:hidden;padding:0 14px 10px 14px;color:#b4bbbf;font-size:12px;}
@@ -25,30 +25,26 @@
 <body>
     <div class="header">
         <div class="ctn">
-            <ul class="nav">
-                <li class="nav-li">
-                   <a class="nav-li-a" href="#">CBA</a>
-               </li>
-
-               <li class="nav-li">
-                   <a class="nav-li-a" href="#">NBA</a>
-               </li>
-
-               <li class="nav-li">
-                   <a class="nav-li-a" href="#">
-                       全明星<i class="hot-ico"></i>
-                   </a>
-               </li>
-           </ul>
+          <ul class="nav">
+              <li class="nav-li">
+                  <a class="nav-li-a" href="#">CBA</a>
+              </li>
+              <li class="nav-li">
+                  <a class="nav-li-a" href="#">NBA</a>
+              </li>
+              <li class="nav-li">
+                <a class="nav-li-a" href="#">全明星<i class="hot-ico"></i></a>
+              </li>
+          </ul>
        </div>
    </div>
 
   <div class="ctn">
       <a class="list" href="#">
         <div class="list-img-box">
-            <span class="recommend-ico">推荐</span>
+            <span class="top-left-ico">推荐</span>
             <img width="280" src="../../../img/kobe-2.jpg"><!-- 
-             --><i class="vip-ico">vip</i>
+             --><i class="top-right-ico">vip</i>
         </div>
 
         <h5 class="list-h">全明星首发阵容-科比</h5>

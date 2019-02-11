@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>absolute-居中、侧边栏定位</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    .ctn{min-height:1000px;background:#5CACEE;}
+    .lists{overflow:hidden;padding:10px;}
+    .list{float:left;margin:5px;width:383px;height:240px;border-radius:4px;background-color:#F7FAF9;box-shadow:0 0 2px #c5c5c5;}
+
+    .loading-box{text-align:center;}
+    .loading-img{position:absolute;width:200px;margin-left:-100px;border-radius:100%;}
+
+    .right-bar-box{overflow:hidden;height:0;text-align:right;}
+    .right-bar{position:fixed;bottom:50px;display:inline;margin-left:20px;}
+    .right-bar>a{display:block;margin-top:10px;width:50px;height:50px;border:2px solid;border-radius:100%;text-align:center;line-height:48px;}
+    </style>
+</head>
+
+<body>
+    <div class="ctn">
+        <div class="lists">
+            <div class="list"></div>
+            <div class="list"></div>
+            <div class="list"></div>
+            <div class="list"></div>
+            <div class="list"></div>
+            <div class="list"></div>
+        </div>
+
+        <div class="loading-box">&nbsp;<img class="loading-img" src="../../../img/loading.gif" alt="loading..."></div>
+        <div class="right-bar-box">
+            &nbsp;
+            <div class="right-bar">
+                <a href="#">TOP</a>
+                <a href="#">返回</a>
+                <a href="#">下载</a>
+            </div>
+        </div>
+    </div>
+
+    <ul class="note">
+      <li>absolute-居中、侧边栏定位</li>
+      <li>loading-box和right-bar-box中的text-align都是控制它们的文本 <span class="orange">&amp;nbsp;</span>，然后利用position的跟随性让div跟着 <span class="orange">&amp;nbsp;</span>。</li>
+    </ul>
+</body>
+
+</html>
