@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>overflow-水平居中跳动问题的修复</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+	<style>
+	/*
+	IE8-
+	html{overflow-y:scroll;}
+	*/
+
+
+	/*-- IE8+ --*/
+	html{overflow-y:scroll;}/*-- 测试用真实应用不写 --*/
+	.ctn{
+		padding-left:calc(100vw - 100%);/*-- 重点：100vw浏览器宽度 - 100%可用内容宽度 = 滚动条宽度，不管出不出现滚动条都会出现滚动条宽度的偏移 --*/
+		text-align:center;
+	}
+	</style>
+</head>
+
+<body>
+	<div class="ctn">
+		<img src="../../../img/kobe-2.jpg" alt="">
+	</div>
+
+	<ul class="note">
+		<li></li>
+		<li><a href="https://github.com/malihu/malihu-custom-scrollbar-plugin">滚动条插件链接，兼容IE8+</a></li>
+	</ul>
+</body>
+
+</html>

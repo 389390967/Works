@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>overflow-基本特征、获取滚动栏width</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    	.scroll{overflow-y:scroll;margin:40px 0;width:400px;height:400px;}
+    	#scroll-in{text-align:center;font-size:30px;line-height:400px;}
+    </style>
+</head>
+
+<body>
+	<ul class="note">
+	    <li>overflow-基本属性</li>
+	    <li>
+	        visible：默认值，内容溢出容器（在ie6下: 内容不会溢出容器而是容器被撑开）<br>
+	        hidden：隐藏超出部分<br>
+	        scroll：产生滚动条<br>
+	        auto：内容超出容器产生滚动条，不超出则不会产生滚动条<br>
+	        inherit：不常用。
+	    </li>
+	</ul>
+
+	<ul class="note">
+	    <li>overflow-基本特性</li>
+	    <li>
+	       当overflow-x与overflow-y值相同时，等同于overflow<br>
+	       当overflow-x与overflow-y值不相同时，且其中一个值为visible，另一个被赋予：hidden auto scroll，那这个visvible会被重置为auto。
+	    </li>
+	</ul>
+
+	<ul class="note">
+		<li>overflow: 作用前提</li>
+		<li>1、非 display: inline 水平</li>
+		<li>2、对应方位的尺寸限制: width/height/max-width/max-height/absolute 拉伸</li>
+		<li>3、对于单元格 td 等, 需要 table 为 table-layout: fixed 状态才可以</li>
+	</ul>
+
+	<ul class="note">
+		<li>overflow:visible</li>
+		<li>在IE7浏览器下，文字越多，按钮两侧padding留白就越大，IE8+则是正常的</li>
+		<li>IE7的这个问题可以用overflow:visible解决</li>
+	</ul>
+
+	<div class="ctn">
+		<div class="scroll bg-blue">
+			<div id="scroll-in"></div>
+		</div>
+	</div>
+
+	<script>
+		var scrollIn = document.getElementById('scroll-in');
+		scrollIn.innerHTML =  '滚动条width:' + (400 - scrollIn.clientWidth);
+	</script>
+</body>
+
+</html>

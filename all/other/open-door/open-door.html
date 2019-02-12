@@ -10,6 +10,7 @@
     .door-box {
         position: relative;
         z-index: 1;
+        overflow:hidden;
         height: 100%;
     }
 
@@ -81,6 +82,7 @@
         background-color: #fff;
         -webkit-perspective: 1200px;
         perspective: 1200px;
+        background:url(../../../img/1.jpg) center;
     }
 
     .door {
@@ -286,7 +288,7 @@
 
     // 点击按钮
     document.querySelector('#doorBtnIn').addEventListener('click', function() {
-        //this.style.display = 'none';
+        this.style.display = 'none';
         audioOpen.play();
         doorBox.classList.add('open');
     });

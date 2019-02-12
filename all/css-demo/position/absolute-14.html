@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>absolute-布局</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    body{-webkit-user-select:none;user-select:none;-ms-touch-action:none}
+    a{-webkit-tap-highlight-color:transparent}
+    h1,h2,h3,h4,h5,h6{font-weight:400}
+
+    .page{position:absolute;top:0;left:0;overflow:hidden;width:100%;height:100%}
+    .header,.content,.footer{position:absolute;right:0;left:0}
+
+    .header{top:0;z-index:1;padding:0 5px;height:48px;background:#5CACEE;}
+    .header>h1{float:left;padding-left:10px;font-size:18px;line-height:48px}
+    .header>a{display:inline-block;overflow:hidden;width:48px;height:48px;background-size:48px 144px;text-indent:-9em}
+    .icon-add,.icon-search,.icon-back{background:url(img/14/icon.png) no-repeat}
+    .icon-back{background-position:0 -96px}
+    .icon-add{background-position:0 -48px}
+    .header>.icon-add,.header>.icon-search{float:right}
+
+    .content{top:48px;bottom:53px;overflow:auto}
+    .wechat-list{display:block;padding:8px 12px;height:64px;border-bottom:1px solid #d7d7d7;background:#fff}
+    .wechat-list:last-child{border-bottom:0}
+    .wechat-list>.list-icon{float:left;width:48px;height:48px;background-size:cover;background-position:center;}
+    .wechat-list>.cell{padding-left:58px;color:#333;line-height:24px}
+    .wechat-h-time{overflow:hidden}
+    .wechat-h-time>h5{float:left;font-size:100%}
+    .wechat-h-time>time{float:right;color:#b9b9b9;font-size:12px}
+    .wechat-h-time+p{overflow:hidden;margin:0 20px 0 0;color:#a8a8a8;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+
+    .footer{bottom:0;z-index:1;height:52px;border-top:1px solid #dfdfdf;background:#fff}
+    .footer>a{float:left;width:25%;color:#999;text-align:center;font-size:14px}
+    .footer>a.active{color:#45c018}
+    .footer>a>i{display:block;margin-bottom:-3px;height:35px;background-size:35px 280px}
+    .icon-wechat,.icon-contacts,.icon-finds,.icon-mes{background:url(img/14/footer.png) no-repeat center top}
+    .active .icon-wechat{background-position:center -35px}
+    .icon-contacts{background-position:center -70px}
+    .active .icon-contacts{background-position:center -105px}
+    .icon-finds{background-position:center -140px}
+    .active .icon-finds{background-position:center -175px}
+    .icon-mes{background-position:center -210px}
+    .active .icon-mes{background-position:center -245px}
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="header">
+            <h1>哈哈哈</h1>
+            <a href="javascript:" class="icon-add">添加</a>
+            <a href="javascript:" class="icon-search">搜索</a>
+        </div>
+
+        <div class="content">
+            <div class="">
+                <a class="wechat-list" href="#">
+                    <div class="list-icon" style='background-image:url(../../../img/kobe-1.jpg);'></div>
+                    <div class="cell">
+                        <div class="wechat-h-time">
+                            <h5>科比</h5>
+                            <time>2008-01-01</time>
+                        </div>
+                        <p>
+                            科比-跳投
+                        </p>
+                    </div>
+                </a>
+
+                <a class="wechat-list" href="#">
+                    <div class="list-icon" style='background-image:url(../../../img/kobe-2.jpg);'></div>
+                    <div class="cell">
+                        <div class="wechat-h-time">
+                            <h5 class="blue">科比</h5>
+                            <time>2008-01-01</time>
+                        </div>
+                        <p>
+                            科比-投篮
+                        </p>
+                    </div>
+                </a>
+
+                <a class="wechat-list" href="#">
+                    <div class="list-icon" style='background-image:url(../../../img/kobe-3.jpg);'></div>
+                    <div class="cell">
+                        <div class="wechat-h-time">
+                            <h5>科比</h5>
+                            <time>2008-01-01</time>
+                        </div>
+                        <p>
+                            科比-扣篮
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <a href="#">
+                <i class="icon-wechat"></i>在线
+            </a>
+                <a href="#">
+                <i class="icon-contacts"></i>通讯录
+            </a>
+                <a href="#">
+                <i class="icon-finds"></i>发现
+            </a>
+                <a class="active" href="#">
+                <i class="icon-mes"></i>我的
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
