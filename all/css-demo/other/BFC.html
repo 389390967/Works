@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>块级格式化上下文</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+</head>
+
+<body>
+	<ul class="note">
+	    <li>一个块级格式化上下文至少满足以下一条的盒模型（怎样创建新的块级格式化上下文）</li>
+	    <li>1、float的值不为空</li>
+	    <li>2、overflow的值不为visible</li>
+	    <li>3、display的值是table-cell、table-caption或者inline-block之一</li>
+	    <li>4、position的值不为static或者relative</li>
+	</ul>
+
+	<ul class="note">
+		<li>块级格式化上下文都做些什么</li>
+		<li class="orange">1、一个块级格式化上下文内部元素再怎么翻云覆雨都不会影响外部。</li>
+		<li>2、由于块级格式化上下文的流动方式，所以它包含了浮动，这样可以阻止外边距叠加和浮动重叠。</li>
+		<li>3、在块级格式化上下文中，盒（boxes）都是从一个包含块的顶部开始，垂直的一个接一个排列着。两个兄弟元素之间的垂直距离由margin属性来决定的。在块级格式化上下文中，相邻的块元素之间的垂直外边距会产生叠加。</li>
+		<li>4、在块级格式化上下文中，每个框(box)的左外边缘挨着包含块的左边(如果是从右往左格式化，情况正好相反)。哪怕存在浮动也会如此，除非这个框(box)创建了一个新的块级格式化上下文(这种情况下，这个框会由于浮动而变窄)。</li>
+	</ul>
+
+	<ul class="note">
+	    <li>注意</li>
+	    <li>
+	        display:table本身不会创建块级格式化上下文。但是由于它可以产生匿名盒(anonymous boxes)，而匿名盒中的display:table-cell可以创建新的块级格式化上下文。换句话说，触发块级格式化上下文的是匿名盒，而不是display:table。编程人员需要铭记于心的是，虽然这两种样式都能够创建新的块级格式化上下文（间接的或者直接的），但是display:table的clear却和display:table-cell的clear效果不一样。<br>
+	        最后一个触发块级格式化上下文的是fieldset元素。奇怪的是，www.w3.org里没有任何有关这个触发行为的信息，直到HTML5标准里才出现。有些浏览器bugs（Webkit，Mozilla）提到过这个触发行为，但是没有任何官方声明。实际上，即使fieldset在大多数的浏览器上都能创建新的块级格式化上下文，开发者也不应该把这当做理所当然的
+	    </li>
+	</ul>
+
+	<a class="fixed-right-bottom" href="https://blog.csdn.net/shoyer/article/details/8753910" target="_block">参考博文：Block Formatting Contexts(块级格式化上下文)</a>
+</body>
+
+</html>

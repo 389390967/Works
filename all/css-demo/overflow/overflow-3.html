@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>overflow-失效妙用</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    .bg-blue {
+        overflow: hidden;
+        height: 300px;
+        text-align: right;
+    }
+
+    .bg-orange {
+        position: absolute;
+        display: inline-block;
+        width: 150px;
+        height: 150px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="ctn">
+        <div class="bg-blue">
+            <span class="bg-orange"></span>
+        </div>
+    </div>
+</body>
+
+</html>

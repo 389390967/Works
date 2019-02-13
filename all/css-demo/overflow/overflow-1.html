@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="../../../img/ico.ico">
     <link rel="stylesheet" href="../../../css/common.css">
     <style>
-    	.scroll{overflow-y:scroll;margin:40px 0;width:400px;height:400px;}
+    	.scroll{overflow-y:scroll;margin-bottom:40px;width:400px;height:400px;}
     	#scroll-in{text-align:center;font-size:30px;line-height:400px;}
     </style>
 </head>
@@ -45,7 +45,17 @@
 		<li>IE7的这个问题可以用overflow:visible解决</li>
 	</ul>
 
+	<ul class="note">
+		<li>overflow与BFC(Block Formatting Contexts 块级格式化上下文)</li>
+		<li>在IE7浏览器下，文字越多，按钮两侧padding留白就越大，IE8+则是正常的</li>
+		<li>IE7的这个问题可以用overflow:visible解决</li>
+	</ul>
+
 	<div class="ctn">
+		<ul class="note">
+		    <li>获取滚动条width</li>
+		</ul>
+
 		<div class="scroll bg-blue">
 			<div id="scroll-in"></div>
 		</div>
