@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>vertical-align</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    	a{
+    		line-height: 30px;
+    		vertical-align: -10px;
+    	}
+    </style>
+</head>
+
+<body>
+    <ul class="note">
+        <li>vertical-align起作用的前提</li>
+        <li>1、vertical-align只能应用于inline、inline-block水平及table-cell元素</li>
+    </ul>
+
+    <ul class="note">
+        <li>vertical-align和line-height</li>
+        <li>1、vertical-align的百分比是相对line-height的值来计算的</li>
+        <li>
+    	<pre><code>
+		{
+			<span class="orange">line-height</span>: 30px;
+			<span class="orange">vertical-align</span>: -10%;
+		}
+		等同于
+		{
+			<span class="orange">line-height</span>: 30px;
+			<span class="orange">vertical-align</span>: -3px;
+		}
+    	</code></pre>
+        </li>
+        <li>2、vertical-align默认值是baseline，所以会出现下图的情况：<img src="img/1.jpg" alt="">解决办法：<br>
+        	A、<span class="orange">&lt;img&gt;</span>添加样式<span class="orange">display</span>:block。<br>
+        	B、改变vertica的值，不要让它默认baseline对齐。<br>
+        	C、把line-height的值设为0或font-size值设为0。
+        </li>
+    </ul>
+</body>
+
+</html>
