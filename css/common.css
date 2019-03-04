@@ -12,7 +12,7 @@ a:hover{color:#ff502c;}
 .ctn{margin:0 auto;width:1200px;}
 .note{margin:0 auto;width:1200px;padding:20px 0;}
 .note>li{font-size:16px;line-height:32px;}
-.note>li:nth-child(1){color:#ff502c;font-size:20px;}
+.note>li:nth-child(1){margin-bottom:10px;color:#ff502c;font-size:20px;}
 
 /*btn*/
 .btn{padding:8px 12px;border:1px solid;color:#fff;cursor:pointer;}
@@ -30,6 +30,7 @@ a:hover{color:#ff502c;}
 
 /*position*/
 .relative{position:relative;}
+.absolute{position:absolute;}
 .fixed-right-bottom{position:fixed;right:0;bottom:0;z-index:99;}
 
 /*display*/

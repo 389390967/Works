@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>margin与absolute的垂直居中</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    .bg-white {
+        position: relative;
+        height: 400px;
+    }
+
+    .bg-blue {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        width: 600px;
+        height: 200px;
+        text-align: center;
+        line-height: 200px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="ctn bg-white">
+        <div class="bg-blue">此方法只适用于IE8+浏览器</div>
+    </div>
+</body>
+
+</html>

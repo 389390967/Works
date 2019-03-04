@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>relative</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+</head>
+
+<body>
+	<ul class="note">
+		<li>relative限制作用</li>
+		<li>1、限制absolute定位范围</li>
+		<li>2、限制absolute和fixed的z-index层级</li>
+		<li>3、限制absolute不再可以超越overflow:hidden</li>
+	</ul>
+
+	<ul class="note">
+		<li>relative定位</li>
+		<li>1、相对自身，就是top:0;left:0;位置不会发生变化。</li>
+		<li>2、无侵害，就是不会响应其他元素布局。</li>
+		<li>3、同时设置top、bottom只有top生效，同时设置left、right只有left生效。</li>
+	</ul>
+
+	<ul class="note">
+		<li>relative和层级</li>
+		<li>1、relative可以提高元素的层级。</li>
+		<li>2、一个元素只设置了relative而没有设置z-index或者设置了z-index:auto，这个元素就不会限制absolute和fixed的z-index层级（IE8+）</li>
+	</ul>
+</body>
+
+</html>

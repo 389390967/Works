@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>z-index</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    	.padding-25{padding:25px;font-size:16px;}
+    	.order-box{height:370px;}
+    	.order-box>div{position:absolute;padding:10px;width:200px;height:130px;}
+    	.order-box>div:nth-child(1){background:#b476c3;}
+    	.order-box>div:nth-child(2){background:#8b74c2;margin:40px;}
+    	.order-box>div:nth-child(3){background:#4e71c2;margin:80px;}
+    	.order-box>div:nth-child(4){background:#72d6a0;margin:120px;}
+    	.order-box>div:nth-child(5){background:#9dd162;margin:160px;}
+    	.order-box>div:nth-child(6){background:#d9ac4e;margin:200px;}
+    	.order-box>div:nth-child(7){background:#d83854;margin:240px;}
+    </style>
+</head>
+
+<body>
+    <ul class="note">
+        <li>基本特性</li>
+        <li>1、支持负值。</li>
+        <li>2、支持出css3动画。</li>
+        <li>3、在css2.1年代，需要和position配合使用。</li>
+    </ul>
+
+    <ul class="note">
+        <li>层级原则</li>
+        <li>如果定位元素z-index没有嵌套：</li>
+        <li>1、后来居上的准则;</li>
+        <li>2、哪个大，哪个上。</li>
+        <li>如果定位元素有嵌套：</li>
+        <li>3、祖先优先原则。</li>
+        <br><br>
+        <li>CSS2.1：z-index:auto当前层叠上下文的生成盒子层叠水平是0，盒子（除非是跟元素）不会创建一个新的层叠上下文。</li>
+    </ul>
+
+    <ul class="note">
+        <li>叠上下文（stacking context）</li>
+        <li>1、叠上下文是HTML元素中的一个三维概念，表示元素在z轴上的层级高低。</li>
+        <li>2、页面根元素天生具有层叠上下文，称之为“根层叠上下文”。</li>
+        <li>3、同时具有position、z-index属性的元素也具有层叠上下文。（z-index属性值为数值，position属性值不是static,position:fixed只有在blink/webkit内核浏览器才创建层叠上下文）</li>
+        <li>
+        	4、其他参与层叠上下文的属性：
+        	<p class="padding-25">
+        		A、z-index值不为auto的flex项（父元素display:flex/inline-flex下的子项）；<br>
+        		B、元素的opacity不是1；<br>
+        		C、元素的filter不是none；<br>
+        		D、元素的transform不是none；<br>
+        		E、元素的isolation是isolate；<br>
+        		F、元素mix-blend-mode不是normal；<br>
+        		G、will-change指定的属性值为上面任意一个；<br>
+        		H、元素的-webkit-overflow-scrolling设为touch。
+        	</p>
+        </li>
+		<li id="flex" class="bg-blue padding-25">
+			<div style="z-index:1; font-size:inherit;">
+				A、z-index值不为auto的flex项（父元素display:flex/inline-flex下的子项）
+				<img src="../../../img/1.jpg" style="position:relative;z-index:-1;display:block;" width="500" alt="">
+				<button id="flexBtn" class="btn btn-orange">父级添加display:flex属性</button>
+			</div>
+		</li>
+		<br>
+
+		<li id="opacityBox" class="bg-blue padding-25">
+			B、元素的opacity不是1
+			<img src="../../../img/1.jpg" style="position:relative;z-index:-1;display:block;" width="500" alt="">
+			<button id="opacityBtn" class="btn btn-orange">opacity:0.5</button>
+		</li>
+		<br>
+
+		<li id="filterBox" class="bg-blue padding-25">
+			C、元素的filter不是none
+			<img src="../../../img/1.jpg" style="position:relative;z-index:-1;display:block;" width="500" alt="">
+			<button id="filterBtn" class="btn btn-orange">filter:blur(5px)</button>
+		</li>
+		<br>
+
+		<li id="transformBox" class="bg-blue padding-25">
+			D、元素的transform不是none
+			<img src="../../../img/1.jpg" style="position:relative;z-index:-1;display:block;" width="500" alt="">
+			<button id="transformBtn" class="btn btn-orange">transform:translateX(50px)</button>
+		</li>
+		<br>
+
+		<li id="isolationBox" class="bg-blue padding-25">
+			E、元素的isolation是isolate
+			<img src="../../../img/1.jpg" style="position:relative;z-index:-1;display:block;" width="500" alt="">
+			<button id="isolationBtn" class="btn btn-orange">isolation:isolate</button>
+		</li>
+		<br>
+
+		<li id="mixBlendModeBox" class="bg-blue padding-25">
+			F、元素的mix-blend-mode不是none
+			<img src="../../../img/1.jpg" style="position:relative;z-index:-1;display:block;" width="500" alt="">
+			<button id="mixBlendModeBtn" class="btn btn-orange">mix-blend-mode:luminosity</button>
+		</li>
+
+		<li id="willChangeBox" class="bg-blue padding-25">
+			G、will-change指定的属性值为上面任意一个
+			<img src="../../../img/1.jpg" style="position:relative;z-index:-1;display:block;" width="500" alt="">
+			<button id="willChangeBtn" class="btn btn-orange">willChange:opacity</button>
+		</li>
+    </ul>
+
+    <ul class="note">
+        <li>层叠水平（stacking leavel）</li>
+        <li>层叠上下文中的每个元素都有一个层叠水平，决定了同一个层叠上下文中元素在z轴上的显示顺序。遵循谁大谁上，后来居上的层叠原则。</li>
+    </ul>
+
+    <ul class="note">
+    	<li>层叠顺序（stacking order）</li>
+    	<li>7阶层叠顺序</li>
+	    <li class="order-box">
+			<div>background/border</div>
+			<div>负z-index</div>
+			<div>block块状水平盒子</div>
+			<div>float浮动盒子</div>
+			<div>inline/inline-block水平盒子</div>
+			<div>z-index:auto或z-index:0</div>
+			<div>正z-index</div>
+	    </li>
+	    <li>为什么需要层叠顺序？ 规范元素重叠时的呈现规则。</li>
+	    <li>为什么是这个层叠顺序？ 更符合页面的加载功能和视觉呈现。（从下到上：装饰>布局>内容）</li>
+    </ul>
+
+    <ul class="note">
+    	<li>z-index与层叠上下文</li>
+    	<li>定位元素默认z-index:auto可以看成是z-index:0；</li>
+    	<li>z-index不为auto的定位元素会创建层叠上下文(IE8+)；</li>
+		<li>z-index层叠顺序的比较止步于父级层叠上下文。</li>
+    </ul>
+	<script>
+	flexBtn.onclick = function() {
+	    if (flex.style.display == 'flex') {
+	        flex.style.display = '';
+	        this.innerHTML = '父级添加display:flex属性';
+	    } else {
+	        flex.style.display = 'flex';
+	        this.innerHTML = '父级删除display:flex属性';
+	    }
+	}
+
+	opacityBtn.onclick = function() {
+	    if (opacityBox.style.opacity == '') {
+	        opacityBox.style.opacity = '0.5';
+	        this.innerHTML = 'opacity:1';
+	    } else {
+	        opacityBox.style.opacity = '';
+	        this.innerHTML = 'opacity:0.5';
+	    }
+	}
+
+	filterBtn.onclick = function() {
+	    if (filterBox.style.filter == '') {
+	        filterBox.style.filter = 'blur(5px)';
+	        this.innerHTML = 'filter:none';
+	    } else {
+	        filterBox.style.filter = '';
+	        this.innerHTML = 'filter:blur(5px)';
+	    }
+	}
+
+	isolationBtn.onclick = function() {
+	    if (isolationBox.style.isolation == '') {
+	        isolationBox.style.isolation = 'isolate';
+	        this.innerHTML = 'isolation:none';
+	    } else {
+	        isolationBox.style.isolation = '';
+	        this.innerHTML = 'isolation:isolate';
+	    }
+	}
+
+	transformBtn.onclick = function() {
+	    if (transformBox.style.transform == '') {
+	        transformBox.style.transform = 'translateX(50px)';
+	        this.innerHTML = 'transform:none';
+	    } else {
+	        transformBox.style.transform = '';
+	        this.innerHTML = 'transform:translateX(50px)';
+	    }
+	}
+
+	mixBlendModeBtn.onclick = function() {
+	    if (mixBlendModeBox.style.mixBlendMode == '') {
+	        mixBlendModeBox.style.mixBlendMode = 'luminosity';
+	        this.innerHTML = 'mix-blend-mode:none';
+	    } else {
+	        mixBlendModeBox.style.mixBlendMode = '';
+	        this.innerHTML = 'mix-blend-mode:luminosity';
+	    }
+	}
+
+	willChangeBtn.onclick = function() {
+	    if (willChangeBox.style.willChange == '') {
+	        willChangeBox.style.willChange = 'opacity';
+	        this.innerHTML = 'will-change:none';
+	    } else {
+	        willChangeBox.style.willChange = '';
+	        this.innerHTML = 'will-change:opacity';
+	    }
+	}
+	</script>
+</body>
+
+</html>

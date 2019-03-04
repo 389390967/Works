@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>padding</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    .captain-ico {
+    	display: inline-block;
+    	padding: 50px 0;
+    	width: 250px;
+    	height: 250px;
+    	border-top: 50px solid #fff;
+    	border-bottom: 50px solid #fff;
+    	background-color: #fff;
+    	background-clip: content-box;
+    }
+
+    .scoring-ring-ico{
+    	display: inline-block;
+    	padding: 10px;
+    	width: 150px;
+    	height: 150px;
+    	border: 10px solid #fff;
+    	border-radius: 50%;
+    	background-color: #fff;
+    	background-clip: content-box;
+    }
+    </style>
+</head>
+
+<body>
+	<ul class="note">
+		<li>padding对inline水平元素的影响</li>
+		<li>水平方向padding影响尺寸；垂直方向padding不影响尺寸（clientHeight），但影响背景色（占据空间/scrollHeight）</li>
+	</ul>
+
+	<ul class="note">
+		<li>padding百分比相对于宽度计算</li>
+		<li>实例：自适应正方形</li>
+		<li>
+			<div style="margin:auto;width:600px;">
+				<div class="bg-blue" style="padding:50%;"></div>
+			</div>
+		</li>
+	</ul>
+
+	<ul class="note">
+		<li>实例：大队长三道杠</li>
+		<li>
+			<div class="captain-ico"></div>
+		</li>
+	</ul>
+
+	<ul class="note">
+		<li>实例：三环圆点</li>
+		<li>
+			<div class="scoring-ring-ico"></div>
+		</li>
+	</ul>
+</body>
+
+</html>

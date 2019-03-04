@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>margin</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    	.box-big{overflow:auto;width:400px;height:350px;resize:both;}
+    	.box{overflow:hidden;width:100%;}
+    	.box>div{margin:50%;}
+    </style>
+</head>
+
+<body>
+	<ul class="note">
+		<li>一、margin重叠通常特性</li>
+		<li>1、只发生在block水平元素（不包括flaot和absolute元素）</li>
+		<li>2、不考虑writing-mode，只发生在垂直方向</li>
+	</ul>
+
+	<ul class="note">
+		<li>二、margin重叠3种情况</li>
+		<li>1、空的block元素</li>
+		<li>2、相邻的兄弟元素</li>
+		<li>3、父级和第一个/最后一个子元素</li>
+	</ul>
+
+	<ul class="note">
+		<li>三、父子margin重叠条件</li>
+		<li class="orange">margin-top重叠</li>
+		<li>1、父元素没有border-top</li>
+		<li>2、父元素没有padding-top</li>
+		<li>3、父元素非块状格式化上下文(BFC)元素</li>
+		<li>4、父元素和第一个子元素之间没有inline元素分隔</li>
+
+		<li class="orange">margin-bottom重叠</li>
+		<li>1、父元素没有border-bottom</li>
+		<li>2、父元素没有padding-bottom</li>
+		<li>3、父元素非块状格式化上下文(BFC)元素</li>
+		<li>4、父元素和最后一个子元素之间没有inline元素分隔</li>
+		<li>5、父元素没有height,min-height,max-height限制</li>
+	</ul>
+
+	<ul class="note">
+		<li>四、空block元素margin重叠其他条件</li>
+		<li>元素没有border</li>
+		<li>元素没有padding</li>
+		<li>元素里面没有inline元素</li>
+		<li>元素没有height或者min-height</li>
+	</ul>
+
+	<ul class="note">
+		<li>margin无效</li>
+		<li>1、inline水平元素的垂直margin无效，替换元素除外,如&lt;img&gt;、&lt;button&gt;</li>
+		<li>2、display:table-cell、display:table-row等声明的margin无效，替换元素除外，如&lt;img&gt;、&lt;button&gt;</li> 
+		<li>3、absolute元素非定位方向的margin看上去无效，其实是有效的，只是因为absolute元素与相邻元素之间是独立存在的，给容器加上position:relative就能使margin生效</li>
+		<li>4、float导致的margin失效，是因为float元素是相对相邻的非float元素独立存在导致的</li>
+		<li>5、inline特性导致的margin失效，是因为inline元素不能完全偏离到容器外导致的</li>
+	</ul>
+
+	<ul class="note">
+		<li>普通元素的百分比margin都是相对于容器的宽度计算的</li>
+		<li class="bg-blue clearfix">
+			<img src="../../../img/kobe-1.jpg" style="float:left;margin:10%;height:300px;" alt="">
+			图片父级的宽度是1200px,<br>
+			现在设置了<span class="orange">margin:10%</span>等同于<span class="orange">margin:120px 120px</span>。
+		</li>
+	</ul>
+
+	<ul class="note">
+		<li>absolute元素的百分比margin是相对于上一级position祖先元素(relative/absolute/fixed)的宽度计算的</li>
+		<li class="bg-blue relative" style="height:540px;">
+			<div class="bg-orange float-left">
+				<img src="../../../img/kobe-1.jpg" style="position:absolute;margin:10%;height:300px;" alt="">
+			</div>
+			上一级position祖先元素的宽度是1200px,<br>
+			现在设置了<span class="orange">margin:10%</span>等同于<span class="orange">margin:120px 120px</span>。
+		</li>
+	</ul>
+
+
+	<ul class="note">
+		<li>实例：自适应长宽2:1布局(不能填充内容的，蓝色是2:1布局)</li>
+		<li class="box-big bg-orange">
+		    <div class="box bg-blue">
+		        <div></div>
+		    </div>
+		</li>
+		<li>这个实例有一个空的block元素margin重叠表现：<span class="orange">margin-top:50%</span>和<span class="orange">margin-bottom:50:%</span>发生了重叠。这也是长宽2:1布局的原理。</li>
+	</ul>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>border</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    .captain-ico {
+    	display: inline-block;
+    	width: 120px;
+    	height: 100px;
+    	border-top: 60px double;
+    	border-bottom: 20px solid;
+    	color: #fff;
+    }
+
+    .add{position:relative;width:100px;height:100px;border:2px solid;color:#ccc;transition:color .25s;}
+    .add:before,.add:after{position:absolute;top:50%;left:50%;content:"";}
+    .add:before{margin-left:-40px;margin-top:-5px;width:80px;border-top:10px solid;}
+    .add:after{margin-left:-5px;margin-top:-40px;height:80px;border-left:10px solid;}
+    .add:hover{color:#5CACEE;}
+
+	.triangle>div{display:inline-block;margin-right:15px;}
+    .triangle-ico-1{border-width:40px;border-style:solid;border-color:#5CACEE transparent transparent transparent;}
+	.triangle-ico-2{border-width:40px;border-style:solid;border-color:#5CACEE #E46C49 transparent transparent;}
+	.triangle-ico-3{border-width:40px;border-style:solid;border-color:#5CACEE #E46C49 #ff502c transparent;border-radius:50%;}
+	.triangle-ico-4{width:80px;height:80px;border-width:20px;border-style:solid;border-color:#5CACEE #E46C49 #ff502c #be3948;background:#fff;}
+	.triangle-ico-5{overflow:hidden;width:80px;height:80px;border-radius:50%;}
+	.triangle-ico-5>div{width:80px;height:80px;border-width:25px;border-style:solid;border-color:#5CACEE #E46C49 #ff502c #be3948;}
+
+
+    .box{height:540px;border-right:20px solid transparent;background:url(../../../img/loading.gif)100% 0 #5CACEE no-repeat;}
+    </style>
+</head>
+
+<body>
+	<ul class="note">
+		<li>实例：大队长三道杠</li>
+		<li>
+			<div class="captain-ico"></div>
+		</li>
+	</ul>
+
+	<ul class="note">
+		<li>实例：利用border-color继承color的特性</li>
+		<li>
+			<a class="add" href="javascript:"></a>
+		</li>
+	</ul>
+
+	<ul class="note">
+		<li>实例：border实现各种图形</li>
+		<li class="triangle">
+			<div class="triangle-ico-1"></div>
+			<div class="triangle-ico-2"></div>
+			<div class="triangle-ico-3"></div>
+			<div class="triangle-ico-4"></div>
+			<div class="triangle-ico-5">
+				<div></div>
+			</div>
+		</li>
+	</ul>
+
+	<ul class="note">
+		<li>实例：利用border-right实现background-position相对于右上角定位</li>
+		<li class="box"></li>
+	</ul>
+</body>
+
+</html>

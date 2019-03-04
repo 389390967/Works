@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>margin与writing的垂直居中</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    .bg-blue {
+        height: 400px;
+        writing-mode: vertical-lr;
+    }
+
+    .bg-white {
+        margin: auto -50px;
+        width: 1300px;
+        height: 200px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="ctn bg-blue">
+        <div class="bg-white"></div>
+    </div>
+
+    <ul class="note">
+    	<li>writing-mode：文本在水平或垂直方向上如何排布</li>
+    	<li>writing-mode: horizontal-tb | vertical-rl | vertical-lr | sideways-rl | sideways-lr</li>
+    	<li>
+    		horizontal-tb：水平方向自上而下的书写方式。即 left-right-top-bottom<br>
+    		vertical-rl：垂直方向自右而左的书写方式。即 top-bottom-right-left<br>
+    		vertical-lr：垂直方向内内容从上到下，水平方向从左到右<br>
+    		sideways-rl：内容垂直方向从上到下排列<br>
+    		sideways-lr：内容垂直方向从下到上排列
+    	</li>
+    </ul>
+</body>
+
+</html>
