@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>border实现两栏等高布局</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    .box{float:left;width:600px;border-left:300px solid #E46C49;}
+    .nav{float:left;margin-left:-300px;width:300px;}
+    .nav>h3,.list{text-align:center;line-height:50px;}
+    </style>
+</head>
+
+<body>
+    <div class="box bg-blue">
+        <nav class="nav">
+            <h3>nav</h3>
+        </nav>
+
+        <section>
+            <div class="list">list</div>
+        </section>
+    </div>
+
+    <script>
+	document.getElementsByTagName("h3")[0].onclick = function(e) {
+		var nav = document.createElement("h3");
+		nav.innerHTML = "nav...";
+		document.getElementsByClassName("nav")[0].append(nav);
+	}
+    </script>
+</body>
+
+</html>

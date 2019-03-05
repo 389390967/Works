@@ -7,14 +7,10 @@
     <link rel="shortcut icon" href="../../../img/ico.ico">
     <link rel="stylesheet" href="../../../css/common.css">
     <style>
-    .captain-ico {
-    	display: inline-block;
-    	width: 120px;
-    	height: 100px;
-    	border-top: 60px double;
-    	border-bottom: 20px solid;
-    	color: #fff;
-    }
+    .del-box{overflow:hidden;width:40px;height:40px;}
+    .del-ico{position:relative;left:-40px;display:inline-block;width:80px;height:40px;border-right:40px solid transparent;filter:drop-shadow(40px 0 #ff0);}
+
+    .captain-ico{display:inline-block;width:120px;height:100px;border-top:60px double;border-bottom:20px solid;color:#fff;}
 
     .add{position:relative;width:100px;height:100px;border:2px solid;color:#ccc;transition:color .25s;}
     .add:before,.add:after{position:absolute;top:50%;left:50%;content:"";}
@@ -35,6 +31,15 @@
 </head>
 
 <body>
+	<ul class="note">
+		<li>实例：增加渲染可视区域</li>
+		<li>
+			<div class="del-box">
+				<img class="del-ico" src="../../../img/icon/del.png" alt="">
+			</div>
+		</li>
+	</ul>
+
 	<ul class="note">
 		<li>实例：大队长三道杠</li>
 		<li>
