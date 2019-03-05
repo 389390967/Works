@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>flex弹性盒模型</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <style>
+    body{margin:20px 0 40px;padding:0;background-color:#F1F1F1;font-size:14px;font-family:PingFangSC-Regular,Verdana,Arial,微软雅黑,宋体,sans-serif;}
+    h1{color:#0BF;text-indent:15px;}
+    h3{padding:15px 0;background-color:#fff;color:#6D7273;text-indent:15px;}
+    p{margin:0 0 5px;padding:0;color:#fff;}
+	.flex-column-center{display:flex;flex-direction:column;justify-content:center;}
+
+    .boxes{display:flex;overflow:hidden;flex-wrap:wrap;align-content:flex-start;}
+    .box{display:inline-block;margin:15px;padding:10px;width:402px;background:#8370F4;}
+
+    .box-style{padding:8px 0;}
+    .border-dashed{border:1px dashed #B6B6B6;}
+    .demo{display:flex;color:#fff;text-align:center;}
+    .demo .item{background-color:#ddd;line-height:40px;}
+    .demo .item:nth-child(1){background-color:#E46C49;}
+    .demo .item:nth-child(2){background-color:#37B0D3;}
+    .demo .item:nth-child(3){background-color:#68B33D;}
+    .demo .item:nth-child(4){background-color:#E46775;}
+    .demo .item:nth-child(5){background-color:#CFC731;}
+    .demo .item:nth-child(6){background-color:#be3948;}
+    .demo .item span{display:block;}
+
+	.demo2 .item{display:flex;width:150px;height:60px;word-wrap:break-word;line-height:1.5;justify-content:center;flex-direction:column}
+    
+    .demo-row{flex-direction:row;}
+    .demo-row-reverse{flex-direction:row-reverse;}
+    .demo-column{height:200px;flex-direction:column;}
+    .demo-column-reverse{height:200px;flex-direction:column-reverse;}
+
+    .demo-nowrap{width:400px;flex-wrap:nowrap;}
+    .demo-wrap{width:400px;flex-wrap:wrap;}
+    .demo-wrap-reverse{width:400px;flex-wrap:wrap-reverse;}
+
+    .demo-nowrap-row{flex-flow:nowrap row;}
+    .demo-wrap-row-reverse{flex-flow:wrap row-reverse;}
+    .demo-nowrap-column{height:200px;flex-flow:nowrap column;}
+    .demo-nowrap-column-reverse{height:200px;flex-flow:nowrap column-reverse;}
+    .demo-wrap-column{height:200px;flex-flow:wrap column;}
+    .demo-wrap-column-reverse{height:200px;flex-flow:wrap column-reverse;}
+
+    .demo-nowrap-column>div,
+    .demo-nowrap-column-reverse>div,
+    .demo-wrap-column>div,
+    .demo-wrap-column-reverse>div{display:flex;width:100px;height:100px;flex-direction:column;justify-content:center;}
+
+    .demo-align-items,
+    .demo-align-content{width:400px;height:200px;border:1px dashed #B6B6B6;flex-wrap:wrap;}
+    .demo-align-items .item,
+    .demo-align-content .item{width:80px;}
+
+    </style>
+</head>
+
+<body>
+    <h1>flex弹性盒模型</h1>
+    <section class="content">
+        <h3>[ flex ]</h3>
+        <div class="boxes">
+            <div class="box">
+                <div class="box-style">
+                    <p>display: flex;</p>
+                </div>
+                <div class="demo demo1">
+                    <div class="item" style="width:100px">width:100px;</div>
+                    <div class="item" style="flex:2">flex: 2;</div>
+                    <div class="item" style="flex:1">flex: 1;</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-style">
+                    <p>display: flex; </p>
+                </div>
+                <div class="demo demo2 border-dashed">
+                    <div class="item" style="margin-right:10px;">
+                        <span>width:150px;</span> <span>margin-right:10px;</span></div>
+                    <div class="item" style="flex:1">flex: 1;</div>
+                    <div class="item" style="margin-left:10px;">
+                        <span>width:150px;</span> <span>margin-left:10px;</span></div>
+                </div>
+            </div>
+        </div>
+
+        <h3>[ flex-direction ]</h3>
+        <div class="boxes">
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>flex-direction: row; /*default*/默认是水平行排列</p>
+                </div>
+                <div class="demo demo-row">
+                    <div class="item" style="flex:1">flex: 1;</div>
+                    <div class="item" style="flex:2">flex: 2;</div>
+                    <div class="item" style="flex:3">flex: 3;</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex; </p>
+                    <p>flex-direction: row-reverse; 水平相反排列</p>
+                </div>
+                <div class="demo demo-row-reverse">
+                    <div class="item" style="flex:1">flex: 1;</div>
+                    <div class="item" style="flex:2">flex: 2;</div>
+                    <div class="item" style="flex:3">flex: 3;</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex; </p>
+                    <p>flex-direction: column; 垂直列排列</p>
+                </div>
+                <div class="demo demo-column">
+                    <div class="item flex-column-center" style="flex:1">flex: 1;</div>
+                    <div class="item flex-column-center" style="flex:2">flex: 2;</div>
+                    <div class="item flex-column-center" style="flex:3">flex: 3;</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex; </p>
+                    <p>flex-direction: column-reverse; 垂直相反排列</p>
+                </div>
+                <div class="demo demo-column-reverse">
+                    <div class="item flex-column-center" style="flex:1">flex: 1;</div>
+                    <div class="item flex-column-center" style="flex:2">flex: 2;</div>
+                    <div class="item flex-column-center" style="flex:3">flex: 3;</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>[ flex-wrap ]</h3>
+        <div class="boxes">
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                	<p>width: 400px;</p>
+                    <p>flex-wrap: nowrap; /*default*/</p>                    
+                </div>
+                <div class="demo demo-nowrap">
+                    <div class="item" style="width: 100px">width: 100px;</div>
+                    <div class="item" style="width: 200px">width: 200px;</div>
+                    <div class="item" style="width: 300px">width: 300px;</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                	<p>width: 400px;</p>
+                    <p>flex-wrap: wrap; 换行</p>
+                </div>
+                <div class="demo demo-wrap border-dashed">
+                    <div class="item" style="width: 100px">width: 100px;</div>
+                    <div class="item" style="width: 200px">width: 200px;</div>
+                    <div class="item" style="width: 300px">width: 300px;</div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                	<p>width: 400px;</p>
+                    <p>flex-wrap: wrap-reverse; 换行并相反排列</p>
+                </div>
+                <div class="demo demo-wrap-reverse border-dashed">
+                    <div class="item" style="width: 100px">width: 100px;</div>
+                    <div class="item" style="width: 200px">width: 200px;</div>
+                    <div class="item" style="width: 300px">width: 300px;</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>[ flex-flow ]</h3>
+        <div class="boxes">
+			<div class="box">
+			    <div class="box-style">
+			    	<p>display: flex;</p>
+			    	<p>width: 400px;</p>
+			        <p>flex-flow: nowrap row; /*default*/</p>                    
+			    </div>
+			    <div class="demo demo-nowrap-row">
+			        <div class="item" style="width: 100px">width: 100px;</div>
+			        <div class="item" style="width: 200px">width: 200px;</div>
+			        <div class="item" style="width: 200px">width: 200px;</div>
+			        <div class="item" style="width: 100px">width: 100px;</div>
+			    </div>
+			</div>
+  			
+  			<div class="box">
+  			    <div class="box-style">
+  			    	<p>display: flex;</p>
+  			    	<p>width: 400px;</p>
+  			        <p>flex-flow: wrap row-reverse; 换行并每行分别相反排列</p>                    
+  			    </div>
+  			    <div class="demo demo-wrap-row-reverse border-dashed">
+  			        <div class="item" style="width: 100px">width: 100px;</div>
+  			        <div class="item" style="width: 200px">width: 200px;</div>
+  			        <div class="item" style="width: 200px">width: 200px;</div>
+  			        <div class="item" style="width: 100px">width: 100px;</div>
+  			    </div>
+  			</div>
+
+  			<div class="box">
+  			    <div class="box-style">
+  			    	<p>display: flex;</p>
+  			    	<p>width: 400px;</p>
+  			        <p>flex-flow: nowrap column 不换行垂直排列</p>                    
+  			    </div>
+  			    <div class="demo demo-nowrap-column border-dashed">
+  			        <div class="item">1</div>
+  			        <div class="item">2</div>
+  			        <div class="item">3</div>
+  			        <div class="item">4</div>
+  			    </div>
+  			</div>
+
+  			<div class="box">
+  			    <div class="box-style">
+  			    	<p>display: flex;</p>
+  			    	<p>width: 400px;</p>
+  			        <p>flex-flow: nowrap column-reverse 不换行垂直相反排列</p>                    
+  			    </div>
+  			    <div class="demo demo-nowrap-column-reverse border-dashed">
+  			        <div class="item">1</div>
+  			        <div class="item">2</div>
+  			        <div class="item">3</div>
+  			        <div class="item">4</div>
+  			    </div>
+  			</div>
+
+  			<div class="box">
+  			    <div class="box-style">
+  			    	<p>display: flex;</p>
+  			    	<p>width: 400px;</p>
+  			        <p>flex-flow: wrap column; 换行垂直排列</p>                    
+  			    </div>
+  			    <div class="demo demo-wrap-column border-dashed">
+  			        <div class="item">1</div>
+  			        <div class="item">2</div>
+  			        <div class="item">3</div>
+  			        <div class="item">4</div>
+  			    </div>
+  			</div>
+
+  			<div class="box">
+  			    <div class="box-style">
+  			    	<p>display: flex;</p>
+  			    	<p>width: 400px;</p>
+  			        <p>flex-flow: wrap column-reverse; 换行并每列分别相反排列</p>                    
+  			    </div>
+  			    <div class="demo demo-wrap-column-reverse border-dashed">
+  			        <div class="item">1</div>
+  			        <div class="item">2</div>
+  			        <div class="item">3</div>
+  			        <div class="item">4</div>
+  			    </div>
+  			</div>
+        </div>
+
+
+        <h3>[ justify-content ]</h3>
+        <div class="boxes">
+            <div class="box">
+                <div class="box-style">
+                    <p>display: flex;</p>
+                    <p>justify-content: flex-start; /* default */效果如同 float:left;</p>
+                </div>
+                <div class="demo border-dashed" style="justify-content: flex-start;">
+                    <div class="item" style="width:100px">width:100px;</div>
+                    <div class="item" style="width:100px">width:100px;</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>justify-content: flex-end; 效果如同 float:right;</p>
+                </div>
+                <div class="demo demo-justify border-dashed" style="justify-content: flex-end;">
+                    <div class="item" style="width:100px">width:100px;</div>
+                    <div class="item" style="width:100px">width:100px;</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>justify-content: center;</p>
+                </div>
+                <div class="demo demo-justify-end border-dashed" style="justify-content: center;">
+                    <div class="item" style="width:100px">width:100px;</div>
+                    <div class="item" style="width:100px">width:100px;</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>justify-content: space-between; </p>
+                </div>
+                <div class="demo demo-justify border-dashed" style="justify-content: space-between;">
+                    <div class="item" style="width:100px">width:100px;</div>
+                    <div class="item" style="width:100px">width:100px;</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>justify-content: space-around; </p>
+                </div>
+                <div class="demo demo-justify-end border-dashed" style="justify-content: space-around;">
+                    <div class="item" style="width:100px">width:100px;</div>
+                    <div class="item" style="width:100px">width:100px;</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>[ align-self ]</h3>
+        <div class="boxes">
+            <div class="box" style="width:1200px;">
+                <div class="box-style">
+                    <p>display: flex;</p>
+                </div>
+                <div class="demo border-dashed" style="height:200px;">
+                	<div class="item" style="flex:1; align-self:auto;">/*default */<br>align-self:auto;</div>
+                    <div class="item" style="flex:1; align-self:flex-start;">align-self:flex-start;</div>
+                    <div class="item" style="flex:1; align-self:flex-end;">align-self:flex-end;</div>
+                    <div class="item" style="flex:1; align-self:center;">align-self:center;</div>
+                    <div class="item" style="flex:1; align-self:baseline;">align-self:baseline;</div>
+                    <div class="item flex-column-center" style="flex:1; align-self:stretch;">align-self:stretch;</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>[ align-items ]</h3>
+        <div class="boxes">
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>align-items: flex-start; /* default */</p>
+                </div>
+                <div class="demo demo-align-items" style="align-items: flex-start;">
+                    <div class="item">a</div>
+                    <div class="item">b</div>
+                    <div class="item">c</div>
+                    <div class="item">d</div>
+                    <div class="item">e</div>
+                    <div class="item">f</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>align-items: flex-end;</p>
+                </div>
+                <div class="demo demo-align-items" style="align-items: flex-end;">
+                    <div class="item">a</div>
+                    <div class="item">b</div>
+                    <div class="item">c</div>
+                    <div class="item">d</div>
+                    <div class="item">e</div>
+                    <div class="item">f</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>align-items: center;</p>
+                </div>
+                <div class="demo demo-align-items" style="align-items: center;">
+                    <div class="item">a</div>
+                    <div class="item">b</div>
+                    <div class="item">c</div>
+                    <div class="item">d</div>
+                    <div class="item">e</div>
+                    <div class="item">f</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>align-items: baseline;</p>
+                </div>
+                <div class="demo demo-align-items" style="align-items: baseline;">
+                    <div class="item">a</div>
+                    <div class="item">b</div>
+                    <div class="item">c</div>
+                    <div class="item">d</div>
+                    <div class="item">e</div>
+                    <div class="item">f</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>align-items: stretch; </p>
+                </div>
+                <div class="demo demo-align-items" style="align-items: stretch;">
+                    <div class="item flex-column-center" style="flex:1; height:100px;">height:100px;</div>
+                    <div class="item flex-column-center" style="flex:1; min-height:20px;">min-height:20px;</div>
+                    <div class="item flex-column-center" style="flex:1; max-height:60px;">max-height:60px;</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>[ align-content ]</h3>
+        <div class="boxes">
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>align-content: flex-start; </p>
+                </div>
+                <div class="demo demo-align-content" style="align-content: flex-start;">
+                    <div class="item">a</div>
+                    <div class="item">b</div>
+                    <div class="item">c</div>
+                    <div class="item">d</div>
+                    <div class="item">e</div>
+                    <div class="item">f</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>align-content: flex-end; </p>
+                </div>
+                <div class="demo demo-align-content" style="align-content: flex-end;">
+                    <div class="item">a</div>
+                    <div class="item">b</div>
+                    <div class="item">c</div>
+                    <div class="item">d</div>
+                    <div class="item">e</div>
+                    <div class="item">f</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>align-content: center; </p>
+                </div>
+                <div class="demo demo-align-content" style="align-content: center;">
+                    <div class="item">a</div>
+                    <div class="item">b</div>
+                    <div class="item">c</div>
+                    <div class="item">d</div>
+                    <div class="item">e</div>
+                    <div class="item">f</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>align-content: space-between; </p>
+                </div>
+                <div class="demo demo-align-content" style="align-content: space-between;">
+                    <div class="item">a</div>
+                    <div class="item">b</div>
+                    <div class="item">c</div>
+                    <div class="item">d</div>
+                    <div class="item">e</div>
+                    <div class="item">f</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>align-content: space-around; </p>
+                </div>
+                <div class="demo demo-align-content" style="align-content: space-around;">
+                    <div class="item">a</div>
+                    <div class="item">b</div>
+                    <div class="item">c</div>
+                    <div class="item">d</div>
+                    <div class="item">e</div>
+                    <div class="item">f</div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                    <p>align-content: stretch; /*default*/ </p>
+                </div>
+                <div class="demo demo-align-content" style="align-content: stretch;">
+                    <div class="item flex-column-center">a</div>
+                    <div class="item flex-column-center">b</div>
+                    <div class="item flex-column-center">c</div>
+                    <div class="item flex-column-center">d</div>
+                    <div class="item flex-column-center">e</div>
+                    <div class="item flex-column-center">f</div>
+                </div>
+            </div>
+        </div>
+
+        <h3>[ order ]</h3>
+        <div class="boxes">
+            <div class="box" style="width:1000px;">
+                <div class="box-style">
+                	<p>display: flex;</p>
+                </div>
+                <div class="demo demo-align-content" style="width:1000px;height:40px;">
+                    <div class="item">a</div>
+                    <div class="item">b</div>
+                    <div class="item">c</div>
+                    <div class="item" style="order:-1; width:120px"> d (order:-1) </div>
+                    <div class="item">e</div>
+                    <div class="item">f</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
