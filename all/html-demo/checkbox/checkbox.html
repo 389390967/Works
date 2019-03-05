@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>checkbox</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    .checkbox-border{width:30px;height:30px;background-color:#fff;background-clip:content-box;box-shadow:inset 0 5px,inset 5px 0,inset -5px 0,inset 0 -5px;color:#5CACEE;font-size:14px;cursor:pointer;}
+
+	.checkbox-box{display:flex;padding:40px;align-items:center;justify-content:space-between;}
+    .checkbox-box input[type=checkbox]{visibility:hidden;}
+
+    	
+	/*Create the slider bar*/
+	.checkboxOne{position:relative;display:inline-block;width:40px;height:10px;border-radius:10px;background:#555}
+	/*Create the slider from the label*/
+	.checkboxOne label{position:absolute;top:-3px;left:-3px;display:block;width:16px;height:16px;border-radius:50%;background:#ccc;cursor:pointer;-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease;-ms-transition:all .5s ease}
+	.checkboxOne input[type=checkbox]:checked + label {left: 27px;}
+
+
+	.checkboxTwo{position:relative;display:inline-block;width:120px;height:40px;border-radius:50px;background:#333;}
+	/*Create the line for the circle to move across*/
+	.checkboxTwo:before{position:absolute;top:19px;left:14px;width:90px;height:2px;background:#111;content:'';}
+	/*Create the circle to click*/
+	.checkboxTwo label{position:absolute;top:9px;left:12px;z-index:1;display:block;width:22px;height:22px;border-radius:50%;background:#ddd;cursor:pointer;-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease;-ms-transition:all .5s ease;}
+	/*Create the click event for the checkbox*/
+	.checkboxTwo input[type=checkbox]:checked+label{left:84px;background:#26ca28;}
+
+
+	.checkboxThree{position:relative;display:inline-block;width:120px;height:40px;border-radius:50px;background:#333;}
+	/*-- 
+	当滑块处于未选中状态时，滑块会在左侧，并且右边显示”OFF”，当点击的时候，滑块移动到右侧，左侧显示”ON”。
+	但是元素数量不足以让我们实现这些功能，所以我们要用:before和:after两个伪类创建两个元素，分别放置”ON”和”OFF”。 
+	--*/
+	.checkboxThree:before{position:absolute;top:12px;left:13px;height:2px;color:#26ca28;content:'On';font-size:16px;}
+	.checkboxThree:after{position:absolute;top:12px;left:84px;height:2px;color:#ddd;content:'Off';font-size:16px;}
+	.checkboxThree label{position:absolute;top:9px;left:12px;z-index:1;display:block;width:52px;height:22px;border-radius:50px;background:#ddd;cursor:pointer;-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease;-ms-transition:all .5s ease;}
+	.checkboxThree input[type=checkbox]:checked+label{left:60px;background:#26ca28;}
+
+
+	.checkboxFour{position:relative;display:inline-block;width:40px;height:40px;border-radius:100%;background:#ddd;-webkit-box-shadow:0 1px 3px rgba(0,0,0,.5);-moz-box-shadow:0 1px 3px rgba(0,0,0,.5);box-shadow:0 1px 3px rgba(0,0,0,.5);}
+	.checkboxFour label{position:absolute;top:5px;left:5px;z-index:1;display:block;width:30px;height:30px;border-radius:100px;background:#333;-webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,.5);-moz-box-shadow:inset 0 1px 3px rgba(0,0,0,.5);box-shadow:inset 0 1px 3px rgba(0,0,0,.5);cursor:pointer;-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease;-ms-transition:all .5s ease;}
+	.checkboxFour input[type=checkbox]:checked+label{background:#26ca28;}
+
+	.checkboxFive{position:relative;display:inline-block;width:25px;}
+	.checkboxFive label{position:absolute;top:0;left:0;width:25px;height:25px;border:1px solid #ddd;background:#eee;cursor:pointer;}
+	/*-- 
+	接下来，我们要创建方框中的对勾，对于这一点，我们可以使用:after伪类创建一个新的元素，为了实现这个样式，我们可以创建一个12px * 8px的长方形并给他加上边框。这时候我们去掉上面和右边的边框之后，它会看起来像一个字母L。然后我们可以使用CSS的transform属性让它旋转一下，这样看起来就像是一个对勾。 
+	--*/
+	.checkboxFive label:after{position:absolute;top:6px;left:6px;width:12px;height:8px;border:3px solid #333;border-top:none;border-right:none;background:0 0;content:'';opacity:.2;-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);transform:rotate(-45deg);-ms-transform:rotate(-45deg);}
+	/*--
+	在上面的CSS中，我们已经设置它的透明度为0.2，所以你会看到的复选框有一个半透明的对勾。你可以在悬停的时候加深一点，在选中时，可以把设置为不透明。
+	--*/
+	.checkboxFive label:hover::after{opacity:.5;}
+	.checkboxFive input[type=checkbox]:checked+label:after{opacity:1;}
+    </style>
+</head>
+
+<body>
+    <ul class="note">
+        <li>checkbox设置border属性无效，可以用box-shadow来模拟border</li>
+        <li><input class="checkbox-border" type="checkbox"></li>
+    </ul>
+
+    <ul class="note">
+        <li>自定义check-box样式</li>
+        <li class="checkbox-box bg-blue">
+            <div class="checkboxOne">
+                <input id="checkboxOneInput" name="" type="checkbox" value="1">
+                <label for="checkboxOneInput"></label>
+            </div>
+
+            <div class="checkboxTwo">
+                <input id="checkboxTwoInput" name="" type="checkbox" value="1">
+                <label for="checkboxTwoInput"></label>
+            </div>
+
+            <div class="checkboxThree">
+                <input id="checkboxThreeInput" name="" type="checkbox" value="1">
+                <label for="checkboxThreeInput"></label>
+            </div>
+
+            <div class="checkboxFour">
+                <input id="checkboxFourInput" name="" type="checkbox" value="1">
+                <label for="checkboxFourInput"></label>
+            </div>
+
+            <div class="checkboxFive">
+                <input id="checkboxFiveInput" name="" type="checkbox" value="1">
+                <label for="checkboxFiveInput"></label>
+            </div>
+        </li>
+    </ul>
+</body>
+
+</html>
