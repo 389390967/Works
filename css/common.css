@@ -45,6 +45,9 @@ a:hover{color:#ff502c;}
 .float-left{float:left;}
 .float-right{float:right;}
 
+/*padding*/
+.padding-left-30{padding-left:30px;}
+
 /*color*/
 .red{color:#be3948;}
 .blue{color:#5CACEE;}
