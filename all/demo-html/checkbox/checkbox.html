@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="../../../img/ico.ico">
     <link rel="stylesheet" href="../../../css/common.css">
     <style>
-    .checkbox-border{width:30px;height:30px;background-color:#fff;background-clip:content-box;box-shadow:inset 0 5px,inset 5px 0,inset -5px 0,inset 0 -5px;color:#5CACEE;font-size:14px;cursor:pointer;}
+    .checkbox-border{width:30px;height:30px;background-color:#fff;background-clip:content-box;box-shadow:0 5px inset,5px 0 inset,-5px 0 inset,0 -5px inset;color:#5CACEE;font-size:14px;cursor:pointer;}
 
 	.checkbox-box{display:flex;padding:40px;align-items:center;justify-content:space-between;}
     .checkbox-box input[type=checkbox]{visibility:hidden;}
@@ -60,7 +60,7 @@
 
 <body>
     <ul class="note">
-        <li>checkbox设置border属性无效，可以用box-shadow来模拟border</li>
+        <li>checkbox设置border属性无效，可以用box-shadow来模拟border, IE11-、Firefox65.0.2- 不兼容</li>
         <li><input class="checkbox-border" type="checkbox"></li>
     </ul>
 
