@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>变量声明</title>
+    <link rel="shortcut icon" href="../../img/ico.ico">
+    <link rel="stylesheet" href="../../css/common.css">
+</head>
+
+<body>
+    <ul class="note">
+        <li>let</li>
+        <li>
+        <pre>
+    	(function () {
+    	    for (<i>var</i> i = 0; i < 3; i++) {
+    	        console.log(i)
+    	    }
+    	    console.log(i)
+    	})();
+
+    	输出：<em>0,1,2</em>
+    	输出：<em>3</em>
+        </pre>
+
+        <pre>
+    	(function () {
+    	    for (<i>let</i> i = 0; i < 3; i++) {
+    	        console.log(i)
+    	    }
+    	    console.log(i)
+    	})();
+
+    	输出：<em>0,1,2</em>
+    	输出：<em>Uncaught ReferenceError: i is not defined.</em>未捕获引用错误：未定义i
+		</pre>
+
+		<pre>
+    	<i>let</i> a = 0;
+    	<i>let</i> a = 1;
+
+    	输出：<em>Uncaught SyntaxError: Identifier 'a' has already been declared.</em>未捕获语法错误：标识符“a”已声明。
+        </pre>
+
+        1、在es6中每一对{}都是一个块作用域，而let声明的变量只能在它声明的块作用域使用<br>
+        2、在es6中默认开启strict（严格的）代码模式，所以报错是<em class="red">Uncaught ReferenceError: i is not defined</em>而不是直接报错<em class="red">undefined</em><br>
+        3、let不能对同一个变量重复命名
+        </li>
+    </ul>
+
+    <ul class="note">
+    	<li>const</li>
+    	<li>
+    	<pre>
+    	function () {
+    		<i>const</i> PI = 3.1415926;
+    		PI = 3.14;
+    		console.log(const)
+    	}
+
+    	输出：<em>Uncaught TypeError: Assignment to constant variable.</em>未捕获的类型错误：分配给常量变量。
+    	</pre>
+
+    	<pre>
+    	(function () {
+    		<i>const</i> PI;
+    		PI = 3.14;
+    		console.log(PI);
+
+    		<i>const</i> test = {
+    			a : 1,
+    		}
+    		test.a = 2;
+    		test.b = 3;
+    		console.log(test)
+    	})();
+
+    	输出：<em>Uncaught SyntaxError: Missing initializer in const declaration</em>未捕获语法错误：常量声明中缺少初始值设定项
+    	输出：<em>{a: 2, b: 3}</em>
+    	</pre>
+
+    	1、在es6中每一对{}都是一个块作用域，而const声明的变量只能在它声明的块作用域使用<br>
+    	2、const声明的是常量，只能读不能改<i>(consts声明的对象除外)</i><br>
+    	3、const声明的时候必须赋值，不能先声明后赋值
+    	</li>
+    </ul>
+    <script>
+    /*(function() {
+        for (var i = 0; i < 3; i++) {
+            console.log(i)
+        }
+        console.log(i)
+    })();*/
+
+    /*(function() {
+        for (let i = 0; i < 3; i++) {
+            console.log(i)
+        }
+        console.log(i)
+    })();*/
+
+    /*let a = 0;
+    let a = 1;*/
+
+	/*(function () {
+		const PI = 3.1415926;
+		PI = 3.14;
+		console.log(PI);
+	})();*/
+
+	/*(function () {
+		const PI = 3.1415926;
+		PI = 3.14;
+		console.log(PI);
+	})();*/
+
+	(function () {
+		// const PI;
+		// PI = 3.14;
+		// console.log(PI);
+
+		const test = {
+			a : 1,
+		}
+		test.a = 2;
+		test.b = 3;
+		console.log(test)
+	})();
+    </script>
+</body>
+
+</html>
