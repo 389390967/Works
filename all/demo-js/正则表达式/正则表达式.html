@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>正则表达式/规则表达式</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    table {
+        margin: 0 15px;
+    }
+
+    th {
+        font-weight: 400;
+        font-size: 16px;
+    }
+
+    td,
+    th {
+        padding: 10px;
+        border: 1px solid #5CACEE;
+    }
+
+    td:nth-child(1),
+    th:nth-child(1) {
+        color: #ff502c;
+        text-align: center;
+    }
+    </style>
+</head>
+
+<body>
+    <ul class="note">
+        <li>规则表达式就是用于描述规则的工具。换句话说，规则表达式就是记录文本规则的代码。</li>
+        <li class="flex-space-between margin-hor--15">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan='2'>常用元字符</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>\w</td>
+                        <td>(word)匹配字母或数字或下划线[a-z0-9_]</td>
+                    </tr>
+                    <tr>
+                        <td>\s</td>
+                        <td>(space)匹配任意的空白符</td>
+                    </tr>
+                    <tr>
+                        <td>\d</td>
+                        <td>(digital)匹配数字[0-9]</td>
+                    </tr>
+                    <tr>
+                        <td>\b</td>
+                        <td>匹配单词的开始或结束(单词边界)</td>
+                    </tr>
+                    <tr>
+                        <td>.</td>
+                        <td>匹配除换行符以外的任意字符</td>
+                    </tr>
+                    <tr>
+                        <td>^</td>
+                        <td>匹配字符串的开始</td>
+                    </tr>
+                    <tr>
+                        <td>$</td>
+                        <td>匹配字符串的结束</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan='2'>常用反义词</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>\W</td>
+                        <td>匹配任意不是字母，数字，下划线，汉字的字符[^a-z0-9_]</td>
+                    </tr>
+                    <tr>
+                        <td>\S</td>
+                        <td>匹配任意不是空白符的字符</td>
+                    </tr>
+                    <tr>
+                        <td>\D</td>
+                        <td>匹配任意非数字的字符[^0-9]</td>
+                    </tr>
+                    <tr>
+                        <td>\B</td>
+                        <td>匹配不是单词开头或结束的位置</td>
+                    </tr>
+                    <tr>
+                        <td>[^a]</td>
+                        <td>匹配除了a以外的任意字符</td>
+                    </tr>
+                    <tr>
+                        <td>[^asdfg]</td>
+                        <td>匹配除了asdfg这几个字母以外的任意字符</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan='2'>常用限定符</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>*</td>
+                        <td>重复零次或更多次{0,}</td>
+                    </tr>
+                    <tr>
+                        <td>+</td>
+                        <td>重复一次或更多次{1,}</td>
+                    </tr>
+                    <tr>
+                        <td>?</td>
+                        <td>重复零次或一次{0,1}</td>
+                    </tr>
+                    <tr>
+                        <td>{n}</td>
+                        <td>重复n次</td>
+                    </tr>
+                    <tr>
+                        <td>{n,}</td>
+                        <td>重复n次或更多次</td>
+                    </tr>
+                    <tr>
+                        <td>{n,m}</td>
+                        <td>重复n到m次</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan='2'>匹配选项</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>i</td>
+                        <td>ignore 忽略大小写匹配</td>
+                    </tr>
+                    <tr>
+                        <td>g</td>
+                        <td>global 全局匹配</td>
+                    </tr>
+                </tbody>
+            </table>
+        </li>
+    </ul>
+
+    <ul class="note">
+        <li>声明</li>
+        <li><pre>
+    	<i>var</i> re = new RegExp('a', 'i'); // js风格
+    	<i>var</i> re = /a/i;  // perl风格
+		</pre>
+        </li>
+    </ul>
+
+    <ul class="note">
+        <li>正则和search()配合使用</li>
+        <li>
+           <pre>
+    	<i>var</i> str = 'asd123';
+    	<i>var</i> re = /\d/;
+    	console.log('第一个数字的位置：' + str.search(re));
+    	输出：<em>第一个数字的位置：3</em>
+		</pre>
+
+        <pre>
+    	<i>if</i> (<i>window</i>.navigator.userAgent.<i>search</i>(/firefox/i) != -1) {
+    	    console.log('firefox');
+    	} <i>else if</i> (<i>window</i>.navigator.userAgent.<i>search</i>(/chrome/i) != -1) {
+    	    console.log('chrome');
+    	} <i>else if</i> (<i>window</i>.navigator.userAgent.<i>search</i>(/msie 9/i) != -1) {
+    	    console.log('IE9');
+    	}
+    	</pre>
+        </li>
+    </ul>
+
+    <ul class="note">
+        <li>正则和match()配合使用</li>
+        <li>
+        <pre>
+    	<i>var</i> re = /\d/g;
+    	<i>var</i> str = 'asd e123 fdsa 456 789gg ethan';
+    	console.log(str.match(re));
+    	输出：<em>["1", "2", "3", "4", "5", "6", "7", "8", "9", "1", "2", "3", "4", "5", "6", "7", "8", "9", "1", "5", "9", "1", "1", "9", "9", "8", "8"]</em>
+
+    	<i>var</i> re = /\d\d/g;
+    	<i>var</i> str = 'asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
+    	console.log(str.match(re));
+    	输出：<em>["12", "45", "78", "12", "34", "56", "78", "15", "11", "99", "88"]</em>
+
+    	<i>var</i> re = /\d+/g;
+    	<i>var</i> str = '0 0 asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
+    	console.log(str.match(re));
+    	输出：<em>["0", "0", "123", "456", "789", "123456789", "159", "11", "99", "88"]</em>
+		</pre>
+        </li>
+    </ul>
+
+    <ul class="note">
+        <li>正则和replace()配合使用</li>
+        <li>
+        <pre>
+    	<i>var</i> str = 'asdfASDF';
+    	console.log(str.replace(/a/gi, 'B'));
+    	输出：<em>BsdfBSDF</em>
+		</pre>
+        </li>
+    </ul>
+
+    <ul class="note">
+        <li>字符</li>
+        <li>
+        <pre>
+    	<i>var</i> re=/1[abc]2/g;
+    	<i>var</i> str='1b2 1a2 abc 1c2 aaa';
+    	console.log(str.match(re));
+    	输出：<em>["1b2", "1a2", "1c2"]</em>
+    	</pre>
+        </li>
+    </ul>
+
+    <div class="ctn">
+    <pre>
+	去空格
+	<i>var</i> str = '  aa bb  cc   dd  ';
+	console.log(str.replace(/\s+/g, ''));
+	输出：<em>aabbccdd</em>
+
+	去首尾空格
+	<i>var</i> re = /^\s+|\s+$/g;
+	<i>var</i> str = 'aa bb cc dd ';
+	console.log(str.replace(re, ''));
+	输出：<em>aa bb cc dd</em>
+
+	检验中文
+	<i>var</i> str = '哈哈 asdfgqwer 12 !@#$ *&^ +_=';
+	<i>var</i> re = /[\u4e00-\u9fa5]/;
+	console.log(re.test(str));
+	输出：<em>true</em>
+
+	<i>var</i> str = '哈哈 asdfgqwer 12 !@#$ *&^ +_=';
+	<i>var</i> re = /^[\u4e00-\u9fa5]$/; 加了<em>^ $</em>以后表示行首和行尾之间必须出现中文而且只能出现中文
+	console.log(re.test(str));
+	输出：<em>false</em>
+
+	检验QQ
+	<i>var</i> re = /[1-9]\d{4,10}/g;
+	<i>var</i> str = 'QQ：159753，QQ：159753，QQ：0-14753';
+	console.log(str.match(re));
+	输出：<em>["159753", "159753", "14753"]</em>
+
+	检验邮箱
+	<i>var</i> re = /^\w+@[a-z0-9]+\.[a-z]{2,4}$/;
+	<i>var</i> str = '159753@qq.com';
+	console.log(re.test(str));
+	输出：<em>true</em>
+	</pre>
+	</div>
+
+	<div class="ctn padding-ver-15">
+		<table>
+		    <thead>
+		        <tr>
+		            <th colspan='5'>分析方法————以邮箱为例</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr>
+		            <td>一串字母、数字、下划线</td>
+		            <td>@</td>
+		            <td>一串字母、数字</td>
+		            <td>.</td>
+		            <td>一串字母（最少2个、最多4个）</td>
+		        </tr>
+		        <tr>
+		            <td>\w+</td>
+		            <td>@</td>
+		            <td>[a-z][0-9]+</td>
+		            <td>.</td>
+		            <td>[a-z]{2,4}</td>
+		        </tr>
+		        <tr>
+		            <td colspan='5'>/\w+@[a-z0-9]+\.[a-z]{2,4}/</td>
+		        </tr>
+		    </tbody>
+		</table>
+    </div>
+    <script>
+    // 声明
+    var re = new RegExp('a', 'i'); // js风格
+    var re = /a/i; // perl风格
+
+    // 正则和search()配合使用
+    var re = /\d/;
+    var str = 'asd123';
+    console.log('第一个数字的位置：' + str.search(re));
+
+    if (window.navigator.userAgent.search(/firefox/i) != -1) {
+        console.log('firefox');
+    } else if (window.navigator.userAgent.search(/chrome/i) != -1) {
+        console.log('chrome');
+    } else if (window.navigator.userAgent.search(/msie 9/i) != -1) {
+        console.log('IE9');
+    }
+
+    // 正则和match()配合使用
+    var re = /\d/g;
+    var str = 'asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
+    console.log(str.match(re));
+
+    var re = /\d\d/g;
+    var str = 'asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
+    console.log(str.match(re));
+
+    var re = /\d+/g;
+    var str = '0 0 asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
+    console.log(str.match(re));
+
+    var str = 'asdfASDF';
+    console.log(str.replace(/a/gi, 'B'));
+
+    var re = /1[abc]2/g;
+    var str = '1b2 1a2 abc 1c2 aaa';
+    console.log(str.match(re));
+
+    // 去空格
+    var str = '  aa bb  cc   dd  ';
+    console.log(str.replace(/\s+/g, ''));
+
+    // 去首尾空格
+    var re = /^\s+|\s+$/g;
+    var str = 'aa bb cc dd ';
+    console.log(str.replace(re, ''));
+
+    // 检验中文
+    var str = '哈哈 asdfgqwer 12 !@#$ *&^ +_=';
+    var re = /[\u4e00-\u9fa5]/;
+    console.log(re.test(str));
+
+    var str = '哈哈 asdfgqwer 12 !@#$ *&^ +_=';
+    var re = /^[\u4e00-\u9fa5]$/; // 加了^ $以后表示行首和行尾之间必须出现中文而且只能出现中文
+    console.log(re.test(str));
+
+    // 检验QQ
+    var re = /[1-9]\d{4,10}/g;
+    var str = 'QQ：159753，QQ：159753，QQ：0-14753';
+    console.log(str.match(re));
+
+    // 检验邮箱
+    var re = /^\w+@[a-z0-9]+\.[a-z]{2,4}$/;
+    var str = '159753@qq.com';
+    console.log(re.test(str));
+    </script>
+</body>
+
+</html>

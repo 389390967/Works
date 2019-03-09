@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>正则表达式-偷小说</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+        textarea{width: 500px;height: 500px;}
+    </style>
+</head>
+
+<body>
+    <div class="ctn flex-end-space-between">
+        <textarea id="txt1"></textarea>
+        <button id="btn1" class="btn bg-blue" type="button">转换</button>
+        <textarea id="txt2"></textarea>
+    </div>
+    <script>
+    window.onload = function() {
+        var oTxt1 = document.getElementById('txt1');
+        var oTxt2 = document.getElementById('txt2');
+        var oBtn = document.getElementById('btn1');
+
+        oBtn.onclick = function() {
+            var re = /<[^<>]+>/g; //在<>之间什么都可以出现，除了<>
+
+            oTxt2.value = oTxt1.value.replace(re, '');
+        };
+    };
+    </script>
+</body>
+
+</html>
