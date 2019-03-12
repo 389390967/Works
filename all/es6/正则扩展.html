@@ -38,7 +38,7 @@
     	输出：<em>false</em>
 
     	上面代码中，<span>\uD83D\uDC2A</span> 是一个四字节的 UTF-16 编码，代表一个字符，
-    	但是ES5不支持四个字节的 UTF-16 编码，会将其识别为两个字符，导致第一行代码结果为 true ，
+    	但是，ES5不支持四个字节的 UTF-16 编码，会将其识别为两个字符，导致第一行代码结果为 true，
     	加了u修饰符以后，ES6就会识别其为一个字符，所以第二行代码结果为false。
     	</pre>
     	</li>
@@ -154,16 +154,52 @@
         </li>
     </ul>
     <script>
-	{
-		console.log(/^\uD83D/.test('\uD83D\uDC2A')); // true
-		console.log(/^\uD83D/u.test('\uD83D\uDC2A')); // false
-		console.log('---------分割线---------');
-	}
-
     {
         // es6声明方法
         let reg3 = new RegExp(/abc/ig, 'i');
         console.log(reg3.flags); // 原有正则对象的修饰符是ig，它会被第二个参数i覆盖。flags是es6新增加的属性，用来获取正则表达式的修饰符
+        console.log('---------分割线---------');
+    }
+
+    {
+    	console.log(/^\uD83D/.test('\uD83D\uDC2A')); // true
+    	console.log(/^\uD83D/u.test('\uD83D\uDC2A')); // false
+    	console.log('---------分割线---------');
+    }
+
+    {
+        // 大括号表示Unicode字符，只有加上u才能识别
+        console.log(/\u{61}/.test('a')); // false
+        console.log(/\u{61}/u.test('a')); // true
+        console.log(/\u{20BB7}/u.test('𠮷')); // true
+        console.log('---------分割线---------');
+
+        // 点（.）字符不能识别码点大于0xFFFF的Unicode字符，必须加上u修饰符。
+        let s = '𠮷';
+        console.log('大于0xFFFF的Unicode字符', /^.$/.test(s)); // false
+        console.log('使用u字符', /^.$/u.test(s)); // true
+        console.log('---------分割线---------');
+
+        // 使用u修饰符后，所有量词都会正确识别大于码点大于0xFFFF的Unicode字符。
+        console.log('量词', /a{2}/.test('aa')); // true
+        console.log('量词', /a{2}/u.test('aa')); // true
+        console.log('量词', /𠮷{2}/.test('𠮷𠮷')); // false
+        console.log('量词', /𠮷{2}/u.test('𠮷𠮷')); // true
+        console.log('---------分割线---------');
+    }
+
+    {
+        // #正则表达式中，点（.）是一个特殊字符，代表任意的单个字符，但是行终止符（line terminator character）除外
+        // U+000A 换行符（\n）
+        // U+000D 回车符（\r）
+        // U+2028 行分隔符（line separator）
+        // U+2029 段分隔符（paragraph separator）
+        // 只是一个提案目前还不支持
+        // let reg=/test.go/s;
+        // console.log(reg.test('test\ngo'));
+        // console.log(reg.test('test\ngo'));
+        console.log('s变通方法', /foo.bar/.test('foo\nbar'));
+        console.log('s变通方法', /foo[^]bar/.test('foo\nbar'));
         console.log('---------分割线---------');
     }
 

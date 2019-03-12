@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>substring的应用</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    p{margin:40px auto 0;padding:20px;width:400px;border:10px solid #ccc;background:#FFC;}background:#FFC;
+    </style>
+    <script>
+    window.onload = function() {
+        var oP = document.getElementsByTagName('p')[0];
+        var oSpan = oP.getElementsByTagName('span')[0];
+        var oA = oP.getElementsByTagName('a')[0];
+        var str = oSpan.innerHTML;
+        var onOff = true;
+
+        oA.onclick = function() {
+            if (onOff) {
+                oSpan.innerHTML = str.substring(0, 18);
+                oA.innerHTML = '>>展开';
+            } else {
+                oSpan.innerHTML = str;
+                oA.innerHTML = '>>收缩';
+            }
+            onOff = !onOff;
+        };
+    };
+    </script>
+</head>
+
+<body>
+    <p id="box"><span>如再證住際，離問院原了支意地位來人大速女都，麼安府初大士。的她空自下來現斯檢像愛寶讀如石自、有土是河的……者場人羅到產只沒創破夫此陸，故外還劇建演民事散今月包天回費人特配動話頭是死溫境裡……客是叫看轉山留寶約，會道文題動情應夫、價入心投……老地做；親軍老少大模面決會遠地又才管表期新能造國建解改線包。開此對的朋的足要看不水些會到這有說境那子難需手生細存了性場媽立的必也會，園好式的意有望失論你；方件有熱一分好面千體有時賽我校子力假一品！</span>……<a href="javascript:;">>>收缩</a></p>
+</body>
+
+</html>
