@@ -3,168 +3,122 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="js/jquery-1.11.3.min.js"></script>
     <title>JS无级树树形菜单</title>
+    <link rel="shortcut icon" href="img/ico.ico">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
     <style type="text/css">
-    .menuTree {
-        margin-left: 0px;
-    }
-
-    .menuTree div {
-        padding-left: 1px;
-    }
-
     .menuTree div ul {
-        overflow: hidden;
         display: none;
-        height: auto;
-        margin: 0;
+        margin-left: 50px;
     }
 
     .menuTree span {
         display: block;
-        height: 20px;
-        line-height: 25px;
-        padding-left: 5px;
-        margin: 1px 0;
+        border-bottom: 1px solid #fff;
+        line-height: 50px;
         cursor: pointer;
-        border-bottom: 1px solid #CCC;
-    }
-
-    .menuTree span:hover {
-        background-color: #e6e6e6;
-        color: #cf0404;
-    }
-
-    .menuTree a {
-        color: #333;
-        text-decoration: none;
-    }
-
-    .menuTree a:hover {
-        color: #06F;
-    }
-
-    .menuTree span {
-        height: 50px;
     }
     </style>
 </head>
 
 <body>
     <div id="menuTree" class="menuTree"></div>
+    </div>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script>
+    var data = [{
+        "title": "HTML",
+        "link": "javascript:;",
+        "child": [{
+            "title": "div",
+            "link": "javascript:;",
+            "child": [{
+                "title": "div的语义",
+                "link": "http://127.0.0.1/works/"
+            }, {
+                "title": "div的作用",
+                "link": "http://127.0.0.1/works/"
+            }]
+        }, {
+            "title": "p",
+            "link": "javascript:;",
+            "child": [{
+                "title": "p的语义",
+                "link": "http://127.0.0.1/works/"
+            }, {
+                "title": "p的作用",
+                "link": "http://127.0.0.1/works/"
+            }]
+        }]
+    }, {
+        "title": "CSS",
+        "link": "javascript:;",
+        "child": [{
+            "title": "display",
+            "link": "javascript:;",
+            "child": [{
+                "title": "block",
+                "link": "http://127.0.0.1/works/"
+            }, {
+                "title": "inline-block",
+                "link": "http://127.0.0.1/works/"
+            }]
+        }, {
+            "title": "position",
+            "link": "javascript:;",
+            "child": [{
+                "title": "relactive",
+                "link": "http://127.0.0.1/works/"
+            }, {
+                "title": "absolute",
+                "link": "http://127.0.0.1/works/"
+            }]
+        }]
+    }];
+
+    /*--递归实现获取无级树数据并生成DOM结构--*/
+    var html = "";
+    var forTree = function(obj) {
+        for (var i = 0; i < obj.length; i++) {
+            if (obj[i].link == "javascript:;") {
+                html += "<div>";
+                html += "<span>" + obj[i].title + "</span><ul>";
+                html += "<ul>";
+            } else {
+                html += "<div>";
+                html += "<span>" + "<a href=" + obj[i].link + ">" + obj[i].title + "</a></span>";
+                html += "<ul>";
+            }
+
+            if (obj[i].child) {
+                forTree(obj[i].child);
+            }
+
+            html += "</ul>";
+            html += "</div>";
+        }
+        return html;
+    }
+    /*--添加无级树--*/
+    document.getElementById("menuTree").innerHTML = forTree(data);
+
+    /*--树形菜单--*/
+    var menuTree = function() {
+        $("#menuTree").find("div span").click(function() {
+            var ul = $(this).siblings("ul");
+            var spanStr = $(this).html();
+            var spanContent = spanStr.substr(3, spanStr.length);
+            if (ul.find("div").html() != null) {
+                if (ul.css("display") == "none") {
+                    ul.show(300);
+                } else {
+                    ul.hide(300);
+                }
+            }
+        })
+    }()
+    </script>
 </body>
 
 </html>
-<script type="text/javascript">
-var json = [{
-        "name": "1",
-        "userLevel": "+ 一级",
-        "list": [{
-            //显示名称
-            "name": "2",
-            //跳转名称
-            "url": "url_herf",
-            //用户等级
-            "userLevel": "+ 二级",
-            //下级
-            "list": [{
-                "name": "3",
-                "userLevel": "三级"
-            }]
-        }]
-    },
-    {
-        "name": "1",
-        "userLevel": "+ a一级",
-        "list": [{
-            //显示名称
-            "name": "2",
-            //跳转名称
-            "url": "url_herf",
-            //用户等级
-            "userLevel": "+ b二级",
-            //下级
-            "list": [{
-                "name": "3",
-                "userLevel": "c三级"
-            }]
-        }]
-    }
-]
-/*递归实现获取无级树数据并生成DOM结构*/
-var str = "";
-var forTree = function(o) {
-    for (var i = 0; i < o.length; i++) {
-        var urlstr = "";
-        try {
-            if (typeof o[i]["url"] == "undefined") {
-                urlstr = "<div><span>" + o[i]["userLevel"] + o[i]["name"] + "</span><ul>";
-                console.log('undefined')
-            } else {
-                urlstr = "<div><span>" + o[i]["userLevel"] + "<a href=" + o[i]["url"] + ">" + o[i]["name"] + "</a></span><ul>";
-            }
-            str += urlstr;
-
-            if (o[i]["list"] != null) {
-                forTree(o[i]["list"]);
-            }
-
-            str += "</ul></div>";
-        } catch (e) {}
-    }
-    return str;
-}
-/*添加无级树*/
-document.getElementById("menuTree").innerHTML = forTree(json);
-
-/*树形菜单*/
-var menuTree = function() {
-    //给有子对象的元素加
-    $("#menuTree ul").each(function(index, element) {
-        var ulContent = $(element).html();
-        var spanContent = $(element).siblings("span").html();
-        if (ulContent) {
-            $(element).siblings("span").html(spanContent)
-        }
-    });
-
-    $("#menuTree").find("div span").click(function() {
-        var ul = $(this).siblings("ul");
-        var spanStr = $(this).html();
-        var spanContent = spanStr.substr(3, spanStr.length);
-        if (ul.find("div").html() != null) {
-            if (ul.css("display") == "none") {
-                ul.show(300);
-                // $(this).html("[-]" + spanContent);
-            } else {
-                ul.hide(300);
-                // $(this).html("[+] " + spanContent);
-            }
-        }
-    })
-}()
-
-/*树形列表展开*/
-$("#btn_open").click(function() {
-    $("#menuTree ul").show(300);
-    curzt("-");
-})
-
-/*收缩*/
-$("#btn_close").click(function() {
-    $("#menuTree ul").hide(300);
-    curzt("+");
-})
-
-function curzt(v) {
-    $("#menuTree span").each(function(index, element) {
-        var ul = $(this).siblings("ul");
-        var spanStr = $(this).html();
-        var spanContent = spanStr.substr(3, spanStr.length);
-        if (ul.find("div").html() != null) {
-            $(this).html("[" + v + "] " + spanContent);
-        }
-    });
-}
-</script>
