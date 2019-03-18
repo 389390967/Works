@@ -24,72 +24,18 @@
 
 <body>
     <div id="menuTree" class="menuTree"></div>
-    </div>
-    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/nav-data.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
     <script>
-    var data = [{
-        "title": "HTML",
-        "link": "javascript:;",
-        "child": [{
-            "title": "div",
-            "link": "javascript:;",
-            "child": [{
-                "title": "div的语义",
-                "link": "http://127.0.0.1/works/"
-            }, {
-                "title": "div的作用",
-                "link": "http://127.0.0.1/works/"
-            }]
-        }, {
-            "title": "p",
-            "link": "javascript:;",
-            "child": [{
-                "title": "p的语义",
-                "link": "http://127.0.0.1/works/"
-            }, {
-                "title": "p的作用",
-                "link": "http://127.0.0.1/works/"
-            }]
-        }]
-    }, {
-        "title": "CSS",
-        "link": "javascript:;",
-        "child": [{
-            "title": "display",
-            "link": "javascript:;",
-            "child": [{
-                "title": "block",
-                "link": "http://127.0.0.1/works/"
-            }, {
-                "title": "inline-block",
-                "link": "http://127.0.0.1/works/"
-            }]
-        }, {
-            "title": "position",
-            "link": "javascript:;",
-            "child": [{
-                "title": "relactive",
-                "link": "http://127.0.0.1/works/"
-            }, {
-                "title": "absolute",
-                "link": "http://127.0.0.1/works/"
-            }]
-        }]
-    }];
+    var navData = navData();
 
     /*--递归实现获取无级树数据并生成DOM结构--*/
     var html = "";
     var forTree = function(obj) {
         for (var i = 0; i < obj.length; i++) {
-            if (obj[i].link == "javascript:;") {
-                html += "<div>";
-                html += "<span>" + obj[i].title + "</span><ul>";
-                html += "<ul>";
-            } else {
-                html += "<div>";
-                html += "<span>" + "<a href=" + obj[i].link + ">" + obj[i].title + "</a></span>";
-                html += "<ul>";
-            }
+            html += "<div>";
+            html += "<span>" + "<a href=" + obj[i].link + ">" + obj[i].title + "</a></span>";
+            html += "<ul>";
 
             if (obj[i].child) {
                 forTree(obj[i].child);
@@ -101,7 +47,7 @@
         return html;
     }
     /*--添加无级树--*/
-    document.getElementById("menuTree").innerHTML = forTree(data);
+    document.getElementById("menuTree").innerHTML = forTree(navData);
 
     /*--树形菜单--*/
     var menuTree = function() {

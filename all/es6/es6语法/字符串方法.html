@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>字符串方法</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+</head>
+
+<body>
+    <ul class="note">
+        <li>字符串方法</li>
+        <li>
+            在ES5中，Unicode必须是<span>\uxxxx</span>形式的，少与4位不行，多于四位必须拆成两个4位的来表示。<br>
+            在ES6中，将一个码点值放在<span>大括号</span>中可以自动解析，与双字节表示等价。
+        </li>
+        <li><pre>
+        {
+            console.log("\uD842\uDFB7");
+            输出：<em>𠮷</em>
+
+            console.log("\u20BB7");
+            输出：<em>₻7</em>
+            
+            console.log("\u{20BB7}");
+            输出：<em>𠮷</em>
+
+            console.log("\u41");
+            输出：<em>Uncaught SyntaxError: Invalid Unicode escape sequence</em>未捕获语法错误：Unicode转义序列无效
+
+            console.log("\u{41}");
+            输出：<em>A</em>
+
+            console.log('\u{1F680}' === '\uD83D\uDE80');
+            输出：<em>true</em>
+        }
+        </pre>
+        </li>
+        <li>
+            在JS内部，字符以UTF-16的格式储存，每个字符固定为两个字节，对于那些需要4个字节来储存的字符，JS认为他们是两个字符。<br>
+            此时charAt方法和charCodeAt方法都无法完整获取这样的字符的码点值。<span>codePointAt</span>可以</li>
+        <li><pre>
+        {
+            let str = '𠮷';
+            console.log(str.length);
+            输出：<em>2</em>
+
+            console.log(str.charAt(0));
+            输出：<em>�</em>
+
+            console.log(str.charAt(1));
+            输出：<em>�</em>
+
+            console.log(str.charCodeAt(0));
+            输出：<em>55362</em>
+
+            console.log(str.charCodeAt(1));
+            输出：<em>57271</em>
+
+            let str1 = '𠮷a';
+            console.log(str1.length);
+            输出：<em>3</em>
+
+            console.log(str1.codePointAt(0));
+            输出：<em>134071</em>
+
+            console.log(str1.codePointAt(0).toString(16));
+            输出：<em>20bb7</em>
+
+            console.log(str1.codePointAt(1));
+            输出：<em>57271</em>
+
+            console.log(str1.codePointAt(2));
+            输出：<em>97</em>
+
+            console.log(String.fromCharCode("0x20bb7"));
+            输出：<em>ஷ</em>
+
+            console.log(String.fromCodePoint("0x20bb7"));
+            输出：<em>𠮷</em>
+        }
+        </pre>
+        </li>
+        <li><pre>
+        {
+            let str = '\u{20bb7}abc';
+            for (let i = 0; i < str.length; i++) {
+                console.log('es5', str[i]);
+            }
+            输出：<em>es5 �</em>
+            输出：<em>es5 �</em>
+            输出：<em>es5 a</em>
+            输出：<em>es5 b</em>
+            输出：<em>es5 c</em>
+
+            for (let code of str) {
+                console.log('es6', code);
+            }
+            输出：<em>es6 𠮷</em>
+            输出：<em>es6 a</em>
+            输出：<em>es6 b</em>
+            输出：<em>es6 c</em>
+        }
+        </pre>
+        </li>
+        <li><pre>
+        {
+            let str = "string";
+            console.log('includes', str.includes("c"));//返回布尔值，表示是否找到了参数字符串。
+            输出：<em>false</em>
+
+            console.log('start', str.startsWith('str'));//返回布尔值，表示参数字符串是否在源字符串的头部。
+            输出：<em>true</em>
+
+            console.log('end', str.endsWith('ng'));//返回布尔值，表示参数字符串是否在源字符串的尾部。
+            输出：<em>true</em>
+        }
+        </pre>
+        </li>
+        <li><pre>
+        {
+            let str = "abc";
+            console.log(str.repeat(2));
+            输出：<em>abcabc</em>
+        }
+        </pre>
+        </li>
+        <li><span>模板字符串</span></li>
+        <li><pre>
+        {
+            let x = 1;
+            let y = 2;
+
+            let str1 = `${x} + ${y} = ${x + y}`;
+            console.log(str1);
+            输出：<em>1 + 2 = 3</em>
+
+            let str2 = `${x} + ${y * 2} = ${x + y * 2}`;
+            console.log(str2);
+            输出：<em>1 + 4 = 5</em>
+
+
+            let obj = { x: 1, y: 2 };
+            let str3 = `${obj.x + obj.y}`;
+            console.log(str3)
+            输出：<em>3</em>
+
+
+            function fn() {
+                return "Hello World";
+            }
+            let str4 = `foo ${fn()} bar`;
+            console.log(str4)
+            输出：<em>foo Hello World bar</em>
+
+
+            let name = "Ethan";
+            let info = "Hello World";
+            let str5 = `I am ${name},${info}`;
+            console.log(str5);
+            输出：<em>I am Ethan,Hello World</em>
+        }
+        </pre>
+            <span>实例：模板编译<br>通过字符串模板生正式模板的实例</span>
+            <pre>
+        {
+            <i>var</i> template = `
+            &lt;ul&gt;<% for(<i>var</i> i=0; i < data.supplies.length; i++) { %>
+                &lt;li&gt;<%= data.supplies[i] %>&lt;/li&gt;<% } %>
+            &lt;/ul&gt;`;
+
+            <i>function</i> compile(template) {
+                <i>var</i> evalExpr = /<%=(.+?)%>/g;
+                <i>var</i> expr = /<%([\s\S]+?)%>/g;
+
+                template = template.<i>replace</i>(evalExpr, '`); \n  echo( $1 ); \n  echo(`').<i>replace</i>(expr, '`); \n $1 \n  echo(`');
+                template = 'echo(`' + template + '`);';
+
+                <i>var</i> script = `(<i>function</i> parse(data){
+                <i>var</i> output = "";
+
+                <i>function</i> echo(html){
+                  output += html;
+                }
+
+                ${ template }
+
+                <em>return</em> output;
+              })`;
+
+                <em>return</em> script;
+            }
+            <i>var</i> parse = eval(compile(template));
+            console.log(parse({ supplies: ["Ethan", "Hello", "World"] }));
+
+            输出：
+            <em>
+                &lt;ul&gt;
+                    &lt;li&gt;Ethan&lt;/li&gt;
+                    &lt;li&gt;Hello&lt;/li&gt;
+                    &lt;li&gt;World&lt;/li&gt;
+                &lt;/ul&gt;
+            </em>
+
+            <span>这里就是使用正则表达式将template模板转换成了类似如下代码并以字符串形式返回，然后使用eval方法把它变成可执行的。</span>
+            echo('&lt;ul&gt;');
+            for(var i=0; i &lt; data.supplies.length; i++) {
+              echo('&lt;li&gt;');
+              echo(data.supplies[i]);
+              echo('&lt;/li&gt;');
+            };
+            echo('&lt;/ul&gt;');
+        }
+        </pre>
+        </li>
+        <li></li>
+        <li><pre>
+        {
+            <span>ES7中推出了字符补全长度的功能，如果某个字符串不够指定长度，就会在头部或尾部补全。</span>
+            console.log('1'.padStart(2, '0'))
+            console.log('1'.padEnd(2, '0'))
+            输出：<em>01</em>
+            输出：<em>10</em>
+
+            console.log('x'.padStart(4, 'ab'))
+            console.log('x'.padStart(5, 'ab'))
+            输出：<em>abax</em>
+            输出：<em>ababx</em>
+
+            <span>位数超了会截掉用来补全的字符串</span>
+            console.log('abc'.padStart(10, '0123456789'))
+            输出：<em>0123456abc</em>
+
+            console.log('123456'.padStart(10, '0'))
+            输出：<em>0000123456</em>
+
+            console.log('12'.padStart(10, 'YYYY-MM-DD'))
+            console.log('09-12'.padStart(10, 'YYYY-MM-DD'))
+            输出：<em>YYYY-MM-12</em>
+            输出：<em>YYYY-09-12</em>
+        }
+        </pre>
+        </li>
+        <li><span>标签模板</span><br>这是函数调用的一种特殊形式，标签指的就是函数，紧跟在后的模板字符串就是它的参数。第一个参数是被插入值分割成数组的字符串，后面就依次是插入值了。</li>
+        <li><pre>
+        {
+            let user = {
+                name: 'Ethan ',
+                info: 'Hello World'
+            };
+            console.log(abc `I am ${user.name}!${user.info}`);
+            输出：<em>I am ,!,Ethan Hello World</em>
+
+            function abc(s, v1, v2) {
+                console.log(s[0]);
+                输出：<em>'I am '</em>
+
+                console.log(s[1]);
+                输出：<em>''</em>
+
+                console.log(s[2]); 
+                输出：<em>'!'</em>
+
+                console.log(v1); 
+                输出：<em>'Ethan '</em>
+
+                console.log(v2); 
+                输出：<em>'Hello World'</em>
+
+                console.log(s, v1, v2);
+                输出：<em>["I am ", "!", ""] "Ethan " "Hello World"</em>
+
+                return s + v1 + v2
+            }
+        }
+        
+        {
+            var a = 5;
+            var b = 10;
+
+            function tag(s, v1, v2) {
+                console.log(s[0]); 
+                输出：<em>'Hello '</em>
+
+                console.log(s[1]); 
+                输出：<em>' world '</em>
+
+                console.log(s[2]); 
+                输出：<em>''</em>
+
+                console.log(v1); 
+                输出：<em>'15'</em>
+
+                console.log(v2); 
+                输出：<em>'50'</em>
+
+                console.log(s, v1, v2);
+                输出：<em>["Hello ", " world ", ""] 15 50</em>
+
+                return s + v1 + v2
+            }
+
+            console.log(tag `Hello ${ a + b } world ${ a * b}`);
+            输出：<em>Hello , world ,1550</em>
+        }
+        </pre>
+        <pre>
+        {
+            //这个可以用来过滤HTML字符串， 以防用户输入恶意内容。
+            <i>var</i> sender = '&lt;i&gt;Tom&lt;/i&gt;';
+            <i>var</i> message = SaferHTML `&lt;p&gt;${sender} has sent you a message.&lt;/p&gt;`;
+
+            <i>function</i> SaferHTML(templateData) {
+                <i>var</i> str = templateData[0];
+                for (<i>var</i> i = 1; i < arguments.length; i++) {
+                    <i>var</i> arg = String(arguments[i]);
+
+                    // <span>Escape special characters in the substitution.转义替换中的特殊字符。</span>
+                    str += arg.<i>replace</i>(/&/g, "&amp;amp;").<i>replace</i>(/&lt;/g, "&amp;lt;").i<>replac</i>e(/>/g, "&amp;gt;");
+
+                    // <span>Don't escape special characters in the template.不要转义模板中的特殊字符。</span>
+                    str += templateData[i];
+                }
+                console.log(str)
+                <i>return</i> str;
+            }
+        }
+        </pre>
+        </li>
+    </ul>
+    <a class="fixed-right-bottom" href="https://blog.csdn.net/exialym/article/details/51643722" target="_blank">参考博文</a>
+    <script>
+    /*{
+        console.log("\uD842\uDFB7"); // 𠮷
+        console.log("\u20BB7"); // ₻7
+        console.log("\u{20BB7}"); // 𠮷
+        console.log("\u41"); // 报错
+        console.log("\u{41}"); // A
+        console.log('\u{1F680}' === '\uD83D\uDE80'); // true
+    }*/
+
+
+    /*{
+        let str = '𠮷';
+        console.log(str.length);
+        console.log(str.charAt(0));
+        console.log(str.charAt(1));
+        console.log(str.charCodeAt(0));
+        console.log(str.charCodeAt(1));
+
+        let str1 = '𠮷a';
+        console.log(str1.length);
+        console.log(str1.codePointAt(0));
+        console.log(str1.codePointAt(0).toString(16));
+        console.log(str1.codePointAt(1));
+        console.log(str1.codePointAt(2));
+
+        console.log(String.fromCharCode("0x20bb7"));
+        console.log(String.fromCodePoint("0x20bb7"));
+    }*/
+
+    /*{
+        let str = '\u{20bb7}abc';
+        for (let i = 0; i < str.length; i++) {
+            console.log('es5', str[i]);
+        }
+        for (let code of str) {
+            console.log('es6', code);
+        }
+    }*/
+
+    /*{
+        let str = "string";
+        console.log('includes', str.includes("c"));
+        console.log('start', str.startsWith('str'));
+        console.log('end', str.endsWith('ng'));
+    }*/
+
+    /*{
+        let str = "abc";
+        console.log(str.repeat(2));
+    }*/
+
+    /*{
+        let x = 1;
+        let y = 2;
+
+        let str1 = `${x} + ${y} = ${x + y}`;
+        console.log(str1); // 1 + 2 = 3
+
+        let str2 = `${x} + ${y * 2} = ${x + y * 2}`;
+        console.log(str2); // 1 + 4 = 5
+
+        let obj = { x: 1, y: 2 };
+        let str3 = `${obj.x + obj.y}`;
+        console.log(str3) // 3
+
+        function fn() {
+            return "Hello World";
+        }
+        let str4 = `foo ${fn()} bar`;
+        console.log(str4) // foo Hello World bar
+
+        let name = "Ethan";
+        let info = "Hello World";
+        let str5 = `I am ${name},${info}`;
+        console.log(str5);
+    }*/
+
+    /*{
+        var template = `
+        <ul><% for(var i=0; i < data.supplies.length; i++) { %>
+            <li><%= data.supplies[i] %></li><% } %>
+        </ul>`;
+
+        function compile(template) {
+            var evalExpr = /<%=(.+?)%>/g;
+            var expr = /<%([\s\S]+?)%>/g;
+
+            template = template.replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`').replace(expr, '`); \n $1 \n  echo(`');
+            template = 'echo(`' + template + '`);';
+
+            var script = `(function parse(data){
+            var output = "";
+
+            function echo(html){
+              output += html;
+            }
+
+            ${ template }
+
+            return output;
+          })`;
+
+            return script;
+        }
+        var parse = eval(compile(template));
+        console.log(parse({ supplies: ["Ethan", "Hello", "World"] }));
+    }*/
+
+    /*{
+        console.log('1'.padStart(2, '0'))
+        console.log('1'.padEnd(2, '0'))
+
+        console.log('x'.padStart(5, 'ab')) // 'ababx'
+        console.log('x'.padStart(4, 'ab')) // 'abax'
+
+        console.log('abc'.padStart(10, '0123456789')) // '0123456abc'
+
+        console.log('123456'.padStart(10, '0')) // "0000123456"
+        console.log('12'.padStart(10, 'YYYY-MM-DD')) // "YYYY-MM-12"
+        console.log('09-12'.padStart(10, 'YYYY-MM-DD')) // "YYYY-09-12"
+    }*/
+
+    /*{
+        let user = {
+            name: 'Ethan ',
+            info: 'Hello World'
+        };
+        console.log(abc `I am ${user.name}!${user.info}`);
+
+        function abc(s, v1, v2) {
+            console.log(s[0]); //'I am '
+            console.log(s[1]); //''
+            console.log(s[2]); //'!'
+            console.log(v1); //'Ethan '
+            console.log(v2); //'Hello World'
+            console.log(s, v1, v2);
+            return s + v1 + v2
+        }
+    }*/
+
+    /*{
+        var a = 5;
+        var b = 10;
+
+        function tag(s, v1, v2) {
+            console.log(s[0]); //'Hello '
+            console.log(s[1]); //' world '
+            console.log(s[2]); //''
+            console.log(v1); //'15'
+            console.log(v2); //'50'
+            console.log(s, v1, v2);
+
+            return s + v1 + v2
+        }
+
+        console.log(tag `Hello ${ a + b } world ${ a * b}`);
+    }*/
+
+    {
+        //这个可以用来过滤HTML字符串， 以防用户输入恶意内容。
+        var sender = '<i>Tom</i>';
+        var message = SaferHTML `<p>${sender} has sent you a message.</p>`;
+
+        function SaferHTML(templateData) {
+            var str = templateData[0];
+            for (var i = 1; i < arguments.length; i++) {
+                var arg = String(arguments[i]);
+
+                // Escape special characters in the substitution.转义替换中的特殊字符。
+                str += arg.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+                // Don't escape special characters in the template.不要转义模板中的特殊字符。
+                str += templateData[i];
+            }
+            console.log(str)
+            return str;
+        }
+    }
+
+    /*{
+        console.log(String.raw `Hi\n${1+2}`);
+        console.log(`Hi\n${1+2}`);
+    }*/
+    </script>
+</body>
+
+</html>

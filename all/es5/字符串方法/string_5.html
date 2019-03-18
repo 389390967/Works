@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>彩色文字</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+	span{display:inline-block;margin:5px;padding:5px 10px;border:1px solid;color:#fff;}
+    </style>
+</head>
+
+<body>
+    <div id="box" class="ctn"></div>
+    <script>
+    var oDiv = document.getElementById('box');
+    var arrColor = ['#be3948', '#5CACEE', '#E46C49', '#ff502c'];
+    var str = '先為著權萬問母標間在；界式狀一們子軍溫畫五叫落又望通、元一談我只。外他度名方正；國最汽；一同處場他陽讀室……做以山市是動字青際車空的門心們，省開代產時十、得名一。';
+    var arr = str.split('');
+
+    for (var i = 0; i < arr.length; i++) {
+        arr[i] = '<span style="background:' + arrColor[i % arrColor.length] + ';">' + arr[i] + '</span>';
+        console.log(i%arrColor.length);
+    }
+
+    oDiv.innerHTML += arr.join('');
+    </script>
+</body>
+
+</html>

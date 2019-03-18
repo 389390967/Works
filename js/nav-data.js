@@ -223,16 +223,19 @@ var data = [
                 "link": "javascript:;",
                 "child": [{
                     "title": "字符串方法",
-                    "link": "all/es5/字符串方法/字符串方法.html"
+                    "link": "all/es5/字符串方法/string_1.html"
                 }, {
                     "title": "charCodeAt和fromCharCode加密应用",
-                    "link": "all/es5/字符串方法/charCodeAt和fromCharCode加密应用.html"
+                    "link": "all/es5/字符串方法/string_2.html"
                 }, {
                     "title": "indexOf和lastIndexOf",
-                    "link": "all/es5/字符串方法/indexOf和lastIndexOf.html"
+                    "link": "all/es5/字符串方法/string_3.html"
                 }, {
                     "title": "substring的应用",
-                    "link": "all/es5/字符串方法/substring的应用.html"
+                    "link": "all/es5/字符串方法/string_4.html"
+                }, {
+                    "title": "split()、join()彩色文字",
+                    "link": "all/es5/字符串方法/string_5.html"
                 }]
             },
             {
@@ -267,17 +270,23 @@ var data = [
                 }]
             },
             {
-                "title": "新增特性",
+                "title": "es6语法",
                 "link": "javascript:;",
                 "child": [{
                     "title": "变量声明",
-                    "link": "all/es6/变量声明.html"
+                    "link": "all/es6/es6语法/变量声明.html"
                 }, {
                     "title": "解构赋值",
-                    "link": "all/es6/解构赋值.html"
+                    "link": "all/es6/es6语法/解构赋值.html"
                 }, {
                     "title": "正则扩展",
-                    "link": "all/es6/正则扩展.html"
+                    "link": "all/es6/es6语法/正则扩展.html"
+                }, {
+                    "title": "字符串方法",
+                    "link": "all/es6/es6语法/字符串方法.html"
+                }, {
+                    "title": "数值方法",
+                    "link": "all/es6/es6语法/数值方法.html"
                 }]
             }
         ]
