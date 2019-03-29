@@ -287,6 +287,12 @@ var data = [
                 }, {
                     "title": "数值方法",
                     "link": "all/es6/es6语法/数值方法.html"
+                }, {
+                    "title": "数组方法",
+                    "link": "all/es6/es6语法/数组方法.html"
+                }, {
+                    "title": "函数扩展",
+                    "link": "all/es6/es6语法/函数扩展.html"
                 }]
             }
         ]
