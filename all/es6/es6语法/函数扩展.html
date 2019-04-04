@@ -14,21 +14,23 @@
         <li>一、函数参数默认值</li>
         <li>1、参数默认值的设置</li>
         <li><pre>
-    	{
-    	    <span>ES5</span>
-    	    <i>function</i> animal(name, type) {
-    	        <i>var</i> name = name || 'yuan';
-    	        <i>var</i> type = type || 'monkey';
-    	        console.log(name, type);
-    	    }
-    	    animal();
+        {
+            <span>ES5</span>
+            <i>function</i> animal(name, type) {
+                <i>var</i> name = name || 'yuan';
+                <i>var</i> type = type || 'monkey';
+                <i>console</i>.<i>log</i>(name, type);
+                输出：<em>yuan monkey</em>
+            }
+            animal();
 
-    	     <span>ES6</span>
-    	    <i>function</i> animal(name = 'yuan', type = 'monkey') {
-    	        <i>console</i>.<i>log</i>(name, type);
-    	    }
-    	    animal();
-    	}
+            <span>ES6</span>
+            <i>function</i> animal(name = 'yuan', type = 'monkey') {
+                <i>console</i>.<i>log</i>(name, type);
+                输出：<em>yuan monkey</em>
+            }
+            animal();
+        }
         </pre>
         </li>
         <li>2、传入参数类型对输出结果的影响</li>
@@ -38,82 +40,243 @@
                 <i>console</i>.<i>log</i>(name, type);
             }
 
-            animal(); // yuan monkey
-            animal(name = 'dog'); // dog monkey
-            animal(name = 'yuan', undefined); // yuan monkey
-            animal(name = 'yuan', null); // yuan null
-            animal(false, undefined); // false "monkey"
-            animal(0, undefined); // 0 "monkey"
+            animal(); 
+            输出：<em>yuan monkey</em>
+
+            animal(name = 'dog'); 
+            输出：<em>dog monkey</em>
+
+            animal(name = 'yuan', undefined); 
+            输出：<em>yuan monkey</em>
+
+            animal(name = 'yuan', null); 
+            输出：<em>yuan null</em>
+
+            animal(false, undefined); 
+            输出：<em>false "monkey"</em>
+
+            animal(0, undefined); 
+            输出：<em>0 "monkey"</em>
+
         }
         </pre>
-        <em>注意：调用函数时只有不传和传入 undefined 的会触发默认值，而传入其它值或者 null，则不会触发默认值。</em>
+            <em>注意：调用函数时只有不传和传入 undefined 的会触发默认值，而传入其它值或者 null，则不会触发默认值。</em>
         </li>
         <li>3、默认参数位置</li>
         <li><pre>
         {
-            // 错误写法
+            <span>错误写法</span>
             <i>function</i> animal(name = 'yuan', type) {
                 <i>console</i>.<i>log</i>(name, type);
             }
             animal();
+            输出：<em>yuan undefined</em>
         }
 
         {
-            // 正确写法
+            <span>正确写法</span>
             <i>function</i> animal(name, type = 'monkey') {
                 <i>console</i>.<i>log</i>(name, type);
             }
             animal();
+            输出：<em>0 "monkey"</em>
         }
         </pre>
-        <em>注意：通常情况下，若有参数需要设置默认值时，一般是放在尾参数位置。</em>
+            <em>注意：通常情况下，若有参数需要设置默认值时，一般是放在尾参数位置。</em>
         </li>
         <li>4、参数默认值与解构赋值默认值的结合使用</li>
         <li><pre>
         {
-            // 第一种写法，参数默认值为空对象，解构赋值有具体的默认值
+            <span>第一种写法，参数默认值为空对象，解构赋值有具体的默认值</span>
             <i>function</i> method1({ x = 0, y = 0 } = {}) {
                 return [x, y];
             }
 
-            // 第二种写法，参数默认值是一个具体的属性对象，而对象解构赋值没有设置默认值 
+            <span>第二种写法，参数默认值是一个具体的属性对象，而对象解构赋值没有设置默认值</span> 
             <i>function</i> method2({ x, y } = { x: 0, y: 0 }) {
                 return [x, y];
             }
 
-            // 函数没有参数时
-            <i>console</i>.<i>log</i>(method1()); // [0, 0]
-            <i>console</i>.<i>log</i>(method2()); // [0, 0]
+            <i>console</i>.<i>log</i>(method1());
+            输出：<em>[0, 0]</em>
+            <i>console</i>.<i>log</i>(method2());
+            输出：<em>[0, 0]</em>
 
-            // x 和 y 都有值
-            <i>console</i>.<i>log</i>(method1({ x: 2, y: 3 })); // [2, 3]
-            <i>console</i>.<i>log</i>(method2({ x: 2, y: 3 })); // [2, 3]
 
-            // x 有值, y 没有值
-            <i>console</i>.<i>log</i>(method1({ x: 2 })); // [2, 0]
-            <i>console</i>.<i>log</i>(method2({ x: 2 })); // [2, undefined]
+            x 和 y 都有值
+            <i>console</i>.<i>log</i>(method1({ x: 2, y: 3 }));
+            输出：<em>[2, 3]</em>
+            <i>console</i>.<i>log</i>(method2({ x: 2, y: 3 }));
+            输出：<em>[2, 3]</em>
 
-            // x 没有值, y 有值
-            <i>console</i>.<i>log</i>(method1({ y: 2 })); // [0, 2]
-            <i>console</i>.<i>log</i>(method2({ y: 2 })); // [undefined, 2
 
-            // x 和 y 都没有值
-            <i>console</i>.<i>log</i>(method1({})); // [0, 0]
-            <i>console</i>.<i>log</i>(method2({})); // [undefined, undefined]
+            x 有值, y 没有值
+            <i>console</i>.<i>log</i>(method1({ x: 2 }));
+            输出：<em>[2, 0]</em>
+            <i>console</i>.<i>log</i>(method2({ x: 2 }));
+            输出：<em>[2, undefined]</em>
+
+            x 没有值, y 有值
+            <i>console</i>.<i>log</i>(method1({ y: 2 }));
+            输出：<em>[0, 2]</em>
+            <i>console</i>.<i>log</i>(method2({ y: 2 }));
+            输出：<em>[undefined, 2]</em>
+
+            x 和 y 都没有值
+            <i>console</i>.<i>log</i>(method1({}));
+            输出：<em>[0, 0]</em>
+            <i>console</i>.<i>log</i>(method2({}));
+            输出：<em>[undefined, undefined]</em>
         }
         </pre>
+            <em>注意：当解构赋值有默认值时任何情况都不会出现undefined</em>
         </li>
         <li>5、使用参数默认值对函数 length 属性的影响</li>
         <li><pre>
         {
-            <i>console</i>.<i>log</i>((<i>function</i>(a) {}).length) // 1
-            <i>console</i>.<i>log</i>((<i>function</i>(a = 5) {}).length) // 0
-            <i>console</i>.<i>log</i>((<i>function</i>(a, b, c = 5) {}).length) // 2
-            <i>console</i>.<i>log</i>((<i>function</i>(a, ...b) {}).length) // 1
+            <i>console</i>.<i>log</i>((<i>function</i>(a) {}).length)
+            输出：<em>1</em>
+
+            <i>console</i>.<i>log</i>((<i>function</i>(a = 5) {}).length)
+            输出：<em>0</em>
+
+            <i>console</i>.<i>log</i>((<i>function</i>(a, b, c = 5) {}).length)
+            输出：<em>2</em>
+
+            <i>console</i>.<i>log</i>((<i>function</i>(a, ...b) {}).length)
+            输出：<em>1</em>
         }
         </pre>
-        <em>注意：函数的参数在指定默认值之后，函数的 length 属性会失真，返回的 length 值，是没有指定默认值的参数的个数，这里的 length 也不包括 rest(...) 参数的个数。</em>
+            <em>注意：函数的参数在指定默认值之后，函数的 length 属性会失真，返回的 length 值，是没有指定默认值的参数的个数，这里的 length 也不包括 rest(...) 参数的个数。</em>
         </li>
+    </ul>
+    <ul class="note">
+        <li>二、rest 参数</li>
+        <li><pre>
+        {
+            <span>求和，把结果赋值给 result</span>
+            <i>function</i> sum(result, ...values) {
+                <i>console</i>.<i>log</i>(values);
+                输出：<em>[1, 2, 3, 4]</em>
+
+                values.<i>forEach</i>(<i>function</i>(value, index) {
+                    result += value;
+                })
+                <i>console</i>.<i>log</i>(result);
+                输出：<em>21</em>
+            }
+            sum(11, 1, 2, 3, 4);
+        }
+        </pre>
+            <em>注意：rest参数（... + 变量名）表示的是：获取函数多余的参数，且这个变量是一个数组。还有一点要注意的是 rest 参数必须是尾参数，后面不能加其他的参数，否则会报错。</em>
+        </li>
+    </ul>
+    <ul class="note">
+        <li>三、name 属性</li>
+        <li><pre>
+        {
+            <span>ES6中增加了函数的name属性</span>
+            <i>const</i> animal = <i>function</i>() {};
+            <i>console</i>.<i>log</i>(animal.name);
+            输出：<em>animal</em>
+
+            <span>Function 构造函数会发的函数实例，name 属性的值为 anonymous(匿名的)</span>
+            <i>console</i>.<i>log</i>((new Function).name);
+            输出：<em>anonymous</em>
+
+            <span>bind 返回的函数，name属性值会加上“bound”前缀</span>
+            <i>function</i> fn() {};
+            <i>console</i>.<i>log</i>(fn.<i>bind</i>({}).name);
+            输出：<em>bound fn</em>
+
+            <span>匿名函数的 bind 返回的值 bound</span>
+            <i>console</i>.<i>log</i>((<i>function</i>() {}).<i>bind</i>({}).name);
+            输出：<em>bound</em>
+        }
+        </pre>
+        </li>
+    </ul>
+    <ul class="note">
+        <li>四、箭头函数</li>
+        <li><pre>
+        {
+            <span>1、当函数体中返回的是对象时，我们需要将其用圆括号 () 括起来</span>
+            var person = name => ({ name: name, type: 'monkey' });
+            <i>console</i>.<i>log</i>(person('哈哈'));
+            <i>console</i>.<i>log</i>(person('哈哈').name);
+
+            <span>2、使用注意点,在箭头函数中 this 指向是固定的</span>
+            <i>function</i> foo() {
+                <i>setTimeout</i>(() => {
+                    <i>console</i>.<i>log</i>('id:', this.id)
+                    输出：<em>42</em>
+                }, 100);
+            }
+            var id = 21;
+            foo.<i>call</i>({ id: 42 });
+            <span>
+            如上输出结果，此处的 this 指向并不是全局对象 window，因为在箭头函数中，this 总是指向函数定义生效时所在的对象，所以输出的结果是 42。
+            如果还不清楚箭头函数 this 指向的含义，我们可以这样通俗的理解：在 JavaScript 中每一个 function 都有一个独立的运行上下文，
+            而箭头函数不是一个普通的 function ，没有自己的运行上下文。
+            所以在箭头函数中写的 this，具体指的是包含这个箭头函数最近的 function 的上下文中的 this，
+            如果没有最近的 function，this 指向的是全局。
+            </span>
+            <span>
+            （1）、函数体内的 this 指向，指向的是定义时所在的对象，而不是使用时所在的对象。
+            （2）、不能当做构造函数用，即不能使用 new 命令，否则会报错
+            （3）、不可以使用 arguments 对象。如果要用，使用 rest 参数代替
+            （4）、不能使用 yield 命令，因为箭头函数不能用作 Generator 函数
+            </span>
+        }
+        </pre>
+        </li>
+    </ul>
+    <ul class="note">
+        <li>五、函数的尾调用</li>
+        <li><pre>
+        {
+            <span>1、定义：尾调用是函数式编程的一个重要概念，是指某个函数的最后一步调用另一个函数。</span>
+            <i>function</i> f(x) {
+                <em>return</em> g(x);
+            }
+            函数f 的最后一步是调用函数g，这就是尾调用。
+
+            <span>2、尾递归：函数调用自身叫做递归，如果尾调用自身就是尾递归。</span>
+            <i>function</i> factorial(n) {
+                if (n === 1) <em>return</em> 1;
+                <em>return</em> n * factorial(n - 1);
+            }
+            <i>console</i>.<i>log</i>(factorial(5));
+            输出：<em>120</em>
+            在ES6 中只要使用尾递归，就不会发生栈溢出，相对节省内存。
+
+            <span>3、尾递归改写</span>
+            为了确保最后一步只调用自身，需要对尾递归函数进行改写，把所有用到的内部变量改写成函数的参数。
+            使用柯里化函数编程思想，将多参数的函数转换成单参数的形式：
+            <i>function</i> curring(fn, n) {
+                <em>return</em> <i>function</i>(m) {
+                    <em>return</em> fn.<i>call</i>(this, m, n);
+                }
+            }
+
+            <i>function</i> tailFactorial(n, total) {
+                if (n === 1) <em>return</em> total;
+                <em>return</em> tailFactorial(n - 1, n * total);
+            }
+            const factorial1 = curring(tailFactorial, 1);
+            <i>console</i>.<i>log</i>(factorial1(5));
+            输出：<em>120</em>
+
+            <span>采用ES6的函数默认值改写</span>
+            <i>function</i> factorial2(n, total = 1) {
+                if (n === 1) <em>return</em> total;
+                <em>return</em> factorial2(n - 1, n * total);
+            }
+            <i>console</i>.<i>log</i>(factorial2(5));
+            输出：<em>120</em>
+            在尾调用优化时，循环是可以用递归代替的，而一旦使用递归，就最好使用尾递归。
+        }
+        </pre></li>
     </ul>
     <script>
     //一、函数参数默认值
@@ -155,7 +318,7 @@
 
     //3、默认参数位置
     {
-        // 错误写法
+        //错误写法
         function animal(name = 'yuan', type) {
             console.log(name, type);
         }
@@ -163,7 +326,7 @@
     }
 
     {
-        // 正确写法
+        //正确写法
         function animal(name, type = 'monkey') {
             console.log(name, type);
         }
@@ -226,6 +389,7 @@
         // 求和，把结果赋值给 result
         function sum(result, ...values) {
             console.log(values); // [1, 2, 3, 4]，这个变量返回的是一个数组
+
             values.forEach(function(value, index) {
                 result += value;
             })
@@ -233,7 +397,7 @@
         }
         sum(11, 1, 2, 3, 4); // 21
 
-        //rest参数（3个点 + 变量名）表示的是：获取函数多余的参数，且这个变量是一个数组。还有一点要注意的是 rest参数必须是尾参数，后面不能加其他的参数，否则会报错。
+        //rest参数（... + 变量名）表示的是：获取函数多余的参数，且这个变量是一个数组。还有一点要注意的是 rest 参数必须是尾参数，后面不能加其他的参数，否则会报错。
 
         // 错误写法
         /*function sum(res, ...values, another) {
@@ -241,52 +405,35 @@
         }
         sum(); // 报错：Uncaught SyntaxError: Rest parameter must be last formal parameter*/
     }
+    console.log('----------分割线----------');
 
 
     //三、name属性
     {
         //ES6中增加了函数的name属性
         const animal = function() {};
-        animal.name; // "animal"
+        console.log(animal.name); // "animal"
 
-        //Function 构造函数会发的函数实例，name 属性的值为“anonymous”
-        (new Function).name; //  "anonymous"
+        //Function 构造函数会发的函数实例，name 属性的值为 anonymous(匿名的)
+        console.log((new Function).name); //  "anonymous"
 
         //bind 返回的函数，name属性值会加上“bound”前缀
-        //function animal() {};
-        animal.bind({}).name; // "bound animal"
+        function fn() {};
+        console.log(fn.bind({}).name); // "bound fn"
 
-        //匿名函数的bind 返回的值“bound”
-        (function() {}).bind({}).name; //  "bound"
+        //匿名函数的 bind 返回的值 bound
+        console.log((function() {}).bind({}).name); //  "bound"
     }
-
-
+    console.log('----------分割线----------');
 
     //四、箭头函数
-    /*1、定义
-    用箭头“=>”来定义函数。
-    2、用法
-    对比*/
     {
-        // ES5 写法
-        var sum = function(a) {
-            return a;
-        }
-        // ES6 写法
-        var sum = a => a;
+        //1、当函数体中返回的是对象时，我们需要将其用圆括号“()”括起来：
+        var person = name => ({ name: name, type: 'monkey' });
+        console.log(person('哈哈'));
+        console.log(person('哈哈').name);
 
-        //如上代码，在ES6中，第一个a表示函数参数，箭头“=>”后面的 a 表示函数体。
-        //上述只是针对一个参数和函数体只有一条语句的写法，若函数参数的个数和函数体的语句超过1个要如何表示呢？如下：
-        var sum = (a, b) => { return a + b };
-        sum(1, 4); // 5
-
-        //如上，若函数的参数个数超过一个时，需要用圆括号“()”来代表参数，函数体的语句条数超过一条时，需要用大括号将它们括起来。
-        //当函数体中返回的是对象时，我们需要将其用圆括号“()”括起来：
-        var person = name => ({ name: 'yuan', type: 'monkey' });
-
-        // 3、使用注意点
-        // （1）、函数体内的 this 指向，指向的是定义时所在的对象，而不是使用时所在的对象。
-        // 在箭头函数中 this 指向是固定的：
+        //2、使用注意点,在箭头函数中 this 指向是固定的：
         function foo() {
             setTimeout(() => {
                 console.log('id:', this.id)
@@ -294,34 +441,36 @@
         }
         var id = 21;
         foo.call({ id: 42 }); // 42
+        //如上输出结果，此处的 this 指向并不是全局对象 window，因为在箭头函数中，this 总是指向函数定义生效时所在的对象，所以输出的结果是 42。
+        //如果还不清楚箭头函数 this 指向的含义，我们可以这样通俗的理解：在 JavaScript 中每一个 function 都有一个独立的运行上下文，而箭头函数不是一个普通的 function ，没有自己的运行上下文。所以在箭头函数中写的 this，具体指的是包含这个箭头函数最近的 function 的上下文中的 this，如果没有最近的 function，this 指向的是全局。
 
-        // 如上输出结果，此处的this 指向并不是全局对象 window，因为在箭头函数中，this 总是指向函数定义生效时所在的对象，所以输出的结果是 42。
-        // 如果还不清楚箭头函数 this 指向的含义，我们可以这样通俗的理解：在JavaScript 中每一个 function 都有一个独立的运行上下文，而箭头函数不是一个普通的 function ，没有自己的运行上下文。所以在箭头函数中写的 this，具体指的是包含这个箭头函数最近的 function 的上下文中的 this，如果没有最近的 function，this 指向的是全局。
-        // （2）、不能当做构造函数用，即不能使用 new 命令，否则会报错
-        // （3）,、不可以使用arguments 对象，该对象哎函数体内不存在。如果要用，使用 rest 参数代替
-        // （4）、不能使用 yield 命令，因为箭头函数不能用作Generator 函数
+        //（1）、函数体内的 this 指向，指向的是定义时所在的对象，而不是使用时所在的对象。
+        //（2）、不能当做构造函数用，即不能使用 new 命令，否则会报错
+        //（3）、不可以使用 arguments 对象。如果要用，使用 rest 参数代替
+        //（4）、不能使用 yield 命令，因为箭头函数不能用作 Generator 函数
     }
-    //六、函数的尾调用
+    console.log('----------分割线----------');
+
+    //五、函数的尾调用
     {
-        // 1、定义
-        // 尾调用是函数式编程的一个重要概念，是指某个函数的最后一步调用另一个函数。
+        //1、定义：尾调用是函数式编程的一个重要概念，是指某个函数的最后一步调用另一个函数。
         function f(x) {
             return g(x);
         }
+        //函数f 的最后一步是调用函数g，这就是尾调用。
 
-        // 函数f 的最后一步是调用函数g，这就是尾调用。
-        // 2、尾递归
-        // 函数调用自身叫做递归，如果尾调用自身就是尾递归。
+        //2、尾递归
+        //函数调用自身叫做递归，如果尾调用自身就是尾递归。
         function factorial(n) {
             if (n === 1) return 1;
             return n * factorial(n - 1);
         }
-        factorial(5); // 120
-
+        console.log(factorial(5)); // 120
         // 在ES6 中只要使用尾递归，就不会发生栈溢出，相对节省内存。
-        // 3、尾递归改写
-        // 为了确保最后一步只调用自身，需要对尾递归函数进行改写，把所有用到的内部变量改写成函数的参数。
-        // 使用柯里化函数编程思想，将多参数的函数转换成单参数的形式：
+
+        //3、尾递归改写
+        //为了确保最后一步只调用自身，需要对尾递归函数进行改写，把所有用到的内部变量改写成函数的参数。
+        //使用柯里化函数编程思想，将多参数的函数转换成单参数的形式：
         function curring(fn, n) {
             return function(m) {
                 return fn.call(this, m, n);
@@ -332,16 +481,15 @@
             if (n === 1) return total;
             return tailFactorial(n - 1, n * total);
         }
-        //const factorial = curring(tailFactorial, 1);
-        factorial(5); // 120
+        const factorial1 = curring(tailFactorial, 1);
+        console.log(factorial1(5)); // 120
 
-        //采用ES6的函数默认值改写：
-        function factorial(n, total = 1) {
+        //采用ES6的函数默认值改写
+        function factorial2(n, total = 1) {
             if (n === 1) return total;
-            return factorial(n - 1, n * total);
+            return factorial2(n - 1, n * total);
         }
-        factorial(5); // 120
-
+        console.log(factorial2(5)); // 120
         //在尾调用优化时，循环是可以用递归代替的，而一旦使用递归，就最好使用尾递归。
     }
     </script>

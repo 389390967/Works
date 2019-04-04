@@ -1,70 +1,14 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>JS无级树树形菜单</title>
-    <link rel="shortcut icon" href="img/ico.ico">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <style type="text/css">
-    .menuTree div ul {
-        display: none;
-        margin-left: 50px;
-    }
-
-    .menuTree span {
-        display: block;
-        border-bottom: 1px solid #fff;
-        line-height: 50px;
-        cursor: pointer;
-    }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 
 <body>
-    <div id="menuTree" class="menuTree"></div>
-    <script src="js/nav-data.js"></script>
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script>
-    var navData = navData();
-
-    /*--递归实现获取无级树数据并生成DOM结构--*/
-    var html = "";
-    var forTree = function(obj) {
-        for (var i = 0; i < obj.length; i++) {
-            html += "<div>";
-            html += "<span>" + "<a href=" + obj[i].link + ">" + obj[i].title + "</a></span>";
-            html += "<ul>";
-
-            if (obj[i].child) {
-                forTree(obj[i].child);
-            }
-
-            html += "</ul>";
-            html += "</div>";
-        }
-        return html;
-    }
-    /*--添加无级树--*/
-    document.getElementById("menuTree").innerHTML = forTree(navData);
-
-    /*--树形菜单--*/
-    var menuTree = function() {
-        $("#menuTree").find("div span").click(function() {
-            var ul = $(this).siblings("ul");
-            var spanStr = $(this).html();
-            var spanContent = spanStr.substr(3, spanStr.length);
-            if (ul.find("div").html() != null) {
-                if (ul.css("display") == "none") {
-                    ul.show(300);
-                } else {
-                    ul.hide(300);
-                }
-            }
-        })
-    }()
-    </script>
 </body>
 
 </html>

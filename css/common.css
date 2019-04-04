@@ -8,16 +8,24 @@ textarea{padding:10px;}
 body,html{height:100%;background-color:#313131;color:#fff;}
 a{display:inline-block;color:#5CACEE;text-decoration:none;transition:color .5s;}
 a:hover{color:#ff502c;}
-i{color:#5CACEE;font-style:normal;}
-b{color:#E7DB74;font-weight:lighter;}
+
+/*Ethan*/
+i{color:#5CACEE;font-style:normal;}/*--蓝色--*/
+b{color:#E7DB74;font-weight:lighter;}/*--黄色--*/
 em{color:#be3948;font-style:normal;}
 span{color:#ff502c;}
 strong{color:#F92472;font-weight:lighter;}
 pre{overflow:auto;margin:10px 0;padding-top:15px;border-radius:8px;background:#282c34;white-space:pre;word-wrap:normal;word-break:break-word;}
 code{display:block;white-space:pre-wrap;line-height:1.5;}
+h1{text-align:center;font-size:40px;color:#ff502c;line-height:100px;}
+th{font-weight:400;font-size:16px}
+td,th{padding:10px;border:1px solid #5CACEE}
+td:nth-child(1),th:nth-child(1){color:#ff502c;text-align:center}
 .clearfix:after,.container:after,.ctn:after,.ctn-big:after{clear:both;display:table;content:"";}
 .ctn{margin:0 auto;width:1200px;}
-h1{text-align:center;font-size:40px;color:#ff502c;line-height:100px;}
+.big-title{margin-top:50px;color:#ff502c;}
+.small-title{margin-top:30px;color:#ff502c;font-size:18px !important;}
+/*Ethan end*/
 
 /*note*/
 .note{margin:0 auto;width:1200px;padding:20px 0;}

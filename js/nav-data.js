@@ -251,6 +251,22 @@ var data = [
                     "title": "getByClass",
                     "link": "all/es5/正则表达式/getByClass.html"
                 }]
+            },
+            {
+                "title": "对象",
+                "link": "javascript:;",
+                "child": [{
+                    "title": "对象",
+                    "link": "all/es5/object/object_1.html"
+                }]
+            },
+            {
+                "title": "其它",
+                "link": "javascript:;",
+                "child": [{
+                    "title": "currying",
+                    "link": "all/es5/other/currying.html"
+                }]
             }
         ]
     },

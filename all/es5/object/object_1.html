@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>对象</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <style>
+    table {
+        margin: 15px 0;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>对象</h1>
+    <ul class="note">
+        <li>一、类与对象</li>
+        <li>
+            <table>
+                <tr>
+                    <td>类</td>
+                    <td>模具</td>
+                </tr>
+                <tr>
+                    <td>对象（实例）</td>
+                    <td>模具生产出来的蛋糕</td>
+                </tr>
+            </table>
+            <p class="small-title">例如：arr = new Array()</p>
+            <table>
+                <tr>
+                    <td>Array类</td>
+                    <td>不具备实际的功能，只能用来构造对象</td>
+                </tr>
+                <tr>
+                    <td>arr对象（实例）</td>
+                    <td>具备实际的功能，被类构造出来</td>
+                </tr>
+            </table>
+        </li>
+    </ul>
+    <div class="ctn">
+        <pre id="pre"></pre>
+    </div>
+    <script id='jsCo'>
+    //一、工厂模式
+    {
+        function Person(name, sex) {
+            var obj = new Object();
+            obj.name = name;
+            obj.sex = sex;
+
+            obj.showName = function() {
+                console.log(obj.name)
+            }
+
+            obj.showSex = function() {
+                console.log(obj.sex)
+            }
+
+            return obj;
+        }
+
+        var p1 = Person('blue', 'man');
+        var p2 = Person('red', 'woman');
+        p1.showName();
+        p1.showSex();
+        p2.showName();
+        p2.showSex();
+
+        //缺点：
+        //1、没有new
+        //2、每个对象都有一套自已的方法，浪费空间
+    }
+    console.log('%c----------分割线----------', 'color:#5CACEE');
+
+    //二、混合模式
+
+    //1、第一步：把 new 提取出来
+    {
+        function Person(name, sex) {
+            //假想的系统内部工作流程
+            //var this = new new Object();
+
+            this.name = name;
+            this.sex = sex;
+
+            this.showName = function() {
+                console.log(this.name)
+            }
+
+            this.showSex = function() {
+                console.log(this.sex)
+            }
+
+            //假想的系统内部工作流程
+            //return this;
+        }
+
+        var p1 = new Person('blue', 'man');
+        var p2 = new Person('red', 'woman');
+        p1.showName();
+        p1.showSex();
+        p2.showName();
+        p2.showSex();
+    }
+    console.log('%c----------分割线----------', 'color:#5CACEE');
+
+    //2、第二步：用 prototype 给类添加添加方法，从而让构造出来的对象都有同一个方法
+    {
+        function Person(name, sex) {
+            this.name = name;
+            this.sex = sex;
+        }
+
+        Person.prototype.showName = function() {
+            console.log(this.name)
+        };
+
+        Person.prototype.showSex = function() {
+            console.log(this.sex)
+        };
+
+        var p1 = new Person('blue', 'man');
+        var p2 = new Person('red', 'woman');
+        p1.showName();
+        p1.showSex();
+        p2.showName();
+        p2.showSex();
+    }
+    </script>
+    <script>
+    var jsCode = jsCo.innerHTML;
+    var textRe = /(\/\/.+\s*)/g;
+    var keysRe = /(var|let|const|function)/g;
+    jsCode = jsCode.replace(textRe, '<span>$1</span>').replace(keysRe, '<i>$1</i>');
+    pre.innerHTML = jsCode;
+
+    //var preCode =
+    //console.log(bb)
+
+    var str1 = '{x:2, list:[{a:0, b:"0", alist:[]}, {a:1,b:"1",alist : []}]}';
+    var reg = /([^\s\:\{\[\,]+)\s*\:/g;
+    var str2 = str1.replace(reg, "\"$1\"\:");
+    console.log(str2);
+    </script>
+</body>
+
+</html>
