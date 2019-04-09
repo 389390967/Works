@@ -257,7 +257,10 @@ var data = [
                 "link": "javascript:;",
                 "child": [{
                     "title": "对象",
-                    "link": "all/es5/object/object_1.html"
+                    "link": "all/es5/object/对象.html"
+                }, {
+                    "title": "系统对象",
+                    "link": "all/es5/object/系统对象.html"
                 }, {
                     "title": "面向对象选项卡",
                     "link": "all/es5/object/面向对象选项卡.html"
