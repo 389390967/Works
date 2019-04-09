@@ -6,10 +6,11 @@
     <title>对象</title>
     <link rel="shortcut icon" href="../../../img/ico.ico">
     <link rel="stylesheet" href="../../../css/common.css">
+    <script src="../../../js/common.js"></script>
     <style>
-    table {
-        margin: 15px 0;
-    }
+        table {
+            margin: 15px 0;
+        }
     </style>
 </head>
 
@@ -45,106 +46,95 @@
         <pre id="pre"></pre>
     </div>
     <script id='jsCo'>
-    //一、工厂模式
-    {
-        function Person(name, sex) {
-            var obj = new Object();
-            obj.name = name;
-            obj.sex = sex;
+        // 一、工厂模式
+        {
+            function Person(name, sex) {
+                var obj = new Object();
+                obj.name = name;
+                obj.sex = sex;
 
-            obj.showName = function() {
-                console.log(obj.name)
+                obj.showName = function () {
+                    console.log(obj.name)
+                }
+
+                obj.showSex = function () {
+                    console.log(obj.sex)
+                }
+
+                return obj;
             }
 
-            obj.showSex = function() {
-                console.log(obj.sex)
-            }
-
-            return obj;
+            var p1 = Person('blue', 'man');
+            var p2 = Person('red', 'woman');
+            p1.showName();
+            p1.showSex();
+            p2.showName();
+            p2.showSex();
         }
+        /*--
+         缺点：
+        1、没有 new
+        2、每个对象都有一套自已的方法，浪费空间 
+        --*/
+        console.log('%c----------分割线----------', 'color:#5CACEE');
 
-        var p1 = Person('blue', 'man');
-        var p2 = Person('red', 'woman');
-        p1.showName();
-        p1.showSex();
-        p2.showName();
-        p2.showSex();
+        // 二、混合模式
 
-        //缺点：
-        //1、没有new
-        //2、每个对象都有一套自已的方法，浪费空间
-    }
-    console.log('%c----------分割线----------', 'color:#5CACEE');
+        // 1、第一步：把 new 提取出来
+        {
+            function Person(name, sex) {
+                // 假想的系统内部工作流程
+                // var this = new Object();
 
-    //二、混合模式
+                this.name = name;
+                this.sex = sex;
 
-    //1、第一步：把 new 提取出来
-    {
-        function Person(name, sex) {
-            //假想的系统内部工作流程
-            //var this = new new Object();
+                this.showName = function () {
+                    console.log(this.name)
+                }
 
-            this.name = name;
-            this.sex = sex;
+                this.showSex = function () {
+                    console.log(this.sex)
+                }
 
-            this.showName = function() {
+                // 假想的系统内部工作流程
+                // return this;
+            }
+
+            var p1 = new Person('blue', 'man');
+            var p2 = new Person('red', 'woman');
+            p1.showName();
+            p1.showSex();
+            p2.showName();
+            p2.showSex();
+        }
+        console.log('%c----------分割线----------', 'color:#5CACEE');
+
+        // 2、第二步：用 prototype 给类添加添加方法，从而让构造出来的对象都有同一个方法
+        {
+            function Person(name, sex) {
+                this.name = name;
+                this.sex = sex;
+            }
+
+            Person.prototype.showName = function () {
                 console.log(this.name)
-            }
+            };
 
-            this.showSex = function() {
+            Person.prototype.showSex = function () {
                 console.log(this.sex)
-            }
+            };
 
-            //假想的系统内部工作流程
-            //return this;
+            var p1 = new Person('blue', 'man');
+            var p2 = new Person('red', 'woman');
+            p1.showName();
+            p1.showSex();
+            p2.showName();
+            p2.showSex();
         }
-
-        var p1 = new Person('blue', 'man');
-        var p2 = new Person('red', 'woman');
-        p1.showName();
-        p1.showSex();
-        p2.showName();
-        p2.showSex();
-    }
-    console.log('%c----------分割线----------', 'color:#5CACEE');
-
-    //2、第二步：用 prototype 给类添加添加方法，从而让构造出来的对象都有同一个方法
-    {
-        function Person(name, sex) {
-            this.name = name;
-            this.sex = sex;
-        }
-
-        Person.prototype.showName = function() {
-            console.log(this.name)
-        };
-
-        Person.prototype.showSex = function() {
-            console.log(this.sex)
-        };
-
-        var p1 = new Person('blue', 'man');
-        var p2 = new Person('red', 'woman');
-        p1.showName();
-        p1.showSex();
-        p2.showName();
-        p2.showSex();
-    }
     </script>
     <script>
-    var jsCode = jsCo.innerHTML;
-    var textRe = /(\/\/.+\s*)/g;
-    var keysRe = /(var|let|const|function)/g;
-    jsCode = jsCode.replace(textRe, '<span>$1</span>').replace(keysRe, '<i>$1</i>');
-    pre.innerHTML = jsCode;
-
-    //var preCode =
-    //console.log(bb)
-
-    var str1 = '{x:2, list:[{a:0, b:"0", alist:[]}, {a:1,b:"1",alist : []}]}';
-    var reg = /([^\s\:\{\[\,]+)\s*\:/g;
-    var str2 = str1.replace(reg, "\"$1\"\:");
-    console.log(str2);
+        appendJsCode('jsCo', 'pre');
     </script>
 </body>
 

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象选项卡</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <script src="../../../js/common.js"></script>
+    <style>
+        #div1>div {
+            width: 214px;
+            height: 214px;
+            background: #000;
+            color: #fff;
+            font-size: 50px;
+            line-height: 214px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ctn" id="div1">
+        <input class="btn btn-blue" type="button" value="按钮一">
+        <input class="btn btn-blue" type="button" value="按钮二">
+        <input class="btn btn-blue" type="button" value="按钮三">
+        <div style="display:block;">1</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+    <div class="ctn">
+        <pre id="pre"></pre>
+    </div>
+    <script id='jsCo'>
+        function tabSwith(id) {
+            var oDiv = document.getElementById(id);
+            this.aBtn = oDiv.getElementsByTagName('input');
+            this.aDiv = oDiv.getElementsByTagName('div');
+
+            var self = this;
+            for (let i = 0; i < this.aBtn.length; i++) {
+                this.aBtn[i].index = i;
+                this.aBtn[i].onclick = function () {
+                    self.tab(this);
+                }
+            }
+        }
+
+        tabSwith.prototype.tab = function (aBtn) {
+            for (let i = 0; i < this.aBtn.length; i++) {
+                this.aDiv[i].style.display = 'none';
+            }
+            this.aDiv[aBtn.index].style.display = 'block';
+        }
+
+        var obj = new tabSwith('div1');
+    </script>
+    <script>
+        appendJsCode('jsCo', 'pre');
+    </script>
+</body>
+
+</html>

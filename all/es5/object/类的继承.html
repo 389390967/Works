@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>类的继承</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <script src="../../../js/common.js"></script>
+</head>
+
+<body>
+    <h1>类的继承</h1>
+    <div class="ctn">
+        <pre id="pre"></pre>
+    </div>
+    <script id="jsCo">
+        function Person(name, sex) {
+            this.name = name;
+            this.sex = sex;
+        }
+
+        Person.prototype.showName = function (params) {
+            console.log(this.name);
+        }
+
+        Person.prototype.showSex = function (params) {
+            console.log(this.sex);
+        }
+
+        function Worker(name, sex, job) {
+            // 构造函数伪装 调用父级的构造函数继承属性
+            // this是new出来的Worker对象（w1）
+            Person.call(this, name, sex);
+            this.job = job;
+        }
+
+        // 原型链 通过原型链继承父级分方法
+        // Worker.prototype = Person.prototype;
+        for (const i in Person.prototype) {
+            Worker.prototype[i] = Person.prototype[i];
+        }
+
+        Worker.prototype.showJob = function (params) {
+            console.log(this.job);
+        }
+
+        var w1 = new Worker('Tom', 'man', '抓老鼠的');
+        w1.showJob();
+    </script>
+
+    <script>
+        appendJsCode('jsCo', 'pre');
+    </script>
+</body>
+
+</html>

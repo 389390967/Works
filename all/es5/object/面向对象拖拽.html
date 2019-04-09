@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象拖拽</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <script src="../../../js/common.js"></script>
+    <style>
+        .div {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 200px;
+            height: 200px;
+            color: #fff;
+            font-size: 50px;
+            line-height: 200px;
+            text-align: center;
+        }
+
+        #div2 {
+            left: 240px;
+        }
+
+        .div:hover {
+            cursor: move;
+        }
+
+        .ctn {
+            padding-top: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>面向对象拖拽</h1>
+    <div class="div bg-blue" id="div1">1</div>
+    <div class="div bg-pink" id="div2">2</div>
+
+    <div class="ctn">
+        <pre id="pre"></pre>
+    </div>
+    <script id='jsCo'>
+        new Drag('div1');
+        new Drag('div2');
+
+        function Drag(id) {
+            var self = this;
+            this.disX = 0;
+            this.disY = 0;
+            this.oDiv = document.getElementById(id);
+            this.oDiv.onmousedown = function (event) {
+                self.fnDown(event);
+            };
+        }
+
+
+        Drag.prototype.fnDown = function (event) {
+            var self = this;
+            this.disX = event.clientX - this.oDiv.offsetLeft; //鼠标光标离div左边的距离
+            this.disY = event.clientY - this.oDiv.offsetTop;
+            console.log("鼠标光标离div左边的距离：" + event.clientX + "-" + this.oDiv.offsetLeft + "=" + this.disX);
+
+            document.onmousemove = function (event) {
+                self.fnMove(event);
+            };
+
+            document.onmouseup = function () {
+                self.fnUp();
+            };
+        }
+
+        Drag.prototype.fnMove = function (event) {
+            this.oDiv.style.left = event.clientX - this.disX + 'px'; //div离body左边的距离
+            this.oDiv.style.top = event.clientY - this.disY + 'px';
+            console.log("div离body左边的距离：" + event.clientX + "-" + this.disX + "=" + (event.clientX - this.disX));
+        }
+
+        Drag.prototype.fnUp = function () {
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+    </script>
+
+    <script>
+        appendJsCode('jsCo', 'pre');
+    </script>
+</body>
+
+</html>

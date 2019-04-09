@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖拽</title>
+    <link rel="shortcut icon" href="../../img/ico.ico">
+    <link rel="stylesheet" href="../../css/common.css">
+    <script src="../../js/common.js"></script>
+    <style>
+        .div {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 200px;
+            height: 200px;
+            color: #fff;
+            font-size: 50px;
+            line-height: 200px;
+            text-align: center;
+        }
+
+        .div:hover {
+            cursor: move;
+        }
+
+        .ctn {
+            padding-top: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div bg-blue" id="div1">1</div>
+
+    <div class="ctn">
+        <pre id="pre"></pre>
+    </div>
+    <script id='jsCo'>
+        var oDiv1 = document.getElementById('div1');
+
+        oDiv1.onmousedown = function (event) {
+            var disX = event.clientX - oDiv1.offsetLeft; //鼠标光标离div左边的距离
+            var disY = event.clientY - oDiv1.offsetTop;
+            console.log("鼠标光标离div左边的距离：" + event.clientX + "-" + oDiv1.offsetLeft + "=" + disX);
+
+            document.onmousemove = function (event) {
+                oDiv1.style.left = event.clientX - disX + 'px'; //div离body左边的距离
+                oDiv1.style.top = event.clientY - disY + 'px';
+                console.log("div离body左边的距离：" + event.clientX + "-" + disX + "=" + (event.clientX - disX));
+            }
+
+            document.onmouseup = function () {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            }
+        }
+    </script>
+    <script>
+        appendJsCode('jsCo', 'pre');
+    </script>
+</body>
+
+</html>

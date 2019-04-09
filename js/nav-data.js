@@ -258,6 +258,18 @@ var data = [
                 "child": [{
                     "title": "对象",
                     "link": "all/es5/object/object_1.html"
+                }, {
+                    "title": "面向对象选项卡",
+                    "link": "all/es5/object/面向对象选项卡.html"
+                }, {
+                    "title": "面向对象拖拽",
+                    "link": "all/es5/object/面向对象拖拽.html"
+                }, {
+                    "title": "类的继承",
+                    "link": "all/es5/object/类的继承.html"
+                }, {
+                    "title": "面向对象拖拽-继承",
+                    "link": "all/es5/object/drag/面向对象拖拽-继承.html"
                 }]
             },
             {
@@ -349,6 +361,9 @@ var data = [
             "child": [{
                 "title": "css3开门动画",
                 "link": "all/other/open-door/open-door.html"
+            }, {
+                "title": "拖拽",
+                "link": "all/demo/拖拽.html"
             }]
         }]
     },

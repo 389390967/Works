@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>面向对象拖拽-继承</title>
+    <link rel="shortcut icon" href="../../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../../css/common.css">
+    <script src="../../../../js/common.js"></script>
+    <script src="drag.js"></script>
+    <style>
+        .div {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 200px;
+            height: 200px;
+            color: #fff;
+            font-size: 50px;
+            line-height: 200px;
+            text-align: center;
+        }
+
+        #div2 {
+            left: 240px;
+        }
+
+        .div:hover {
+            cursor: move;
+        }
+
+        .ctn {
+            padding-top: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>面向对象拖拽</h1>
+    <div class="div bg-blue" id="div1">1</div>
+    <div class="div bg-pink" id="div2">2</div>
+
+    <div class="ctn">
+        <pre id="pre"></pre>
+    </div>
+    <script id='jsCo'>
+        var instance1 = new Drag('div1');
+        var instance2 = new LimitDrag('div2');
+        console.log("instance1是否是Drag的实例：" + (instance1 instanceof Drag));
+        console.log("instance2是否是Drag的实例：" + (instance2 instanceof Drag));
+        console.log("instance2是否是LimitDrag的实例：" + (instance2 instanceof LimitDrag));
+
+        function LimitDrag(id) {
+            Drag.call(this, id);
+        }
+
+        for (const key in Drag.prototype) {
+            LimitDrag.prototype[key] = Drag.prototype[key]
+        }
+
+        LimitDrag.prototype.fnMove = function (event) {
+            var left = event.clientX - this.disX;
+            var top = event.clientY - this.disY;
+            var maxLeft = document.documentElement.clientWidth - this.oDiv.offsetWidth;
+            var maxTop = document.documentElement.clientHeight - this.oDiv.offsetHeight;
+
+            if (left < 0) {
+                left = 0;
+            } else if (left > maxLeft) {
+                left = maxLeft;
+            }
+
+            if (top < 0) {
+                top = 0;
+            } else if (top > maxTop) {
+                top = maxTop;
+            }
+
+            this.oDiv.style.left = left + 'px';
+            this.oDiv.style.top = top + 'px';
+        };
+
+    </script>
+
+    <script>
+        appendJsCode('jsCo', 'pre');
+    </script>
+</body>
+
+</html>
