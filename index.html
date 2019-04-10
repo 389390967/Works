@@ -14,45 +14,14 @@
     <div id="iframe-box">
         <iframe id="iframe" src="all/demo-css/other/VFM.html"></iframe>
     </div>
-    <script src="js/nav-data.js"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/nav-data.js"></script>
+    <script src="js/common.js"></script>
     <script>
-    var navData = navData();
-    var navHtml = '';
-
-    function tree(obj) {
-        for (var i = 0; i < obj.length; i++) {
-            if (obj[i].child) {
-                navHtml += "<li class='nav-li'><a href=" + obj[i].link + "><span>" + obj[i].title + "</span></a><ul>";
-
-                tree(obj[i].child);
-
-                navHtml += "</ul></li>";
-            } else {
-                navHtml += "<li><a class='link-a' href='javascript:;' link=" + obj[i].link + ">" + obj[i].title + "</a></li>";
-            }
+        var iframeSrc = getCookie('iframeSrc');
+        if (iframeSrc) {
+            $('#iframe').attr('src', iframeSrc);
         }
-
-        return navHtml;
-    };
-    document.getElementById("nav-1").innerHTML = tree(navData);
-
-    $('#nav-1').on('click', '.nav-li', function(event) {
-        event.stopPropagation();
-
-        $(this).siblings('li').children('ul').hide();
-        $(this).children('ul').show();
-    }).on('click', '.link-a', function(event) {
-        event.stopPropagation();
-
-        var link = $(this).attr('link'),
-            title = $(this).text(),
-            aParent = $(this).closest('ul');
-        $('#iframe').attr('src', link);
-        aParent.hide();
-        aParent.parent().parent().hide();
-        $('title').text(title);
-    });
     </script>
 </body>
 

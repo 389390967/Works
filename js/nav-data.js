@@ -372,6 +372,39 @@ var data = [
     },
 ];
 
-function navData() {
-    return data;
+// 生成导航
+var navHtml = '';
+
+function tree(obj) {
+    for (var i = 0; i < obj.length; i++) {
+        if (obj[i].child) {
+            navHtml += "<li class='nav-li'><a href=" + obj[i].link + "><span>" + obj[i].title + "</span></a><ul>";
+
+            tree(obj[i].child);
+
+            navHtml += "</ul></li>";
+        } else {
+            navHtml += "<li><a class='link-a' href='javascript:;' link=" + obj[i].link + ">" + obj[i].title + "</a></li>";
+        }
+    }
+
+    return navHtml;
 }
+document.getElementById("nav-1").innerHTML = tree(data);
+
+// 导航操作
+$('#nav-1').on('click', '.nav-li', function (event) {
+    event.stopPropagation();
+    $(this).siblings('li').children('ul').hide();
+    $(this).children('ul').show();
+}).on('click', '.link-a', function (event) {
+    event.stopPropagation();
+    var link = $(this).attr('link'),
+        title = $(this).text(),
+        aParent = $(this).closest('ul');
+    setCookie('iframeSrc', link);
+    $('#iframe').attr('src', link);
+    aParent.hide();
+    aParent.parent().parent().hide();
+    $('title').text(title);
+});
