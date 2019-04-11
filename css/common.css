@@ -16,6 +16,7 @@ em{color:#be3948;font-style:normal;}
 span{color:#ff502c;}
 strong{color:#F92472;font-weight:lighter;}
 pre{overflow:auto;margin:10px 0;padding-top:15px;border-radius:8px;background:#282c34;white-space:pre;word-wrap:normal;word-break:break-word;}
+#pre{padding-top:0;}
 code{display:block;white-space:pre-wrap;line-height:1.5;}
 h1{text-align:center;font-size:40px;color:#ff502c;line-height:100px;}
 th{font-weight:400;font-size:16px}
@@ -97,6 +98,7 @@ td:nth-child(1),th:nth-child(1){color:#ff502c;text-align:center}
 .float-right{float:right;}
 
 /*margin*/
+.margin-bottom-20{margin-bottom:20px!important;}
 .margin-hor--15{margin:0 -15px;}
 
 /*padding*/

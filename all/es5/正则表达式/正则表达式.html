@@ -7,16 +7,17 @@
     <link rel="shortcut icon" href="../../../img/ico.ico">
     <link rel="stylesheet" href="../../../css/common.css">
     <style>
-    table {
-        margin: 0 15px;
-    }
+        table {
+            margin: 0 15px;
+        }
     </style>
 </head>
 
 <body>
+    <h1>正则/规则表达式</h1>
     <ul class="note">
-        <li>规则表达式就是用于描述规则的工具。换句话说，规则表达式就是记录文本规则的代码。</li>
-        <li class="flex-space-between margin-hor--15">
+        <li>解释：规则表达式就是用于描述规则的工具。换句话说，规则表达式就是记录文本规则的代码。</li>
+        <li class="flex-space-between margin-hor--15 margin-bottom-20">
             <table>
                 <thead>
                     <tr>
@@ -30,7 +31,7 @@
                     </tr>
                     <tr>
                         <td>\s</td>
-                        <td>(space)匹配任意的空白符</td>
+                        <td>(space)匹配任意的空白符[\t\n\x0B\f\r]</td>
                     </tr>
                     <tr>
                         <td>\d</td>
@@ -42,11 +43,11 @@
                     </tr>
                     <tr>
                         <td>.</td>
-                        <td>匹配除换行符以外的任意字符</td>
+                        <td>匹配除换行符以外的任意字符[^\n\r]</td>
                     </tr>
                     <tr>
                         <td>^</td>
-                        <td>匹配字符串的开始</td>
+                        <td>匹配字符串的开始(以什么开始)</td>
                     </tr>
                     <tr>
                         <td>$</td>
@@ -89,6 +90,46 @@
                 </tbody>
             </table>
 
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan='2'>不常用元字符</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>\t</td>
+                        <td>水平制表符</td>
+                    </tr>
+                    <tr>
+                        <td>\v</td>
+                        <td>垂直制表符</td>
+                    </tr>
+                    <tr>
+                        <td>\n</td>
+                        <td>换行符</td>
+                    </tr>
+                    <tr>
+                        <td>\r</td>
+                        <td>回车符</td>
+                    </tr>
+                    <tr>
+                        <td>\0</td>
+                        <td>空字符</td>
+                    </tr>
+                    <tr>
+                        <td>\f</td>
+                        <td>换页符</td>
+                    </tr>
+                    <tr>
+                        <td>\cX</td>
+                        <td>与X对应的控制字符</td>
+                    </tr>
+                </tbody>
+            </table>
+        </li>
+
+        <li class="flex-space-between margin-hor--15">
             <table>
                 <thead>
                     <tr>
@@ -138,14 +179,25 @@
                         <td>g</td>
                         <td>global 全局匹配</td>
                     </tr>
+                    <tr>
+                        <td>m</td>
+                        <td>multiple lines 多行匹配</td>
+                    </tr>
                 </tbody>
             </table>
         </li>
+        <li><a href="https://regexper.com/">网站：正则表达式工具</a></li>
     </ul>
+
+    <div class="ctn">
+        <pre id="pre"></pre>
+    </div>
+
 
     <ul class="note">
         <li>声明</li>
-        <li><pre>
+        <li>
+            <pre>
     	<i>var</i> re = new RegExp('a', 'i'); // js风格
     	<i>var</i> re = /a/i;  // perl风格
 		</pre>
@@ -155,14 +207,14 @@
     <ul class="note">
         <li>正则和search()配合使用</li>
         <li>
-           <pre>
+            <pre>
     	<i>var</i> str = 'asd123';
     	<i>var</i> re = /\d/;
     	console.log('第一个数字的位置：' + str.search(re));
     	输出：<em>第一个数字的位置：3</em>
 		</pre>
 
-        <pre>
+            <pre>
     	<i>if</i> (<i>window</i>.navigator.userAgent.<i>search</i>(/firefox/i) != -1) {
     	    console.log('firefox');
     	} <i>else if</i> (<i>window</i>.navigator.userAgent.<i>search</i>(/chrome/i) != -1) {
@@ -177,7 +229,7 @@
     <ul class="note">
         <li>正则和match()配合使用</li>
         <li>
-        <pre>
+            <pre>
     	<i>var</i> re = /\d/g;
     	<i>var</i> str = 'asd e123 fdsa 456 789gg ethan';
     	console.log(str.match(re));
@@ -199,7 +251,7 @@
     <ul class="note">
         <li>正则和replace()配合使用</li>
         <li>
-        <pre>
+            <pre>
     	<i>var</i> str = 'asdfASDF';
     	console.log(str.replace(/a/gi, 'B'));
     	输出：<em>BsdfBSDF</em>
@@ -210,7 +262,7 @@
     <ul class="note">
         <li>字符</li>
         <li>
-        <pre>
+            <pre>
     	<i>var</i> re=/1[abc]2/g;
     	<i>var</i> str='1b2 1a2 abc 1c2 aaa';
     	console.log(str.match(re));
@@ -220,7 +272,7 @@
     </ul>
 
     <div class="ctn">
-    <pre>
+        <pre>
 	去空格
 	<i>var</i> str = '  aa bb  cc   dd  ';
 	console.log(str.replace(/\s+/g, ''));
@@ -255,101 +307,231 @@
 	console.log(re.test(str));
 	输出：<em>true</em>
 	</pre>
-	</div>
-
-	<div class="ctn padding-ver-15">
-		<table>
-		    <thead>
-		        <tr>
-		            <th colspan='5'>分析方法————以邮箱为例</th>
-		        </tr>
-		    </thead>
-		    <tbody>
-		        <tr>
-		            <td>一串字母、数字、下划线</td>
-		            <td>@</td>
-		            <td>一串字母、数字</td>
-		            <td>.</td>
-		            <td>一串字母（最少2个、最多4个）</td>
-		        </tr>
-		        <tr>
-		            <td>\w+</td>
-		            <td>@</td>
-		            <td>[a-z][0-9]+</td>
-		            <td>.</td>
-		            <td>[a-z]{2,4}</td>
-		        </tr>
-		        <tr>
-		            <td colspan='5'>/\w+@[a-z0-9]+\.[a-z]{2,4}/</td>
-		        </tr>
-		    </tbody>
-		</table>
     </div>
+
+    <div class="ctn padding-ver-15">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan='5'>分析方法————以邮箱为例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>一串字母、数字、下划线</td>
+                    <td>@</td>
+                    <td>一串字母、数字</td>
+                    <td>.</td>
+                    <td>一串字母（最少2个、最多4个）</td>
+                </tr>
+                <tr>
+                    <td>\w+</td>
+                    <td>@</td>
+                    <td>[a-z][0-9]+</td>
+                    <td>.</td>
+                    <td>[a-z]{2,4}</td>
+                </tr>
+                <tr>
+                    <td colspan='5'>/\w+@[a-z0-9]+\.[a-z]{2,4}/</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="../../../js/common.js"></script>
+    <script id="jsCo">
+        T('一、声明');
+        {
+            var re = new RegExp('a', 'i'); // js风格
+            var re = /a/i; // perl风格
+        }
+        console.blue('----------分割线----------');
+
+        T('二、匹配选项');
+        T('1、全局匹配符 g');
+        {
+            var str = 'He is Blue. She is Red. This is a cat.';
+            var reg = /is/;
+            str = str.replace(reg, 'IS');
+            console.log(str);
+
+        }
+
+        {
+            var str = 'He is Blue. She is Red. This is a cat.';
+            var reg = /is/g;
+            str = str.replace(reg, 'IS');
+            console.log(str);
+
+        }
+        // 如果没有用全局匹配符 g 匹配到第一个符合条件的就不再往下匹配了
+        console.blue('----------分割线----------');
+
+        T('三、常用元字符');
+        T('1、\b 匹配单词的开始或结束(单词边界)');
+        {
+            var str = 'He is Blue. She is Red. This is a cat.';
+            var reg = /is/g;
+            str = str.replace(reg, 'IS');
+            console.log(str);
+
+        }
+
+        {
+            var str = 'He is Blue. She is Red. This is a cat.';
+            var reg = /\bis\b/g;
+            str = str.replace(reg, 'IS');
+            console.log(str);
+        }
+        // 没有用 \b 的时候，会连 This 中的 is 都会被替换
+        console.blue('----------分割线----------');
+
+        T('四、贪婪模式和非贪婪模式');
+        T('1、贪婪模式');
+        {
+            var str = '12345678';
+            var reg = /\d{3,6}/g
+            str = str.replace(reg, 'N');
+            console.log(str);
+        }
+        //贪婪模式：会将量词的条件匹配到最大所以这里是 123456 符合条件
+
+        T('2、非贪婪模式：在量词后面加 ？');
+        {
+            var str = '12345678';
+            var reg = /\d{3,6}?/g
+            str = str.replace(reg, 'N');
+            console.log(str);
+        }
+        // 非贪婪模式：满足量词的最小条件后则不再匹配，所以这里匹配到 123 后不再匹配下去，而是开始新的匹配 456
+        console.blue('----------分割线----------');
+
+        T('五、分组');
+        T('1、基本应用');
+        {
+            var str = 'a1b2c3d4';
+            var reg = /[a-z]\d{3}/g;
+            str = str.replace(reg, 'X');
+            console.log(str);
+        }
+
+        {
+            var str = 'a1b2c3d4';
+            var reg = /([a-z]\d){3}/g;
+            str = str.replace(reg, 'X');
+            console.log(str);
+        }
+        console.blue('----------分割线----------');
+
+        T('2、与 |（或）的应用');
+        {
+            var result = 'EthanRica'.replace(/Ethan|Rica/g, 'X');
+            console.log(result);
+
+            var result = 'EthancaEthRica'.replace(/Eth(an|Ri)ca/g, 'X');
+            console.log(result);
+
+            var result = 'ByronsperByrCasper'.replace(/Byr(on|Ca)sper/g, 'X');
+            console.log(result);
+
+            var result = '一只猪一头猪'.replace(/一(头|只)猪/g, 'X');
+            console.log(result);
+        }
+        console.blue('----------分割线----------');
+
+        T('3、分组捕获');
+        {
+            var str = '2019-01-01';
+            var reg = /(\d{4})-(\d{2})-(\d{2})/;
+            str = str.replace(reg, '$1/$2/$3');
+            console.log(str);
+        }
+        console.blue('----------分割线----------');
+
+        T('4、忽略分组: (?:规则)');
+        {
+            var str = '2019-01-01';
+            var reg = /(?:\d{4})-(\d{2})-(\d{2})/;
+            str = str.replace(reg, '$1/$2/$3');
+            console.log(str);
+        }
+        console.blue('----------分割线----------');
+
+        T('5、前瞻: (?=规则) 正则表达式从左往右解析文本，右为前，左为后');
+        {
+            var str = '1a2b3cxx*8*8';
+            var reg = /\d(?=\w)/g;
+            str = str.replace(reg, '哈');
+            console.log(str);
+        }
+        // ()括号中前瞻部分不会被替换掉，它只是一个前瞻条件
+        console.blue('----------分割线----------');
+    </script>
     <script>
-    // 声明
-    var re = new RegExp('a', 'i'); // js风格
-    var re = /a/i; // perl风格
+        appendJsCode('jsCo', 'pre');
+        // 声明
+        var re = new RegExp('a', 'i'); // js风格
+        var re = /a/i; // perl风格
 
-    // 正则和search()配合使用
-    var re = /\d/;
-    var str = 'asd123';
-    console.log('第一个数字的位置：' + str.search(re));
+        // 正则和search()配合使用
+        var re = /\d/;
+        var str = 'asd123';
+        console.log('第一个数字的位置：' + str.search(re));
 
-    if (window.navigator.userAgent.search(/firefox/i) != -1) {
-        console.log('firefox');
-    } else if (window.navigator.userAgent.search(/chrome/i) != -1) {
-        console.log('chrome');
-    } else if (window.navigator.userAgent.search(/msie 9/i) != -1) {
-        console.log('IE9');
-    }
+        if (window.navigator.userAgent.search(/firefox/i) != -1) {
+            console.log('firefox');
+        } else if (window.navigator.userAgent.search(/chrome/i) != -1) {
+            console.log('chrome');
+        } else if (window.navigator.userAgent.search(/msie 9/i) != -1) {
+            console.log('IE9');
+        }
 
-    // 正则和match()配合使用
-    var re = /\d/g;
-    var str = 'asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
-    console.log(str.match(re));
+        // 正则和match()配合使用
+        var re = /\d/g;
+        var str = 'asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
+        console.log(str.match(re));
 
-    var re = /\d\d/g;
-    var str = 'asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
-    console.log(str.match(re));
+        var re = /\d\d/g;
+        var str = 'asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
+        console.log(str.match(re));
 
-    var re = /\d+/g;
-    var str = '0 0 asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
-    console.log(str.match(re));
+        var re = /\d+/g;
+        var str = '0 0 asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
+        console.log(str.match(re));
 
-    var str = 'asdfASDF';
-    console.log(str.replace(/a/gi, 'B'));
+        var str = 'asdfASDF';
+        console.log(str.replace(/a/gi, 'B'));
 
-    var re = /1[abc]2/g;
-    var str = '1b2 1a2 abc 1c2 aaa';
-    console.log(str.match(re));
+        var re = /1[abc]2/g;
+        var str = '1b2 1a2 abc 1c2 aaa';
+        console.log(str.match(re));
 
-    // 去空格
-    var str = '  aa bb  cc   dd  ';
-    console.log(str.replace(/\s+/g, ''));
+        // 去空格
+        var str = '  aa bb  cc   dd  ';
+        console.log(str.replace(/\s+/g, ''));
 
-    // 去首尾空格
-    var re = /^\s+|\s+$/g;
-    var str = 'aa bb cc dd ';
-    console.log(str.replace(re, ''));
+        // 去首尾空格
+        var re = /^\s+|\s+$/g;
+        var str = 'aa bb cc dd ';
+        console.log(str.replace(re, ''));
 
-    // 检验中文
-    var str = '哈哈 asdfgqwer 12 !@#$ *&^ +_=';
-    var re = /[\u4e00-\u9fa5]/;
-    console.log(re.test(str));
+        // 检验中文
+        var str = '哈哈 asdfgqwer 12 !@#$ *&^ +_=';
+        var re = /[\u4e00-\u9fa5]/;
+        console.log(re.test(str));
 
-    var str = '哈哈 asdfgqwer 12 !@#$ *&^ +_=';
-    var re = /^[\u4e00-\u9fa5]$/; // 加了^ $以后表示行首和行尾之间必须出现中文而且只能出现中文
-    console.log(re.test(str));
+        var str = '哈哈 asdfgqwer 12 !@#$ *&^ +_=';
+        var re = /^[\u4e00-\u9fa5]$/; // 加了^ $以后表示行首和行尾之间必须出现中文而且只能出现中文
+        console.log(re.test(str));
 
-    // 检验QQ
-    var re = /[1-9]\d{4,10}/g;
-    var str = 'QQ：159753，QQ：159753，QQ：0-14753';
-    console.log(str.match(re));
+        // 检验QQ
+        var re = /[1-9]\d{4,10}/g;
+        var str = 'QQ：159753，QQ：159753，QQ：0-14753';
+        console.log(str.match(re));
 
-    // 检验邮箱
-    var re = /^\w+@[a-z0-9]+\.[a-z]{2,4}$/;
-    var str = '159753@qq.com';
-    console.log(re.test(str));
+        // 检验邮箱
+        var re = /^\w+@[a-z0-9]+\.[a-z]{2,4}$/;
+        var str = '159753@qq.com';
+        console.log(re.test(str));
     </script>
 </body>
 

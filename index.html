@@ -19,8 +19,10 @@
     <script src="js/common.js"></script>
     <script>
         var iframeSrc = getCookie('iframeSrc');
+        var title = getCookie('title');
         if (iframeSrc) {
             $('#iframe').attr('src', iframeSrc);
+            $('title').text(title);
         }
     </script>
 </body>

@@ -7,10 +7,12 @@ function appendJsCode(jsCodeId, preId) {
     var textRe2 = /(\/\/.+\s*)/g;
     var keysRe1 = /(var|let|const|function|Class|this|console|log|null)/g;
     var keysRe2 = /(new|return)/g;
-    var keysRe3 = /(\s[A-Z]+[\w\d]*|getElementById|getElementsByTagName|onmousedown|onmousemove|onmouseup|alert)/g;
+    var keysRe3 = /(\s[A-Z]+[\w\d]*|getElementById|getElementsByTagName|onmousedown|onmousemove|onmouseup|alert|replace)/g;
     var keysRe4 = /(this)/g;
-    var consoleLine = /console\.log(.+分割线.+);/g;
+    var consoleLine = /console.+(.+分割线.+);/g;
+    var consoleTitle = /T\('(.+)'\);/g;
     var code = jsCode.replace(consoleLine, '<i class="line-blue"></i>')
+        .replace(consoleTitle, '<span>$1</span>')
         .replace(textRe1, '<span>$1</span>')
         .replace(textRe2, '<span class="gray">$1</span>')
         .replace(keysRe1, '<i>$1</i>')
@@ -20,6 +22,16 @@ function appendJsCode(jsCodeId, preId) {
 
     pre.innerHTML = code;
 }
+
+// 在 Console 面板输出橙色的文字
+function T(title) {
+    console.log('%c' + title, 'color:#ff502c');
+}
+
+// 在 Console 面板输出蓝色的文字
+console.blue = function (title) {
+    console.log('%c' + title, 'color:#5CACEE');
+};
 
 // F5刷新iframe
 function f5(id) {

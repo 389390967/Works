@@ -290,7 +290,7 @@ var data = [
         "title": "ECMAScript6",
         "link": "javascript:;",
         "child": [{
-                "title": "项目构建",
+                "title": "ES6项目构建",
                 "link": "javascript:;",
                 "child": [{
                     "title": "01基础架构",
@@ -301,9 +301,12 @@ var data = [
                 }]
             },
             {
-                "title": "es6语法",
+                "title": "ES6语法",
                 "link": "javascript:;",
                 "child": [{
+                    "title": "ES6常用知识点大纲",
+                    "link": "all/es6/es6语法/00ES6常用知识点大纲.html"
+                }, {
                     "title": "变量声明",
                     "link": "all/es6/es6语法/变量声明.html"
                 }, {
@@ -402,9 +405,10 @@ $('#nav-1').on('click', '.nav-li', function (event) {
     var link = $(this).attr('link'),
         title = $(this).text(),
         aParent = $(this).closest('ul');
-    setCookie('iframeSrc', link);
     $('#iframe').attr('src', link);
     aParent.hide();
     aParent.parent().parent().hide();
     $('title').text(title);
+    setCookie('iframeSrc', link);
+    setCookie('title', title);
 });
