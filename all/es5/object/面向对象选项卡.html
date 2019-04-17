@@ -8,7 +8,7 @@
     <title>面向对象选项卡</title>
     <link rel="shortcut icon" href="../../../img/ico.ico">
     <link rel="stylesheet" href="../../../css/common.css">
-    <script src="../../../js/common.js"></script>
+    <link rel="stylesheet" href="../../../css/monokai.css">
     <style>
         #div1>div {
             width: 214px;
@@ -32,9 +32,13 @@
         <div>2</div>
         <div>3</div>
     </div>
+
     <div class="ctn">
-        <pre id="pre"></pre>
+        <pre><code id="code"></code></pre>
     </div>
+
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
     <script id='jsCo'>
         function tabSwith(id) {
             var oDiv = document.getElementById(id);
@@ -60,7 +64,8 @@
         var obj = new tabSwith('div1');
     </script>
     <script>
-        appendJsCode('jsCo', 'pre');
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
     </script>
 </body>
 

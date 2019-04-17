@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>变量声明</title>
+	<link rel="shortcut icon" href="../../../img/ico.ico">
+	<link rel="stylesheet" href="../../../css/common.css">
+	<link rel="stylesheet" href="../../../css/monokai.css">
+</head>
+
+<body>
+	<h1>变量声明</h1>
+	
+	<div class="ctn">
+		<pre><code id="code"></code></pre>
+	</div>
+
+	<script src="../../../js/common.js"></script>
+	<script src="../../../js/highlight.min.js"></script>
+	<script id="jsCo">
+		T('一、let');
+		preTx('1、在es6中每一对{}都是一个块作用域，而 let 声明的变量只能在它声明的块作用域使用');
+		preTx('2、在es6中默认开启strict（严格的）代码模式，所以报错是 Uncaught ReferenceError: i is not defined 而不是直接报错 undefined');
+		preTx('3、let 不能对同一个变量重复命名');
+		{
+			(function () {
+				for (var i = 0; i < 3; i++) {
+					console.log(i);
+				}
+				console.log(i);
+			})();
+
+			/*
+			(function () {
+				for (let i = 0; i < 3; i++) {
+					console.log(i);
+				}
+				console.log(i);
+				// Uncaught ReferenceError: i is not defined.未捕获引用错误：未定义i
+			})();
+			*/
+
+
+			/*
+			let a = 0;
+			let a = 1; 
+			// Uncaught SyntaxError: Identifier 'a' has already been declared.未捕获语法错误：标识符“a”已声明。
+			*/
+
+		}
+		console.hr('----------分割线----------');
+
+		T('二、const');
+		preTx('1、在es6中每一对{}都是一个块作用域，而 const 声明的变量只能在它声明的块作用域使用');
+		preTx('2、const 声明的是常量，只能读不能改（const 声明的对象除外）');
+		preTx('3、const 声明的时候必须赋值，不能先声明后赋值');
+		{
+			/* 
+			(function () {
+				const PI = 3.1415926;
+				PI = 3.14;
+				console.log(PI);
+				// Uncaught TypeError: Assignment to constant variable.未捕获的类型错误：分配给常量变量。
+			}()); 
+			*/
+
+			(function () {
+				/* 
+				const PI;
+				PI = 3.14;
+				console.log(PI);
+				// Uncaught SyntaxError: Missing initializer in const declaration.未捕获语法错误：常量声明中缺少初始值设定项 
+				*/
+
+				const test = {
+					a: 1,
+				}
+				test.a = 2;
+				test.b = 3;
+				console.log(test);
+				// { a: 2, b: 3 }
+			})();
+		}
+		console.hr('----------分割线----------');
+	</script>
+	<script>
+		appendCode('jsCo', 'code');
+		hljs.initHighlightingOnLoad();
+	</script>
+</body>
+
+</html>

@@ -308,25 +308,28 @@ var data = [
                     "link": "all/es6/es6语法/00ES6常用知识点大纲.html"
                 }, {
                     "title": "变量声明",
-                    "link": "all/es6/es6语法/变量声明.html"
+                    "link": "all/es6/es6语法/01变量声明.html"
                 }, {
                     "title": "解构赋值",
-                    "link": "all/es6/es6语法/解构赋值.html"
+                    "link": "all/es6/es6语法/02解构赋值.html"
                 }, {
                     "title": "正则扩展",
-                    "link": "all/es6/es6语法/正则扩展.html"
-                }, {
-                    "title": "字符串方法",
-                    "link": "all/es6/es6语法/字符串方法.html"
+                    "link": "all/es6/es6语法/03正则扩展.html"
                 }, {
                     "title": "数值方法",
-                    "link": "all/es6/es6语法/数值方法.html"
+                    "link": "all/es6/es6语法/04数值方法.html"
                 }, {
                     "title": "数组方法",
-                    "link": "all/es6/es6语法/数组方法.html"
+                    "link": "all/es6/es6语法/05数组方法.html"
                 }, {
                     "title": "函数扩展",
-                    "link": "all/es6/es6语法/函数扩展.html"
+                    "link": "all/es6/es6语法/06函数扩展.html"
+                }, {
+                    "title": "字符串方法",
+                    "link": "all/es6/es6语法/08字符串方法.html"
+                }, {
+                    "title": "Symbol",
+                    "link": "all/es6/es6语法/09Symbol.html"
                 }]
             }
         ]

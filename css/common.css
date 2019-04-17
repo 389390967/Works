@@ -10,14 +10,11 @@ a{display:inline-block;color:#5CACEE;text-decoration:none;transition:color .5s;}
 a:hover{color:#ff502c;}
 
 /*Ethan*/
-i{color:#5CACEE;font-style:normal;}
-b {color:#F9CC9D;font-weight: lighter;}
-em{color:#be3948;font-style:normal;}
-span{color:#ff502c;}
-strong{color:#F92472;font-weight:lighter;}
-pre{overflow:auto;margin:10px 0;padding-top:15px;border-radius:8px;background:#282c34;white-space:pre;word-wrap:normal;word-break:break-word;}
-#pre{padding-top:0;}
-code{display:block;white-space:pre-wrap;line-height:1.5;}
+i{font-style:normal;}
+pre{overflow:auto;margin-bottom:50px;border-radius:8px;background:#282c34;white-space:pre;word-wrap:normal;word-break:break-word;}
+code{display:block;white-space:pre-wrap;line-height:1.6;}
+code *{line-height:1.6;}
+code i{font-size:16px;}
 h1{text-align:center;font-size:40px;color:#ff502c;line-height:100px;}
 th{font-weight:400;font-size:16px}
 td,th{padding:10px;border:1px solid #5CACEE}
@@ -34,25 +31,12 @@ td:nth-child(1),th:nth-child(1){color:#ff502c;text-align:center}
 .list-style-dot>li:nth-child(1):before{display:none;}
 .note>li *{font-size:16px;}
 
-
 /* title */
-.big-title {
-    margin-top: 50px;
-    color: #ff502c;
-}
-
-.small-title {
-    margin-top: 30px;
-    color: #ff502c;
-    font-size: 18px !important;
-}
+.big-title{margin-top:50px;color:#ff502c;}
+.small-title{margin-top:30px;color:#ff502c;font-size:18px!important;}
 
 /* line */
-.line-blue{
-    height: 1px;
-    background: #5CACEE;
-    display: block;
-}
+.line-blue{display:block;margin-top:15px;height:1px;background:#5CACEE;}
 
 /*btn*/
 .btn{padding:8px 12px;border:1px solid;color:#fff;cursor:pointer;}
@@ -113,10 +97,15 @@ td:nth-child(1),th:nth-child(1){color:#ff502c;text-align:center}
 .pink{color:#E46C49;}
 .green{color:#A6E229;}
 .orange{color:#ff502c;}
+.orange *{color:#ff502c!important;}
 .yellow{color:#E7DB74;}
+.yellow *{color:#E7DB74!important;}
 .yellow-1{color:#FD971F!important;}
 .gray{color:#666666!important;}
 .gray *{color:#666666!important;}
+.white{color:#fff;}
+.pre-title{color:#ff502c;font-size:16px;}
+.pre-title *{color:#ff502c!important;font-size:16px;font-weight:normal!important;}
 
 /*background*/
 .bg-red{background:#be3948;}

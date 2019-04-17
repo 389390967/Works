@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Symbol</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+</head>
+
+<body>
+    <h1>Symbol</h1>
+    <ul class="note list-style-dot">
+        <li>总结</li>
+        <li>Symbol的概念</li>
+        <li>Symbol的作用</li>
+    </ul>
+
+    <div class="ctn">
+        <pre id="pre"></pre>
+    </div>
+
+    <script src="../../../js/common.js"></script>
+    <script id="jsCo">
+        {
+            (function () {
+                console.log(arguments);
+                console.log(typeof arguments);
+                return typeof arguments;
+            })(1);
+        }
+
+        {
+            var f = function g() { return 23; };
+            console.log(typeof g());
+        }
+
+        {
+            (function (x) {
+                delete x;
+                return x;
+            })(1);
+        }
+
+        {
+            var y = 1, x = y = typeof x;
+            x;
+        }
+        {
+            (function f(f) {
+                return typeof f();
+            })(function () { return 1; });
+        }
+
+        {
+            var foo = {
+                bar: function () { return this.baz; },
+                baz: 1
+            };
+            (function () {
+                return typeof arguments[0]();
+            })(foo.bar);
+        }
+
+        {
+            var f = (function f() { return "1"; }, function g() { return 2; })();
+            typeof f;
+        }
+
+        {
+            var x = 1;
+            if (function f() { }) {
+                x += typeof f;
+                console.log(x);
+            }
+        }
+
+        {
+            var x = [typeof x, typeof y][1];
+            typeof typeof x;
+        }
+
+        {
+            (function (foo) {
+                return typeof foo.bar;
+            })({ foo: { bar: 1 } });
+        }
+
+        {
+
+            (function f() {
+                function f() { return 1; }
+                return f();
+                function f() { return 2; }
+            })();
+        }
+
+        {
+            function f() { return f; }
+            new f() instanceof f;
+        }
+
+        {
+            with (function (x, undefined) { }) length;
+        }
+    </script>
+    <script>
+        appendJsCode('jsCo', 'pre');
+    </script>
+</body>
+
+</html>

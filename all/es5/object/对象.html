@@ -6,7 +6,7 @@
     <title>对象</title>
     <link rel="shortcut icon" href="../../../img/ico.ico">
     <link rel="stylesheet" href="../../../css/common.css">
-    <script src="../../../js/common.js"></script>
+    <link rel="stylesheet" href="../../../css/monokai.css">
     <style>
         table {
             margin: 15px 0;
@@ -42,11 +42,15 @@
             </table>
         </li>
     </ul>
+
     <div class="ctn">
-        <pre id="pre"></pre>
+        <pre><code id="code"></code></pre>
     </div>
+
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
     <script id='jsCo'>
-        // 一、工厂模式
+        T('一、工厂模式');
         {
             function Person(name, sex) {
                 var obj = new Object();
@@ -76,11 +80,10 @@
         1、没有 new
         2、每个对象都有一套自已的方法，浪费空间 
         --*/
-        console.log('%c----------分割线----------', 'color:#5CACEE');
+        console.hr('----------分割线----------');
 
-        // 二、混合模式
-
-        // 1、第一步：把 new 提取出来
+        T('二、混合模式');
+        T('1、第一步：把 new 提取出来');
         {
             function Person(name, sex) {
                 // 假想的系统内部工作流程
@@ -108,9 +111,9 @@
             p2.showName();
             p2.showSex();
         }
-        console.log('%c----------分割线----------', 'color:#5CACEE');
+        console.hr('----------分割线----------');
 
-        // 2、第二步：用 prototype 给类添加添加方法，从而让构造出来的对象都有同一个方法
+        T('2、第二步：用 prototype 给类添加添加方法，从而让构造出来的对象都有同一个方法');
         {
             function Person(name, sex) {
                 this.name = name;
@@ -134,7 +137,8 @@
         }
     </script>
     <script>
-        appendJsCode('jsCo', 'pre');
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
     </script>
 </body>
 

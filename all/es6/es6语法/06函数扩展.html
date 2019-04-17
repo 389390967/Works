@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ES6函数扩展</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../../css/monokai.css">
+</head>
+
+<body>
+    <h1>ES6函数扩展</h1>
+    <ul class="note list-style-dot">
+        <li>总结</li>
+        <li>参数默认值</li>
+        <li>rest 参数</li>
+        <li>name 属性</li>
+        <li>箭头函数</li>
+        <li>this绑定</li>
+        <li>尾调用</li>
+    </ul>
+
+    <div class="ctn">
+            <pre><code id="code"></code></pre>
+        </div>
+
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
+    <script id="jsCo">
+        T('一、函数参数默认值');
+        T('1、参数默认值的设置');
+        {
+            // ES5
+            function animal(name, type) {
+                var name = name || 'yuan';
+                var type = type || 'monkey';
+                console.log(name, type);
+            }
+            animal();
+
+            // ES6
+            function animal(name = 'yuan', type = 'monkey') {
+                console.log(name, type);
+            }
+            animal();
+        }
+
+        T('2、传入参数类型对输出结果的影响');
+        {
+            function animal(name = 'yuan', type = 'monkey') {
+                console.log(name, type);
+            }
+
+            animal(); // yuan monkey
+            animal(name = 'dog'); // dog monkey
+            animal(name = 'yuan', undefined); // yuan monkey
+            animal(name = 'yuan', null); // yuan null
+            animal(false, undefined); // false "monkey"
+            animal(0, undefined); // 0 "monkey"
+
+            preTi('注意：调用函数时只有 不传参数 和 传入undefined 的会触发默认值，而传入其它值或者 null，则不会触发默认值。');
+        }
+
+        T('3、默认参数位置');
+        {
+            //错误写法
+            function animal(name = 'yuan', type) {
+                console.log(name, type);
+            }
+            animal();
+        }
+
+        {
+            //正确写法
+            function animal(name, type = 'monkey') {
+                console.log(name, type);
+            }
+            animal();
+
+            preTi('注意：通常情况下，若有参数需要设置默认值时，一般是放在尾参数位置。');
+        }
+
+        T('4、参数默认值与解构赋值默认值的结合使用');
+        {
+            // 第一种写法，参数默认值为空对象，解构赋值有具体的默认值
+            function method1({ x = 0, y = 0 } = {}) {
+                return [x, y];
+            }
+
+            // 第二种写法，参数默认值是一个具体的属性对象，而对象解构赋值没有设置默认值 
+            function method2({ x, y } = { x: 0, y: 0 }) {
+                return [x, y];
+            }
+
+            // 函数没有参数时
+            console.log(method1()); // [0, 0]
+            console.log(method2()); // [0, 0]
+
+            // x 和 y 都有值
+            console.log(method1({ x: 2, y: 3 })); // [2, 3]
+            console.log(method2({ x: 2, y: 3 })); // [2, 3]
+
+            // x 有值, y 没有值
+            console.log(method1({ x: 2 })); // [2, 0]
+            console.log(method2({ x: 2 })); // [2, undefined]
+
+            // x 没有值, y 有值
+            console.log(method1({ y: 2 })); // [0, 2]
+            console.log(method2({ y: 2 })); // [undefined, 2
+
+            // x 和 y 都没有值
+            console.log(method1({})); // [0, 0]
+            console.log(method2({})); // [undefined, undefined]
+
+            preTi('注意：当解构赋值有默认值时任何情况都不会出现 undefined');
+        }
+
+        T('5、使用参数默认值对函数 length 属性的影响');
+        {
+            console.log((function (a) { }).length) // 1
+            console.log((function (a = 5) { }).length) // 0
+            console.log((function (a, b, c = 5) { }).length) // 2
+            console.log((function (a, ...b) { }).length) // 1
+
+            preTi('注意：函数的参数在指定默认值之后，函数的 length 属性会失真，返回的 length 值，是没有指定默认值的参数的个数，这里的 length 也不包括 rest(...) 参数的个数。');
+        }
+        console.hr('----------分割线----------');
+
+        T('二、rest 参数');
+        {
+            T('1、求和，把结果赋值给 result');
+            function sum(result, ...values) {
+                console.log(values); // [1, 2, 3, 4]，这个变量返回的是一个数组
+
+                values.forEach(function (value, index) {
+                    result += value;
+                })
+                console.log(result);
+            }
+            sum(11, 1, 2, 3, 4); // 21
+
+            T('2、将数组转为字符串');
+            console.log(...[1, 2, 3]);
+            console.log('a', 'b', 'c', ...[1, 2, 3]);
+
+            // 错误写法
+            /*--
+            function sum(res, ...values, another) {
+                console.log(values);
+            }
+            sum(); // 报错：Uncaught SyntaxError: Rest parameter must be last formal parameter
+            --*/
+            preTi('注意：rest参数（... + 变量名）表示的是：获取函数多余的参数，且这个变量是一个数组。还有一点要注意的是 rest 参数必须是尾参数，后面不能加其他的参数，否则会报错。');
+        }
+        console.hr('----------分割线----------');
+
+        T('三、name属性');
+        {
+            // ES6中增加了函数的name属性
+            const animal = function () { };
+            console.log(animal.name); // "animal"
+
+            // Function 构造函数会发的函数实例，name 属性的值为 anonymous(匿名的)
+            console.log((new Function).name); // "anonymous"
+
+            // bind 返回的函数，name属性值会加上“bound”前缀
+            function fn() { };
+            console.log(fn.bind({}).name); // "bound fn"
+
+            // 匿名函数的 bind 返回的值 bound
+            console.log((function () { }).bind({}).name); // "bound"
+        }
+        console.hr('----------分割线----------');
+
+        T('四、箭头函数');
+        {
+            T('1、当函数体中返回的是对象时，我们需要将其用圆括号“()”括起来');
+            var person = name => ({ name: name, type: 'monkey' });
+            console.log(person('哈哈'));
+            console.log(person('哈哈').name);
+
+            T('2、使用注意点,在箭头函数中 this 指向是固定的');
+            function foo() {
+                setTimeout(() => {
+                    console.log('id:', this.id)
+                }, 100);
+            }
+            var id = 21;
+            foo.call({ id: 42 }); // 42
+            /* --
+            如上输出结果，此处的 this 指向并不是全局对象 window，因为在箭头函数中，this 总是指向函数定义生效时所在的对象，所以输出的结果是 42。
+            如果还不清楚箭头函数 this 指向的含义，我们可以这样通俗的理解：在 JavaScript 中每一个 function 都有一个独立的运行上下文，
+            而箭头函数不是一个普通的 function ，没有自己的运行上下文。
+            所以在箭头函数中写的 this，具体指的是包含这个箭头函数最近的 function 的上下文中的 this，如果没有最近的 function，this 指向的是全局。
+
+            （1）、函数体内的 this 指向，指向的是定义时所在的对象，而不是使用时所在的对象。
+            （2）、不能当做构造函数用，即不能使用 new 命令，否则会报错
+            （3）、不可以使用 arguments 对象。如果要用，使用 rest 参数代替
+            （4）、不能使用 yield 命令，因为箭头函数不能用作 Generator 函数 
+            -- */
+        }
+        console.hr('----------分割线----------');
+
+        T('五、函数的尾调用');
+        {
+            T('1、解析：尾调用是函数式编程的一个重要概念，是指某个函数的最后一步调用另一个函数。');
+            function f(x) {
+                return g(x);
+            }
+            // 函数f 的最后一步是调用函数g，这就是尾调用。
+
+            T('2、尾递归：函数调用自身叫做递归，如果尾调用自身就是尾递归。');
+            function factorial(n) {
+                if (n === 1) return 1;
+                return n * factorial(n - 1);
+            }
+            console.log(factorial(5)); // 120
+            // 在ES6 中只要使用尾递归，就不会发生栈溢出，相对节省内存。
+
+            T('3、尾递归改写');
+            /* --
+            为了确保最后一步只调用自身，需要对尾递归函数进行改写，把所有用到的内部变量改写成函数的参数。
+            使用柯里化函数编程思想，将多参数的函数转换成单参数的形式： 
+            -- */
+            function curring(fn, n) {
+                return function (m) {
+                    return fn.call(this, m, n);
+                }
+            }
+
+            function tailFactorial(m, total) {
+                if (m === 1) return total;
+                return tailFactorial(m - 1, m * total);
+            }
+            
+            const factorial1 = curring(tailFactorial, 1);
+            console.log(factorial1(5)); // 120
+
+            // 采用ES6的函数默认值改写
+            function factorial2(n, total = 1) {
+                if (n === 1) return total;
+                return factorial2(n - 1, n * total);
+            }
+            console.log(factorial2(5)); // 120
+            // 在尾调用优化时，循环是可以用递归代替的，而一旦使用递归，就最好使用尾递归。
+        }
+        console.hr('----------分割线----------');
+    </script>
+    <script>
+            appendCode('jsCo', 'code');
+            hljs.initHighlightingOnLoad();
+        </script>
+</body>
+
+</html>

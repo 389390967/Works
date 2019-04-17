@@ -193,122 +193,6 @@
         <pre id="pre"></pre>
     </div>
 
-
-    <ul class="note">
-        <li>声明</li>
-        <li>
-            <pre>
-    	<i>var</i> re = new RegExp('a', 'i'); // js风格
-    	<i>var</i> re = /a/i;  // perl风格
-		</pre>
-        </li>
-    </ul>
-
-    <ul class="note">
-        <li>正则和search()配合使用</li>
-        <li>
-            <pre>
-    	<i>var</i> str = 'asd123';
-    	<i>var</i> re = /\d/;
-    	console.log('第一个数字的位置：' + str.search(re));
-    	输出：<em>第一个数字的位置：3</em>
-		</pre>
-
-            <pre>
-    	<i>if</i> (<i>window</i>.navigator.userAgent.<i>search</i>(/firefox/i) != -1) {
-    	    console.log('firefox');
-    	} <i>else if</i> (<i>window</i>.navigator.userAgent.<i>search</i>(/chrome/i) != -1) {
-    	    console.log('chrome');
-    	} <i>else if</i> (<i>window</i>.navigator.userAgent.<i>search</i>(/msie 9/i) != -1) {
-    	    console.log('IE9');
-    	}
-    	</pre>
-        </li>
-    </ul>
-
-    <ul class="note">
-        <li>正则和match()配合使用</li>
-        <li>
-            <pre>
-    	<i>var</i> re = /\d/g;
-    	<i>var</i> str = 'asd e123 fdsa 456 789gg ethan';
-    	console.log(str.match(re));
-    	输出：<em>["1", "2", "3", "4", "5", "6", "7", "8", "9", "1", "2", "3", "4", "5", "6", "7", "8", "9", "1", "5", "9", "1", "1", "9", "9", "8", "8"]</em>
-
-    	<i>var</i> re = /\d\d/g;
-    	<i>var</i> str = 'asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
-    	console.log(str.match(re));
-    	输出：<em>["12", "45", "78", "12", "34", "56", "78", "15", "11", "99", "88"]</em>
-
-    	<i>var</i> re = /\d+/g;
-    	<i>var</i> str = '0 0 asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
-    	console.log(str.match(re));
-    	输出：<em>["0", "0", "123", "456", "789", "123456789", "159", "11", "99", "88"]</em>
-		</pre>
-        </li>
-    </ul>
-
-    <ul class="note">
-        <li>正则和replace()配合使用</li>
-        <li>
-            <pre>
-    	<i>var</i> str = 'asdfASDF';
-    	console.log(str.replace(/a/gi, 'B'));
-    	输出：<em>BsdfBSDF</em>
-		</pre>
-        </li>
-    </ul>
-
-    <ul class="note">
-        <li>字符</li>
-        <li>
-            <pre>
-    	<i>var</i> re=/1[abc]2/g;
-    	<i>var</i> str='1b2 1a2 abc 1c2 aaa';
-    	console.log(str.match(re));
-    	输出：<em>["1b2", "1a2", "1c2"]</em>
-    	</pre>
-        </li>
-    </ul>
-
-    <div class="ctn">
-        <pre>
-	去空格
-	<i>var</i> str = '  aa bb  cc   dd  ';
-	console.log(str.replace(/\s+/g, ''));
-	输出：<em>aabbccdd</em>
-
-	去首尾空格
-	<i>var</i> re = /^\s+|\s+$/g;
-	<i>var</i> str = 'aa bb cc dd ';
-	console.log(str.replace(re, ''));
-	输出：<em>aa bb cc dd</em>
-
-	检验中文
-	<i>var</i> str = '哈哈 asdfgqwer 12 !@#$ *&^ +_=';
-	<i>var</i> re = /[\u4e00-\u9fa5]/;
-	console.log(re.test(str));
-	输出：<em>true</em>
-
-	<i>var</i> str = '哈哈 asdfgqwer 12 !@#$ *&^ +_=';
-	<i>var</i> re = /^[\u4e00-\u9fa5]$/; 加了<em>^ $</em>以后表示行首和行尾之间必须出现中文而且只能出现中文
-	console.log(re.test(str));
-	输出：<em>false</em>
-
-	检验QQ
-	<i>var</i> re = /[1-9]\d{4,10}/g;
-	<i>var</i> str = 'QQ：159753，QQ：159753，QQ：0-14753';
-	console.log(str.match(re));
-	输出：<em>["159753", "159753", "14753"]</em>
-
-	检验邮箱
-	<i>var</i> re = /^\w+@[a-z0-9]+\.[a-z]{2,4}$/;
-	<i>var</i> str = '159753@qq.com';
-	console.log(re.test(str));
-	输出：<em>true</em>
-	</pre>
-    </div>
-
     <div class="ctn padding-ver-15">
         <table>
             <thead>
@@ -344,7 +228,7 @@
             var re = new RegExp('a', 'i'); // js风格
             var re = /a/i; // perl风格
         }
-        console.blue('----------分割线----------');
+        console.hr('----------分割线----------');
 
         T('二、匹配选项');
         T('1、全局匹配符 g');
@@ -364,7 +248,7 @@
 
         }
         // 如果没有用全局匹配符 g 匹配到第一个符合条件的就不再往下匹配了
-        console.blue('----------分割线----------');
+        console.hr('----------分割线----------');
 
         T('三、常用元字符');
         T('1、\b 匹配单词的开始或结束(单词边界)');
@@ -383,7 +267,7 @@
             console.log(str);
         }
         // 没有用 \b 的时候，会连 This 中的 is 都会被替换
-        console.blue('----------分割线----------');
+        console.hr('----------分割线----------');
 
         T('四、贪婪模式和非贪婪模式');
         T('1、贪婪模式');
@@ -403,7 +287,7 @@
             console.log(str);
         }
         // 非贪婪模式：满足量词的最小条件后则不再匹配，所以这里匹配到 123 后不再匹配下去，而是开始新的匹配 456
-        console.blue('----------分割线----------');
+        console.hr('----------分割线----------');
 
         T('五、分组');
         T('1、基本应用');
@@ -420,7 +304,7 @@
             str = str.replace(reg, 'X');
             console.log(str);
         }
-        console.blue('----------分割线----------');
+        console.hr('----------分割线----------');
 
         T('2、与 |（或）的应用');
         {
@@ -436,7 +320,7 @@
             var result = '一只猪一头猪'.replace(/一(头|只)猪/g, 'X');
             console.log(result);
         }
-        console.blue('----------分割线----------');
+        console.hr('----------分割线----------');
 
         T('3、分组捕获');
         {
@@ -445,7 +329,7 @@
             str = str.replace(reg, '$1/$2/$3');
             console.log(str);
         }
-        console.blue('----------分割线----------');
+        console.hr('----------分割线----------');
 
         T('4、忽略分组: (?:规则)');
         {
@@ -454,9 +338,9 @@
             str = str.replace(reg, '$1/$2/$3');
             console.log(str);
         }
-        console.blue('----------分割线----------');
+        console.hr('----------分割线----------');
 
-        T('5、前瞻: (?=规则) 正则表达式从左往右解析文本，右为前，左为后');
+        T('5、前瞻: (?=规则/?!规则) 正则表达式从左往右解析文本，右为前，左为后');
         {
             var str = '1a2b3cxx*8*8';
             var reg = /\d(?=\w)/g;
@@ -464,74 +348,156 @@
             console.log(str);
         }
         // ()括号中前瞻部分不会被替换掉，它只是一个前瞻条件
-        console.blue('----------分割线----------');
+
+        {
+            var str = '1a2b3cxx*8*8';
+            var reg = /\d(?!\w)/g;
+            str = str.replace(reg, '哈');
+            console.log(str);
+        }
+        console.hr('----------分割线----------');
+
+        T('六、正则表达式的 test()方法 和 lastIndex属性');
+        {
+            var reg = /\w/g;
+            for (let index = 0; index < 4; index++) {
+                console.log(reg.lastIndex, reg.test('a'));
+            }
+        }
+        /* --
+            如上例：字符串长度是 1 的时候执行第一次 lastIndex 是 0；第二次的时候是 1；第三次是 0；第四次是 0；依次循环。
+        -- */
+
+        {
+            var reg = /\w/g;
+            while (reg.test('abcd')) {
+                console.log(reg.lastIndex);
+            }
+        }
+
+        /* --
+            总结：
+            1、正则表达式每次执行 test() 它的 lastIndex 都会改变。
+            2、lastIndex 表示匹配项的下一个位置，即执行下一次匹配时的起始位置。
+            3、如果正则表达式的模式不是 global，那么 lastIndex 会一直是0，只有使用了 g 标志时，lastIndex 才起作用。 
+        --*/
+        console.hr('----------分割线----------');
+
+        T('七、exec()');
+        {
+            var reg1 = /\d(\w)\d/;
+            var reg2 = /\d(\w)\d/g;
+            var str = '!@1a2b3c4d5e6f'
+
+            var result1 = reg1.exec(str);
+            console.log(result1);
+
+            var result2 = '';
+            while (result2 = reg2.exec(str)) {
+                console.log(result2);
+            }
+
+            /* --
+                总结：
+                调用正则表达式的exec(),如果匹配到结果返回一个数组，否则返回null
+                ["1a2", "a", index: 2, input: "!@1a2b3c4d5e6f"]
+                1、第一个元素是与正则表达式匹配的文本。
+                2、第二个元素是第一个子表达式匹配的内容，即第一个分组（如果有的话）；
+                第三个元素是第二个子表达式匹配的内容，即第二个分组（如果有的话）依次类推。
+                3、index 是返回数组中，正则表达式匹配到第一个字符的位置。
+            -- */
+        }
+        console.hr('----------分割线----------');
+
+        T('八、正则表达式与 String 对象的方法配合使用');
+        T('1、search()配合使用：返回与正则表达式匹配的子字符串的位置。忽视 g 全局匹配符');
+        {
+            var reg = /\d/g;
+            var str = 'asd123';
+            console.log('第一个数字的位置：' + str.search(reg));
+        }
+
+        T('简单应用：判断当前用的是什么浏览器');
+        {
+            if (window.navigator.userAgent.search(/firefox/i) != -1) {
+                console.log('当前浏览器是：firefox');
+            } else if (window.navigator.userAgent.search(/chrome/i) != -1) {
+                console.log('当前浏览器是：chrome');
+            } else if (window.navigator.userAgent.search(/msie 9/i) != -1) {
+                console.log('当前浏览器是：IE9');
+            }
+        }
+        console.hr('----------分割线----------');
+
+        T('2、match()配合使用：将所有匹配结果以数组形式返回');
+        {
+            var reg = /\d/g;
+            var str = 'asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
+            console.log(str.match(reg));
+
+            var reg = /\d{2}/g;
+            var str = 'asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
+            console.log(str.match(reg));
+
+            var reg = /\d+/g;
+            var str = '0 0 asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
+            console.log(str.match(reg));
+
+            var reg = /1[abc]2/g;
+            var str = '1b2 1a2 abc 1c2 aaa';
+            console.log(str.match(re));
+        }
+        console.hr('----------分割线----------');
+
+        T('2、split()配合使用：将一个字符串拆分成一个数组');
+        {
+            var reg = /\d/g;
+            var str = '1a2b3c4d5e6f'
+            console.log(str.split(reg));
+        }
+        console.hr('----------分割线----------');
+
+        T('2、replace()配合使用：将字符串中的某些子串替换为需要的内容');
+        {
+            var str = 'asdfASDF';
+            console.log(str.replace(/a/gi, 'B'));
+        }
+        console.hr('----------分割线----------');
+
+        T('九、实例应用');
+        {
+            T('1、去空格');
+            var str = '  aa bb  cc   dd  ';
+            console.log(str.replace(/\s+/g, ''));
+
+            T('2、去首尾空格');
+            var re = /^\s+|\s+$/g;
+            var str = 'aa bb cc dd ';
+            console.log(str.replace(re, ''));
+
+            T('3、检验中文');
+            var str = '哈哈 asdfgqwer 12 !@#$ *&^ +_=';
+            var re = /[\u4e00-\u9fa5]/;
+            console.log(re.test(str));
+
+            var str = '哈哈 asdfgqwer 12 !@#$ *&^ +_=';
+            var re = /^[\u4e00-\u9fa5]$/; // 加了^ $以后表示行首和行尾之间必须出现中文而且只能出现中文
+            console.log(re.test(str));
+
+            T('4、检验QQ');
+            var re = /[1-9]\d{4,10}/g;
+            var str = 'QQ：159753，QQ：159753，QQ：0-14753';
+            console.log(str.match(re));
+
+            T('5、检验邮箱');
+            var re = /^\w+@[a-z0-9]+\.[a-z]{2,4}$/;
+            var str = '159753@qq.com';
+            console.log(re.test(str));
+        }
+        console.hr('----------分割线----------');
     </script>
     <script>
         appendJsCode('jsCo', 'pre');
-        // 声明
-        var re = new RegExp('a', 'i'); // js风格
-        var re = /a/i; // perl风格
-
-        // 正则和search()配合使用
-        var re = /\d/;
-        var str = 'asd123';
-        console.log('第一个数字的位置：' + str.search(re));
-
-        if (window.navigator.userAgent.search(/firefox/i) != -1) {
-            console.log('firefox');
-        } else if (window.navigator.userAgent.search(/chrome/i) != -1) {
-            console.log('chrome');
-        } else if (window.navigator.userAgent.search(/msie 9/i) != -1) {
-            console.log('IE9');
-        }
-
-        // 正则和match()配合使用
-        var re = /\d/g;
-        var str = 'asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
-        console.log(str.match(re));
-
-        var re = /\d\d/g;
-        var str = 'asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
-        console.log(str.match(re));
-
-        var re = /\d+/g;
-        var str = '0 0 asd e123 fdsa 456 789gg 123456789 ethan 159 11 99 88';
-        console.log(str.match(re));
-
-        var str = 'asdfASDF';
-        console.log(str.replace(/a/gi, 'B'));
-
-        var re = /1[abc]2/g;
-        var str = '1b2 1a2 abc 1c2 aaa';
-        console.log(str.match(re));
-
-        // 去空格
-        var str = '  aa bb  cc   dd  ';
-        console.log(str.replace(/\s+/g, ''));
-
-        // 去首尾空格
-        var re = /^\s+|\s+$/g;
-        var str = 'aa bb cc dd ';
-        console.log(str.replace(re, ''));
-
-        // 检验中文
-        var str = '哈哈 asdfgqwer 12 !@#$ *&^ +_=';
-        var re = /[\u4e00-\u9fa5]/;
-        console.log(re.test(str));
-
-        var str = '哈哈 asdfgqwer 12 !@#$ *&^ +_=';
-        var re = /^[\u4e00-\u9fa5]$/; // 加了^ $以后表示行首和行尾之间必须出现中文而且只能出现中文
-        console.log(re.test(str));
-
-        // 检验QQ
-        var re = /[1-9]\d{4,10}/g;
-        var str = 'QQ：159753，QQ：159753，QQ：0-14753';
-        console.log(str.match(re));
-
-        // 检验邮箱
-        var re = /^\w+@[a-z0-9]+\.[a-z]{2,4}$/;
-        var str = '159753@qq.com';
-        console.log(re.test(str));
     </script>
 </body>
 

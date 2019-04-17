@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>正则扩展</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../../css/monokai.css">
+</head>
+
+<body>
+    <h1>正则扩展</h1>
+    <ul class="note list-style-dot">
+        <li></li>
+        <li>构造函数的变化</li>
+        <li>正则方法的扩展</li>
+        <li>u修饰符</li>
+        <li>y修饰符</li>
+        <li>s修饰符</li>
+    </ul>
+
+    <div class="ctn">
+        <pre><code id="code"></code></pre>
+    </div>
+
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
+    <script id="jsCo">
+        T('一、构造函数的变化/声明的变化');
+        T('1、es5声明方法');
+        {
+            let reg = new RegExp('xyz', 'i'); // 第一个参数是正则表达式字符串，第二个是修饰符
+            let reg2 = new RegExp(/xyz/i); // 第一个参数是正则表达式，不接受第二个参数，否则会报错
+        }
+
+        T('2、es6声明方法');
+        {
+            let reg3 = new RegExp(/abc/ig, 'i'); // 原有正则对象的修饰符是ig，它会被第二个参数i覆盖。
+            console.log(reg3.flags); // flags是es6新增加的属性，用来获取正则表达式的修饰符
+            // i
+        }
+        console.hr('---------分割线---------');
+
+        {
+            console.log(/^\uD83D/.test('\uD83D\uDC2A')); // true
+            console.log(/^\uD83D/u.test('\uD83D\uDC2A')); // false
+        }
+        console.hr('---------分割线---------');
+
+        T('二、u修饰符');
+        T('解释：u修饰符含义为 "Unicode模式"，用来正确处理大于 \uFFFF 的Unicode字符。也就是说，会正确处理四个字符的 UTF-16 编码。');
+        {
+            console.log(/^\uD83D/.test('\uD83D\uDC2A')); // true
+            console.log(/^\uD83D/u.test('\uD83D\uDC2A')); // false
+
+            /* --
+            上面代码中，\uD83D\uDC2A 是一个四字节的 UTF - 16 编码，代表一个字符，
+            但是，ES5不支持四个字节的 UTF - 16 编码，会将其识别为两个字符，导致第一行代码结果为 true，
+            加了u修饰符以后，ES6就会识别其为一个字符，所以第二行代码结果为false。
+            -- */
+
+            preTx('花括号{}表示Unicode字符，只有加上u才能识别');
+            console.log(/\u{61}/.test('a')); // false
+            console.log(/\u{61}/u.test('a')); // true
+            console.log(/\u{20BB7}/u.test('𠮷')); // true
+
+            preTx('点（.）字符不能识别码点大于0xFFFF的Unicode字符，必须加上u修饰符。');
+            let s = '𠮷';
+            console.log('大于0xFFFF的Unicode字符', /^.$/.test(s)); // 大于0xFFFF的Unicode字符 false
+            console.log('使用u字符', /^.$/u.test(s)); // 使用u字符 true
+
+            preTx('使用u修饰符后，所有量词都会正确识别大于码点大于0xFFFF的Unicode字符。');
+            console.log('量词', /a{2}/.test('aa')); // true
+            console.log('量词', /a{2}/u.test('aa')); // true
+            console.log('量词', /𠮷{2}/.test('𠮷𠮷')); // false
+            console.log('量词', /𠮷{2}/u.test('𠮷𠮷')); // true
+        }
+
+        {
+            /* --
+            #正则表达式中，点（.）是一个特殊字符，代表任意的单个字符，但是行终止符（line terminator character）除外
+            U+000A 换行符（\n）
+            U+000D 回车符（\r）
+            U+2028 行分隔符（line separator）
+            U+2029 段分隔符（paragraph separator）
+            只是一个提案目前还不支持
+            let reg=/test.go/s;
+            console.log(reg.test('test\ngo'));
+            console.log(reg.test('test\ngo'));
+            -- */
+            console.log('s变通方法', /foo.bar/.test('foo\nbar')); // s变通方法 false
+            console.log('s变通方法', /foo[^]bar/.test('foo\nbar')); // s变通方法 true
+        }
+        console.hr('---------分割线---------');
+
+        T('三、y修饰符与g修饰符的区别');
+        {
+            let str = 'aaaa_aaa_aa_a';
+            var regY = /a+/y;
+            var regG = /a+/g;
+
+            T('1、y 修饰符');
+            console.log(regY.exec(str), regY.lastIndex); // ["aaaa", index: 0, input: "aaaa_aaa_aa_a"] 4
+            console.log(regY.exec(str), regY.lastIndex); // null 0
+            console.log(regY.exec(str), regY.lastIndex); // ["aaaa", index: 0, input: "aaaa_aaa_aa_a"] 4
+            console.log(regY.exec(str), regY.lastIndex); // null 0
+            console.log(regY.exec(str), regY.lastIndex); // ["aaaa", index: 0, input: "aaaa_aaa_aa_a"] 4
+            console.hr('---------分割线---------');
+
+            T('2、g 修饰符');
+            console.log(regG.exec(str), regG.lastIndex); // ["aaaa", index: 0, input: "aaaa_aaa_aa_a"] 4
+            console.log(regG.exec(str), regG.lastIndex); // ["aaa", index: 5, input: "aaaa_aaa_aa_a"] 8
+            console.log(regG.exec(str), regG.lastIndex); // ["aa", index: 9, input: "aaaa_aaa_aa_a"] 11
+            console.log(regG.exec(str), regG.lastIndex); // ["a", index: 12, input: "aaaa_aaa_aa_a"] 13
+            console.log(regG.exec(str), regG.lastIndex); // null 0
+            console.hr('---------分割线---------');
+
+            T('3、y 代表粘连模式');
+            console.log(regY.sticky, regG.sticky); // true false
+        }
+        console.hr('---------分割线---------');
+
+        T('4、ecex()');
+        preTx('1、如果 exec() 找到了匹配的文本，则返回一个结果数组。否则，返回 null。');
+        preTx('2、除了数组元素和 length 属性之外，exec() 方法还返回两个属性。');
+        preTx('index 属性声明的是匹配文本的第一个字符的位置。');
+        preTx('input 属性则存放的是被检索的字符串。');
+        preTx('3、在调用非全局的正则表达的 exec() 方法时，返回的数组与调用方法 String.match() 返回的数组是相同的。');
+        {
+            var str = "E Ethan Ethan Ethan Ethan Ethan";
+            var reg = new RegExp("Ethan");
+
+            console.log(str.match(reg)); // ["Ethan", index: 2, input: "E Ethan Ethan Ethan Ethan Ethan"]
+            console.log(reg.exec(str)); 0 // ["Ethan", index: 2, input: "E Ethan Ethan Ethan Ethan Ethan"]
+        }
+
+        preTx('4、但是，当正则表达式是一个全局正则表达式式时，exec() 的行为就稍微复杂一些。');
+        preTx('它会在正则表达式的 lastIndex 属性指定的字符处开始检索字符串。');
+        preTx('当 exec() 找到了与正则表达式相匹配的文本时，');
+        preTx('在匹配后，它将把正则表达式的 lastIndex 属性设置为匹配文本的最后一个字符的下一个位置,即执行下一次匹配时的起始位置。');
+        preTx('这就是说，您可以通过反复调用 exec() 方法来遍历字符串中的所有匹配文本。');
+        preTx('当 exec() 再也找不到匹配的文本时，它将返回 null，并把 lastIndex 属性重置为 0。');
+
+        {
+            var str = 'E Ethan Ethan Ethan Ethan Ethan';
+            var reg = new RegExp("Ethan", 'g');
+
+            console.log(str.match(reg)); // ["Ethan", "Ethan", "Ethan", "Ethan", "Ethan"]
+
+            var result;
+            var arr = [];
+            while ((result = reg.exec(str)) != null) {
+                arr.push(result[0]);
+                console.log('lastIndex:' + reg.lastIndex);
+            }
+            console.log(arr); // ["Ethan", "Ethan", "Ethan", "Ethan", "Ethan"]
+        }
+        console.hr('---------分割线---------');
+    </script>
+    <script>
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+
+</html>

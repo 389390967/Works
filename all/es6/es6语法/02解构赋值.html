@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>解构赋值</title>
+	<link rel="shortcut icon" href="../../../img/ico.ico">
+	<link rel="stylesheet" href="../../../css/common.css">
+	<link rel="stylesheet" href="../../../css/monokai.css">
+</head>
+
+<body>
+	<h1>解构赋值</h1>
+	<ul class="note list-style-dot">
+		<li>解释：左边一种结构右边一种结构，左右一 一对应进行赋值</li>
+		<li>一、数组解构赋值（常用）</li>
+		<li>二、对象解构赋值（常用）</li>
+		<li>三、字符串解构赋值</li>
+		<li>四、布尔值解构赋值</li>
+		<li>五、函数参数解构赋值（数组解构赋值在函数参数的应用）</li>
+		<li>六、数值解构赋值</li>
+	</ul>
+
+	<div class="ctn">
+		<pre><code id="code"></code></pre>
+	</div>
+
+	<script src="../../../js/common.js"></script>
+	<script src="../../../js/highlight.min.js"></script>
+	<script id="jsCo">
+		T('一、数组解构赋值');
+		T('1、应用场景一：变量值交换');
+		{
+			let a = 1;
+			let b = 2;
+			[a, b] = [b, a];
+			console.log(a, b);
+			// 2 1
+		}
+		console.hr('----------分割线----------');
+
+		T('2、应用场景二：取函数返回值');
+		{
+			function test() {
+				return [1, 2];
+			}
+			let a, b;
+			[a, b] = test();
+			console.log(a, b);
+			// 1 2
+		}
+
+		{
+			function test() {
+				return [1, 2, 3, 4];
+			}
+			let a, b;
+			[a, , , b] = test();// 忽略某些返回值，取自己需要的返回值
+			console.log(a, b);
+			// 1 4
+		}
+
+		{
+			function test() {
+				return [1, 2, 3, 4, 5];
+			}
+			let a, b;
+			[a, ...b] = test();
+			console.log(a, b);
+			// 1 [2, 3, 4, 5]
+		}
+		console.hr('----------分割线----------');
+
+		T('二、对象解构赋值');
+		{
+			let { a, b } = { a: 1, b: 2 };
+			console.log(a, b);
+			// 1 2
+		}
+
+		{
+			let o = { c: 123, d: 456 };
+			let { c, d } = o;
+			console.log(c, d)
+			// 123 456
+		}
+
+		{
+			let { a = 1, b = 2 } = { a: 3 };
+			console.log(a, b);
+			// 3 2
+		}
+
+		{
+			let data = {
+				title: "数据标题",
+				desc: [{
+					title: "描述标题",
+					text: "哈哈哈"
+				}]
+			}
+			let { title: dataTitle, desc: [{ title: descTitle }] } = data;
+			console.log(dataTitle, descTitle)
+			// 数据标题 描述标题
+		}
+		console.hr('----------分割线----------');
+
+		T('三、默认值');
+		{
+			let a, b, c;
+			[a, b, c = 3] = [1, 2];
+			console.log(a, b, c)
+			// 1 2 3
+		}
+
+		{
+			let a, b, c;
+			[a, b, c = 3] = [1, 2, 4];
+			console.log(a, b, c)
+			// 1 2 4
+		}
+
+		{
+			let { a = 1, b = 2 } = { a: 2 };
+			console.log(a, b);
+			// 2 2
+		}
+		console.hr('----------分割线----------');
+	</script>
+	<script>
+		appendCode('jsCo', 'code');
+		hljs.initHighlightingOnLoad();
+	</script>
+</body>
+
+</html>

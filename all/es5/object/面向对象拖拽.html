@@ -8,7 +8,7 @@
     <title>面向对象拖拽</title>
     <link rel="shortcut icon" href="../../../img/ico.ico">
     <link rel="stylesheet" href="../../../css/common.css">
-    <script src="../../../js/common.js"></script>
+    <link rel="stylesheet" href="../../../css/monokai.css">
     <style>
         .div {
             position: absolute;
@@ -42,8 +42,11 @@
     <div class="div bg-pink" id="div2">2</div>
 
     <div class="ctn">
-        <pre id="pre"></pre>
+        <pre><code id="code"></code></pre>
     </div>
+
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
     <script id='jsCo'>
         new Drag('div1');
         new Drag('div2');
@@ -87,7 +90,8 @@
     </script>
 
     <script>
-        appendJsCode('jsCo', 'pre');
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
     </script>
 </body>
 
