@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>类</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../../css/monokai.css">
+</head>
+
+<body>
+    <h1>类</h1>
+    <ul class="note list-style-dot">
+        <li>总结</li>
+        <li>基本语法</li>
+        <li>继承</li>
+        <li>getter</li>
+        <li>setter</li>
+        <li>静态方法</li>
+        <li>静态属性</li>
+    </ul>
+
+    <div class="ctn">
+        <pre><code id="code"></code></pre>
+    </div>
+
+    <a class="fixed-right-bottom" href="https://www.jianshu.com/p/d36b06a8010e" target="_blank">参考博文</a>
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
+    <script id="jsCo">
+        T('一、基本语法');
+        {
+            class Person {
+                constructor(name = 'name', age = 0) {
+                    this.name = name;
+                    this.age = age;
+                }
+            }
+
+            let Hulk = new Person('Hulk', 30);
+            console.log(Hulk);
+        }
+        console.hr('----------分割线----------');
+
+        T('二、继承');
+        {
+            class Person {
+                constructor(name = 'name', age = 0) {
+                    this.name = name;
+                    this.age = age;
+                }
+            }
+
+            class Avenger extends Person {
+                constructor(name = 'nickname', age = 30, role = 'avenger') {
+                    super(name, age, role);
+                    this.role = role;
+                }
+            }
+
+            let Tony = new Avenger('Tony', '35');
+            console.log(Tony);
+        }
+        console.hr('----------分割线----------');
+
+        T('三、getter,setter');
+        {
+            class Person {
+                constructor(name, age) {
+                    this.name = name;
+                    this.age = age;
+                }
+
+                get getName() { //getName看起来是一个方法，其实它是一个属性
+                    return `通过getter返回${this.name}`;
+                }
+
+                set setName(val) {
+                    this.name = val;
+                }
+            }
+
+            let person = new Person('Tony', '30');
+            console.log(person.getName);
+
+            person.setName = 'Stark';
+            console.log(person.getName);
+        }
+        console.hr('----------分割线----------');
+
+        T('四、静态方法');
+        {
+            class Person {
+                constructor(name = 'Rica') {
+                    this.name = name;
+                }
+
+                static tell() {
+                    console.log('我是静态方法，我是被类调用的而不是被类的实例（对象）调用的');
+                }
+            }
+            Person.tell();
+        }
+        console.hr('----------分割线----------');
+
+        T('五、静态属性');
+        {
+            class Person {
+                constructor(name = 'Rica') {
+                    this.name = name;
+                }
+            }
+
+            Person.sex = 'men';
+            console.log('我是静态属性' + Person.sex);
+        }
+        console.hr('----------分割线----------');
+    </script>
+    <script>
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+
+</html>

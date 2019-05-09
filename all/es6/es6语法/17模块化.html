@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>模块化</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../../css/monokai.css">
+</head>
+
+<body>
+    <h1>模块化</h1>
+    <ul class="note list-style-dot">
+        <li></li>
+    </ul>
+
+    <div class="ctn">
+        <pre><code id="code"></code></pre>
+    </div>
+
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
+    <script id="jsCo">
+        /* 
+        export let A=123;
+        
+        export function test(){
+          console.log('test');
+        }
+        
+        export class Hello{
+          test(){
+            console.log('class');
+          }
+        } 
+        */
+
+        let A = 123;
+        let test = function () {
+            console.log('test');
+        }
+        
+        class Hello {
+            test() {
+                console.log('class');
+            }
+        }
+
+        export default {
+            A,
+            test,
+            Hello
+        }
+
+    </script>
+    <script>
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+
+</html>

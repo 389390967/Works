@@ -3,7 +3,7 @@ function appendCode(jsCodeId, codeId) {
     var jsCode = document.getElementById(jsCodeId).innerHTML;
     var codeTag = document.getElementById(codeId);
 
-    var tagRe1 = /<(ul|\/ul|li|\/li|p|\/p)>/g;
+    var tagRe1 = /<(ul|\/ul|li|\/li|p|\/p|script|\/script)>/g;
     var consoleLine = /console.+(.+分割线.+);/g;
     var consoleRed = /console\.red|preTi\('(.+)'\);/g;
     var consoleTitle = /T\('(.+)'\);/g;
@@ -17,40 +17,6 @@ function appendCode(jsCodeId, codeId) {
         .replace(preTxet, '<i class="white">$1</i>');
 
     codeTag.innerHTML = code;
-}
-
-// 输出js代码在页面
-function appendJsCode(jsCodeId, preId) {
-    var jsCode = document.getElementById(jsCodeId).innerHTML;
-    var pre = document.getElementById(preId);
-
-    var textRe1 = /\/\/\s([一二三四五六七八九十\d]+、.+\s*)/g;
-    var textRe2 = /(\/\/.+\s*)/g;
-    var keysRe1 = /(var|let|const|function|Class|console|log|null|undefined)/g;
-    var keysRe2 = /(new|return|for)/g;
-    var keysRe3 = /(\s[A-Z]+\w*\.|alert)/g;
-    var keysRe4 = /\.(\w+\b)(?=\()/g;
-    var keysRe5 = /(\bthis\b)/g;
-    var tagRe1 = /<(ul|\/ul|li|\/li|p|\/p)>/g;
-    var consoleLine = /console.+(.+分割线.+);/g;
-    var consoleRed = /console\.red|preTi\('(.+)'\);/g;
-    var consoleTitle = /T\('(.+)'\);/g;
-    var strRe = /('.*?')/g;
-
-    var code = jsCode.replace(consoleLine, '<i class="line-blue"></i>')
-        .replace(consoleRed, '<i class="red">$1</i>')
-        .replace(consoleTitle, '<span>$1</span>')
-        .replace(textRe1, '<span>$1</span>')
-        .replace(textRe2, '<span class="gray">$1</span>')
-        .replace(keysRe1, '<i>$1</i>')
-        .replace(keysRe2, '<strong>$1</strong>')
-        .replace(keysRe3, '<i class="green">$1</i>')
-        .replace(keysRe4, '.<i class="green">$1</i>')
-        .replace(keysRe5, '<i class="yellow-1">$1</i>')
-        .replace(tagRe1, '&lt;$1&gt;')
-        .replace(strRe, '<i class="yellow">$1</i>');
-
-    pre.innerHTML = code;
 }
 
 // 在 pre 标签中输出提示

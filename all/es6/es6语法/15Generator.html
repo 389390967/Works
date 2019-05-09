@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Generator</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../../css/monokai.css">
+</head>
+
+<body>
+    <h1>Generator</h1>
+    <ul class="note list-style-dot">
+        <li>总结</li>
+        <li>一、Genertaor基本定义</li>
+        <li>二、Genertaor和iterator的关系</li>
+        <li>三、状态机</li>
+        <li>四、抽奖</li>
+        <li>五、长轮询</li>
+    </ul>
+
+    <div class="ctn">
+        <pre><code id="code"></code></pre>
+    </div>
+
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
+    <script id="jsCo">
+        T('一、Genertaor基本用法');
+        {
+            // Generator也是解决异步操作一个方法
+            let tell = function* () {
+                yield 'a';
+                yield 'b';
+                return 'c'
+            };
+
+            let k = tell();
+
+            console.log(k.next());
+            console.log(k.next());
+            console.log(k.next());
+            console.log(k.next());
+        }
+        console.hr('----------分割线----------');
+
+        T('二、Genertaor和iterator的关系');
+        {
+            let obj = {};
+            obj[Symbol.iterator] = function* () {
+                yield 1;
+                yield 2;
+                yield 3;
+            }
+
+            for (let value of obj) {
+                console.log(value);
+            }
+        }
+        console.hr('----------分割线----------');
+
+        T('三、状态机');
+        {
+            let state = function* () {
+                while (1) {
+                    yield 'A';
+                    yield 'B';
+                    yield 'C';
+                }
+            }
+            let status = state();
+            console.log(status.next());
+            console.log(status.next());
+            console.log(status.next());
+            console.log(status.next());
+            console.log(status.next());
+        }
+
+        /* 
+        {
+            let state = async function () {
+                while (1) {
+                    await 'A';
+                    await 'B';
+                    await 'C';
+                }
+            }
+            let status = state();
+            console.log(status.next());
+            console.log(status.next());
+            console.log(status.next());
+            console.log(status.next());
+            console.log(status.next());
+        } 
+        */
+        console.hr('----------分割线----------');
+
+        T('四、抽奖');
+        {
+            let draw = function (count) {
+                /* --
+                省略具体的抽奖逻辑
+                -- */
+
+                console.info(`剩余${count}次`);
+            }
+
+            let residue = function* (count) {
+                while (count > 0) {
+                    count--;
+                    yield draw(count);
+                }
+            }
+
+            let start = residue(5);
+            let btn = document.createElement('button');
+            btn.id = 'start';
+            btn.className = 'btn bg-blue';
+            btn.textContent = '抽奖';
+            document.body.appendChild(btn);
+            document.getElementById('start').addEventListener('click', function () {
+                start.next();
+            }, false);
+        }
+        console.hr('----------分割线----------');
+
+        T('五、长轮询');
+        {
+            let num = 5;
+            let ajax = function* () {
+                yield new Promise(function (resolve, reject) {
+                    num--;
+                    setTimeout(() => {
+                        resolve({ code: num });
+                    }, 200);
+                });
+            }
+
+            let pull = function () {
+                let generator = ajax();
+                let step = generator.next();
+                step.value.then(function (data) {
+                    if (data.code != 0) {
+                        setTimeout(() => {
+                            console.log('请求中...');
+                            pull();
+                        }, 1000);
+                    } else {
+                        console.log(data);
+                    }
+                });
+            }
+            pull();
+            console.hr('----------分割线----------');
+        }
+    </script>
+    <script>
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+
+</html>

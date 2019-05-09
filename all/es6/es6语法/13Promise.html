@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Promise</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../../css/monokai.css">
+    <style>
+        .img {
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Promise</h1>
+    <ul class="note list-style-dot">
+        <li>总结</li>
+        <li>一、ES5中传统的回调方法解决异步</li>
+        <li>二、Promise解决回调</li>
+        <li>三、Promise解决多重回调</li>
+        <li>四、Promise的错误捕获，catch</li>
+        <li>五、实例：所有图片加载完再添加到页面</li>
+        <li>六、实例：有一张图片加载完再添加到页面</li>
+    </ul>
+
+    <div class="ctn">
+        <pre><code id="code"></code></pre>
+    </div>
+
+    <div class="ctn text-center" id="imgBox"></div>
+
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
+    <script id="jsCo">
+        T('一、ES5中传统的回调方法解决异步');
+        {
+            let ajax = function (callback) {
+                console.log('执行');
+
+                setTimeout(function () {
+                    callback && callback.call()
+                }, 1000);
+            };
+
+            ajax(function () {
+                console.log('一、ES5中传统的回调方法解决异步：回调');
+            })
+        }
+        console.hr('----------分割线----------');
+
+        T('二、Promise解决回调');
+        {
+            let ajax = function () {
+                console.log('执行');
+
+                return new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        resolve()
+                    }, 1000);
+                })
+            };
+
+            ajax().then(function () {
+                console.log('二、Promise解决回调：resolve()');
+            });
+
+            /* --
+            在结果上和传统的回调方法是一样的，但是在编写和可读性上有很大的优势
+            -- */
+        }
+        console.hr('----------分割线----------');
+
+        T('三、Promise解决多重回调');
+        {
+            let ajax = function () {
+                console.log('执行');
+
+                return new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        resolve()
+                    }, 1000);
+                })
+            };
+
+            ajax().then(function () {
+                return new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        resolve()
+                    }, 1000);
+                });
+            }).then(function () {
+                console.log('三、Promise解决多重回调：resolve()');
+            })
+        }
+        console.hr('----------分割线----------');
+
+        T('四、Promise的错误捕获，catch');
+        {
+            let ajax = function (num) {
+                console.log('执行');
+
+                return new Promise(function (resolve, reject) {
+                    if (num > 5) {
+                        resolve(num)
+                    } else {
+                        throw new Error('出错了')
+                    }
+                });
+            }
+
+            ajax(6).then(function (num) {
+                console.log(num);
+            }).catch(function (err) {
+                console.log(err);
+            });
+
+            ajax(3).then(function (num) {
+                console.log(num);
+            }).catch(function (err) {
+                console.log(err);
+            });
+        }
+        console.hr('----------分割线----------');
+
+        T('五、实例：所有图片加载完再添加到页面');
+        {
+            function loadImg(src) {
+                return new Promise((resolve, reject) => {
+                    let img = document.createElement('img');
+                    img.className = 'img';
+                    img.src = src;
+                    img.onload = function () {
+                        resolve(img);
+                    };
+                    img.onerror = function (err) {
+                        reject(err);
+                    }
+                });
+            }
+
+            function showImgs(imgs) {
+                imgs.forEach((img) => {
+                    document.getElementById('imgBox').appendChild(img);
+                });
+            }
+
+            Promise.all([
+                loadImg('https://389390967.github.io/Works/img/body.jpg'),
+                loadImg('https://389390967.github.io/Works/img/div.jpg'),
+                loadImg('https://389390967.github.io/Works/img/a.jpg'),
+            ]).then(showImgs);
+
+            /* --
+            Promise.all将3个loadImg Promise实例合成一个新的Promise实例，
+            等新的Promise的实例执行完再促发then(showImgs)，
+            即执行完三个loadImg Promise再促发then(showImgs)。
+            -- */
+        }
+        console.hr('----------分割线----------');
+
+        T('六、实例：有一张图片加载完再添加到页面');
+        {
+            function loadImg(src) {
+                return new Promise((resolve, reject) => {
+                    let img = document.createElement('img');
+                    img.className = 'img';
+                    img.src = src;
+                    img.onload = function () {
+                        resolve(img);
+                    };
+                    img.onerror = function (err) {
+                        reject(err);
+                    }
+                });
+            }
+
+            function showImgs(img) {
+                document.getElementById('imgBox').appendChild(img);
+            }
+
+            Promise.race([
+                loadImg('https://389390967.github.io/Works/img/html.jpg'),
+                loadImg('https://389390967.github.io/Works/img/class.jpg'),
+                loadImg('https://389390967.github.io/Works/img/id.jpg'),
+            ]).then(showImgs);
+        }
+        console.hr('----------分割线----------');
+    </script>
+    <script>
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+
+</html>

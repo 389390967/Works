@@ -4,108 +4,212 @@
 <head>
     <meta charset="UTF-8">
     <title>Symbol</title>
-    <link rel="shortcut icon" href="../../../img/ico.ico">
-    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="shortcut icon" href="../../img/ico.ico">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/monokai.css">
 </head>
 
 <body>
     <h1>Symbol</h1>
-    <ul class="note list-style-dot">
-        <li>总结</li>
-        <li>Symbol的概念</li>
-        <li>Symbol的作用</li>
-    </ul>
 
     <div class="ctn">
-        <pre id="pre"></pre>
+        <pre><code id="code"></code></pre>
     </div>
 
-    <script src="../../../js/common.js"></script>
+    <div class="fixed-right-bottom">
+        <a href="https://www.zhihu.com/question/34079683" target="_blank">参考 |</a>
+        <a href="http://perfectionkills.com/javascript-quiz/" target="_blank">Perfection Kills |</a>
+        <a href="https://kangax.github.io/nfe/#credits" target="_blank">Named function expressions demystified |</a>
+        <a href="http://dmitrysoshnikov.com/ecmascript/chapter-1-execution-contexts/" target="_blank">ECMA-262 in detail</a>
+    </div>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/highlight.min.js"></script>
     <script id="jsCo">
+        T('1');
         {
             (function () {
-                console.log(arguments);
                 console.log(typeof arguments);
                 return typeof arguments;
-            })(1);
+            })();
         }
+        // arguments 是一个类似数组的对象
+        console.hr('----------分割线----------');
 
+        T('2');
         {
-            var f = function g() { return 23; };
-            console.log(typeof g());
+            var f2 = function g() { return 23; };
+            // typeof g();
+            // Uncaught ReferenceError: g is not defined
         }
+        /* --
+        在 JS 里，声明函数只有 2 种方法：
+        第 1 种： 普通函数直接声明function a () {return b;}（这种在解析时会被优先处理）。
 
+        第 2 种： var a = function () {return b;} 这种也被称为表达式类型，因为右边部分已经成为一个表达式的一部分，无法再被正常访问。
+
+        除此之外，类似于 var foo = function bar(){...} 这样的东西统一按 2 方法处理，即在函数外部无法通过 bar 访问到函数，因为这已经变成了一个表达式。
+
+        但为什么不是 "undefined"？这里如果求 typeof g ，会返回 undefined，但求的是 g()，所以会去先去调用函数 g，这里就会直接抛出异常，所以是 Error。
+        -- */
+        console.hr('----------分割线----------');
+
+        T('3');
         {
             (function (x) {
                 delete x;
+                console.log(x);
                 return x;
             })(1);
         }
+        /* --
+        delete是用来删除对象的属性的，它不能够删除函数中传递的参数,
+        所以这里 delete x 这句其实并没有什么用，函数正常执行传参及返回参数。
+        -- */
+        console.hr('----------分割线----------');
 
+        T('4');
         {
-            var y = 1, x = y = typeof x;
-            x;
+            var a = 1, b = a = typeof b;
+            console.log(b);
+            console.log(typeof b);
+            console.log(b);
         }
+        /* --
+        1、赋值运算符由右向左运算。
+        2、typeof b 因为b未声明，因此结果是"undifined"（注意：typeof的结果都是以字符串形式给出的）。
+        -- */
+        console.hr('----------分割线----------');
+
+        T('5');
         {
-            (function f(f) {
+            (function f5(f) {
+                console.log(typeof f());
                 return typeof f();
             })(function () { return 1; });
         }
+        console.hr('----------分割线----------');
 
+        T('6');
         {
-            var foo = {
+            var foo6 = {
                 bar: function () { return this.baz; },
                 baz: 1
             };
             (function () {
+                console.log(typeof arguments[0]());
                 return typeof arguments[0]();
-            })(foo.bar);
+            })(foo6.bar);
         }
+        /* --
+        1、this指向的四种情况，其中只有作为方法调用或者apply/call强行指向的情况下才可能指向原函数
+            1 纯粹的函数调用
+            2 作为对象方法的调用
+            3 作为构造函数调用
+            4 apply/call调用
+        2、这里foo.bar中的this指向的是arguments
+        -- */
+        console.hr('----------分割线----------');
 
+        T('7');
         {
-            var f = (function f() { return "1"; }, function g() { return 2; })();
-            typeof f;
+            var foo7 = {
+                bar: function () { return this.baz; },
+                baz: 1
+            }
+            console.log(typeof (f = foo7.bar)());
+            typeof (f = foo7.bar)();
         }
+        /* --
+        1、这题还是在考察this的指向问题。
+        2、foo.bar的确是方法的调用方式，但是在赋值给f的时候这个this的指向还是被改变了。
+        3、把调用函数拆分一下就清楚了
 
+        var f = foo7.bar
+        typeof f();
+
+        4、这样在调用形式上又是普通函数调用，this指向window；同上题，答案是undefined
+        -- */
+
+        console.hr('----------分割线----------');
+
+        T('8');
+        {
+            var f8 = (function f8() { return "1"; }, function g() { return 2; })();
+            console.log(typeof f8);
+            typeof f8;
+        }
+        /* --
+        1、此处是一个立即执行函数，但是在前面的包含函数的圆括号（命名空间）中出现了2个函数，并用逗号分隔。
+        2、这种形式，最终圆括号返回的是最后的一个值。
+        -- */
+        console.hr('----------分割线----------');
+
+        T('9');
         {
             var x = 1;
-            if (function f() { }) {
-                x += typeof f;
+            if (function f9() { }) {
+                x += typeof f9;
                 console.log(x);
             }
         }
+        /* --
+        1、首先在if判定中，函数f9的布尔值是true；所以判定条件成立，可以执行if中的语句。
+        2、函数f9在正常声明的情况下，typeof f9应该是"function"。
+        3、但是题目中f9函数只是if的判定条件，没有经过声明；所以typeof f9返回"undefined"。
+        -- */
+        console.hr('----------分割线----------');
 
+        T('10');
         {
             var x = [typeof x, typeof y][1];
+            console.log(typeof typeof x);
             typeof typeof x;
         }
+        console.hr('----------分割线----------');
 
+        T('11');
         {
-            (function (foo) {
-                return typeof foo.bar;
-            })({ foo: { bar: 1 } });
+            (function (foo11) {
+                console.log(typeof foo11.bar);
+                return typeof foo11.bar;
+            })({ foo11: { bar: 1 } });
         }
+        console.hr('----------分割线----------');
 
+        T('12');
         {
 
-            (function f() {
-                function f() { return 1; }
-                return f();
-                function f() { return 2; }
-            })();
+            console.log((function f12() {
+                function f12() { return 1; }
+                return f12();
+                function f12() { return 2; }
+            })());
         }
+        console.hr('----------分割线----------');
 
+        T('13');
         {
-            function f() { return f; }
-            new f() instanceof f;
+            function f13() {
+                return f13;
+            }
+            console.log(new f13() instanceof f13);
         }
+        console.hr('----------分割线----------');
 
+        T('14');
         {
             with (function (x, undefined) { }) length;
         }
+        /* --
+        对with语句有一点了解的话，就知道这代码相当于
+        (function(x,undefined) {}).length
+        而一个函数对象的length属性是该函数的形参个数，故答案是2
+        -- */
+        console.hr('----------分割线----------');
     </script>
     <script>
-        appendJsCode('jsCo', 'pre');
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
     </script>
 </body>
 

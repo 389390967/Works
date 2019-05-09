@@ -214,11 +214,25 @@ var data = [
             }
         ]
     },
-    //ECMAScript5
+    //ES5
     {
         "title": "ECMAScript5",
         "link": "javascript:;",
         "child": [{
+                "title": "作用域",
+                "link": "javascript:;",
+                "child": [{
+                    "title": "作用域概念-预解析规则、表达式",
+                    "link": "all/es5/作用域/scope_1.html"
+                }, {
+                    "title": "全局与局部作用域解析、作用域链",
+                    "link": "all/es5/作用域/scope_2.html"
+                }, {
+                    "title": "调用局部数据、全局声明、for嵌套函数中i取值",
+                    "link": "all/es5/作用域/scope_3.html"
+                }]
+            },
+            {
                 "title": "字符串方法",
                 "link": "javascript:;",
                 "child": [{
@@ -285,7 +299,7 @@ var data = [
             }
         ]
     },
-    //ECMAScript6
+    //ES6
     {
         "title": "ECMAScript6",
         "link": "javascript:;",
@@ -325,11 +339,35 @@ var data = [
                     "title": "函数扩展",
                     "link": "all/es6/es6语法/06函数扩展.html"
                 }, {
+                    "title": "对象扩展",
+                    "link": "all/es6/es6语法/07对象扩展.html"
+                }, {
                     "title": "字符串方法",
                     "link": "all/es6/es6语法/08字符串方法.html"
                 }, {
                     "title": "Symbol",
                     "link": "all/es6/es6语法/09Symbol.html"
+                }, {
+                    "title": "set-map数据结构",
+                    "link": "all/es6/es6语法/10set-map数据结构.html"
+                }, {
+                    "title": "Proxy和Reflect",
+                    "link": "all/es6/es6语法/11Proxy和Reflect.html"
+                }, {
+                    "title": "类",
+                    "link": "all/es6/es6语法/12类.html"
+                }, {
+                    "title": "Promise",
+                    "link": "all/es6/es6语法/13Promise.html"
+                }, {
+                    "title": "iterator",
+                    "link": "all/es6/es6语法/14iterator.html"
+                }, {
+                    "title": "Generator",
+                    "link": "all/es6/es6语法/15Generator.html"
+                }, {
+                    "title": "Decorator 修饰器",
+                    "link": "all/es6/es6语法/16Decorator.html"
                 }]
             }
         ]
@@ -374,6 +412,18 @@ var data = [
                 "title": "拖拽",
                 "link": "all/demo/拖拽.html"
             }]
+        }]
+    },
+    // 其他
+    {
+        "title": "其他",
+        "link": "javascript:;",
+        "child": [{
+            "title": "css3开门动画",
+            "link": "all/other/open-door/open-door.html"
+        }, {
+            "title": "趣味测试",
+            "link": "all/other/test.html"
         }]
     },
 ];

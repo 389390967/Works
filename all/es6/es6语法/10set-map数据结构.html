@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>set map数据结构</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../../css/monokai.css">
+</head>
+
+<body>
+    <h1>set map数据结构</h1>
+    <ul class="note list-style-dot">
+        <li>ES6中引入了4种新的数据结构</li>
+        <li>集合（Set）</li>
+        <li>弱集合（WeakSet）</li>
+        <li>映射（Map）</li>
+        <li>弱映射（WeakMap）</li>
+        <li>重点是要掌握两个数据结构的具体代表的含义、用法以及各数据结构与Map 和 Set 之间的相互转换。</li>
+    </ul>
+
+    <div class="ctn">
+        <pre><code id="code"></code></pre>
+    </div>
+
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
+    <script id="jsCo">
+        T('一、Set');
+        T('1、声明和解析');
+        /* --
+        1、Set 对象允许你存储任何类型的唯一值，无论是原始值或者是对象引用。
+        2、一个类似数组的集合
+        -- */
+        {
+            var set1 = new Set();
+            set1.add(1);
+            set1.add(2);
+            set1.add(3);
+            var set2 = new Set([1, 2, 3]);
+            console.log(set1);
+            console.log(set2);
+        }
+        console.hr('----------分割线----------');
+
+        T('2、属性和方法');
+        {
+            let setList = new Set(['size', 'add', 'delete', 'has', 'clear']);
+
+            console.log('长度：', setList.size);
+            console.log('增：', setList.add('test'));
+            console.log('删：', setList.delete('test'), setList);
+            console.log('查：', setList.has('add'));
+            setList.clear();
+            console.log(setList);
+        }
+        console.hr('----------分割线----------');
+
+        T('3、遍历');
+        {
+            let setArr = ['size', 'add', 'delete', 'has', 'clear'];
+            let setList = new Set(setArr);
+
+            for (let key of setList.keys()) {
+                console.log(key);
+            }
+            console.hr('----------分割线----------');
+
+            for (let value of setList.values()) {
+                console.log(value);
+            }
+            console.hr('----------分割线----------');
+
+            for (let [key, value] of setList.entries()) {
+                console.log(key, value);
+            }
+            console.hr('----------分割线----------');
+
+            setList.forEach(function (item) {
+                console.log(item);
+            })
+        }
+        console.hr('----------分割线----------');
+
+
+        T('4、应用');
+        T('（1）Array 与 Set 相互转换');
+        {
+            var arr = ['1', '2', '3'];
+
+            // 用Set构造器将Array转换为Set
+            var setList = new Set(arr);
+            console.log(setList);
+
+            // 用...(扩展运算符)操作符将Set转换为Array
+            console.log([...setList]);
+
+            // 用数组静态方法 Array.from
+            console.log(Array.from(setList));
+        }
+        console.hr('----------分割线----------');
+
+        T('（2）、数组去重');
+        {
+            var arr = [1, 1, 1, 2, 3, 2, 4];
+            // 用数组静态方法 Array.from
+            let arr1 = Array.from(new Set(arr));
+            console.log(arr1);
+
+            // 或用扩展运算符（...）
+            let arr2 = [...new Set(arr)];
+            console.log(arr2);
+        }
+        console.hr('----------分割线----------');
+
+        T('（3）、字符串转成 Set');
+        {
+            var text = 'Ethan';
+            var setStr = new Set(text);
+            console.log(setStr);
+            console.log(setStr.size);
+        }
+        console.hr('----------分割线----------');
+
+        T('（4）、实现并集、交集、差集');
+        {
+            let a = new Set([1, 2, 3]);
+            let b = new Set([4, 3, 2]);
+            // 并集
+            let union = new Set([...a, ...b]); // Set {1, 2, 3, 4} 
+            console.log(union);
+
+            // 交集
+            let intersect = new Set([...a].filter(x => b.has(x))); // Set { 2, 3} 
+            console.log(intersect);
+
+            // 差集
+            let difference = new Set([...a].filter(x => !b.has(x))); // Set { 1 }
+            console.log(difference);
+        }
+        console.hr('----------分割线----------');
+
+        T('二、WeakSet');
+        T('1、声明');
+        {
+            var Stark = { 'Tony': 'Iron Man' };
+            var Rogers = { 'Steve': 'Captian America' };
+            var Banner = { 'Bruce': 'Hulk' };
+            var WeakSet1 = new WeakSet();
+            WeakSet1.add(Stark);
+            WeakSet1.add(Rogers);
+            WeakSet1.add(Banner);
+            var WeakSet2 = new WeakSet([Stark, Rogers, Banner]);
+            console.log(WeakSet1);
+            console.log(WeakSet2);
+        }
+        console.hr('----------分割线----------');
+
+        T('2、与 Set 区别');
+        /* --
+        （1）、WeakSet 的成员只能是对象，而不能是其他类型的值。
+        （2）、WeakSet 中的对象都是弱引用，即垃圾回收机制不考虑WeakSet对该对象的引用。
+        （3）、WeakSet 没有size属性，没有办法遍历其成员。 
+        -- */
+
+        T('3、方法');
+        {
+            let add = {}; let del = {}; let has = {}; let test = {};
+            let weakSetList = new WeakSet([add, del, has]);
+
+            console.log('增：', weakSetList.add(test));
+            console.log('删：', weakSetList.delete(test), weakSetList);
+            console.log('查：', weakSetList.has(add));
+            console.log(weakSetList);
+        }
+        console.hr('----------分割线----------');
+
+        T('三、Map');
+        T('1、声明和解析');
+        {
+            /* --
+            1、Map 对象保存键值对。任何值(对象或者原始值) 都可以作为一个键或一个值。
+            2、一个类似json的集合
+            -- */
+            let map1 = new Map();
+            let arrKey = [];
+            let jsonKey = {};
+            let fnKey = function () { };
+            map1.set(arrKey, 'array');
+            map1.set(jsonKey, 'json');
+            map1.set(fnKey, 'function');
+            console.log(map1);
+            console.log(map1.get(arrKey));
+
+            let map2 = new Map([['Tony', 'Iron Man'], ['Steve', 'Captain America']]);
+            console.log(map2);
+            console.log(map2.get('Tony'));
+        }
+        console.hr('----------分割线----------');
+
+        T(' 2、属性和方法');
+        {
+            // size, set, delete, get, has, clear
+            var mapList = new Map([['Tony Stark', 'Iron Man'], ['Scott Lang', 'Ant Man'], ['Peter Parker', 'Spider-Man']]);
+            console.log(mapList.size);
+            console.log(mapList.set('Thor', 'Thor'));
+            console.log(mapList.delete('Thor'));
+            console.log(mapList.get('Tony Stark'));
+            console.log(mapList.has('Thor'));
+            console.log(mapList.clear());
+            console.log(mapList);
+        }
+        console.hr('----------分割线----------');
+
+
+        T('3、遍历');
+        {
+            let mapArr = new Map([['Tony', 'Iron Man'], ['Steve', 'Captain America'], ['Bruce', 'Hulk'], ['Thor', 'Thor'], ['Natasha', 'Black Widow'], ['Clint', 'Hawkeye']]);
+            let mapList = new Map(mapArr);
+
+            for (let key of mapList.keys()) {
+                console.log(key);
+            }
+            console.hr('----------分割线----------');
+
+            for (let value of mapList.values()) {
+                console.log(value);
+            }
+            console.hr('----------分割线----------');
+
+            for (let [key, value] of mapList.entries()) {
+                console.log(key, value);
+            }
+            console.hr('----------分割线----------');
+
+            mapList.forEach(function (item) {
+                console.log(item);
+            });
+        }
+        console.hr('----------分割线----------');
+
+        T('4、应用');
+        T('（1）、Map 与 数组之间的相互转换');
+        {
+            // Map 转数组
+            var myMap = new Map();
+            myMap.set('Tony', 'Iron Man');
+            myMap.set('Scott', 'Ant-Man');
+            myMap.set('Peter', 'Spider-Man');
+            console.log([...myMap]);
+
+            // 数组转Map
+            const arr = new Map([['Steve', 'Captian America'], ['Carol', 'Captain Marvel']]);
+            console.log(arr);
+        }
+        console.hr('----------分割线----------');
+
+        T('（2）、Map 与对象相互转换');
+        {
+            // Map 转对象
+            function mapToObj(mapList) {
+                let obj = Object.create(null);
+                for (let [key, val] of mapList) {
+                    obj[key] = val;
+                }
+                return obj;
+            }
+            const mapList = new Map([['Steve', 'Captian America'], ['Carol', 'Captain Marvel']]);
+            console.log(mapToObj(mapList));
+            console.hr('----------分割线----------');
+
+            // 对象转 Map
+            function objToMap(obj) {
+                let map = new Map();
+                for (let key of Object.keys(obj)) {
+                    map.set(key, obj[key]);
+                }
+                return map;
+            }
+            var obj = { 'Steve': 'Captian America', 'Carol': 'Captain Marvel' };
+            console.log(objToMap(obj));
+        }
+        console.hr('----------分割线----------');
+
+
+        T('（3）、Map 与 JSON 相互转换');
+        {
+            // JSON.stringify()方法是将一个对象或者数组转换为一个JSON字符串
+            function mapToJson(mapList) {
+                return JSON.stringify(mapToObj(mapList));
+            }
+            const myMap = new Map([['Steve', 'Captian America'], [123, 'Captain Marvel']]);
+            console.log(mapToJson(myMap));
+            console.hr('----------分割线----------');
+
+            // Map 的键名为非字符串
+            function mapToArrayJson(map) {
+                return JSON.stringify([...map]);
+            }
+            console.log(mapToArrayJson(myMap));
+            console.hr('----------分割线----------');
+
+            // Json 转 Map
+            // 正常情况下所有键名都为字符串
+            function jsonToMap(jsronStr) {
+                return objToMap(JSON.parse(jsronStr));
+            }
+            console.log(jsonToMap('{ "Steve": "Captian America", "Carol": "Captain Marvel" }'));
+        }
+        console.hr('----------分割线----------');
+
+
+        T('四、WeakMap');
+        T('1、声明');
+        {
+            // WeakMap 结构与Map结构类似，也是用于生成键值对的集合。
+            let weakmap = new WeakMap();
+            let avengers = {};
+            weakmap.set(avengers, 123);
+            console.log(weakmap.get(avengers));
+        }
+        console.hr('----------分割线----------');
+
+        T('2、与 Map 区别');
+        /* --
+        （1）、WeakMap 只接受对象作为键名（null 除外），不接受其他类型的值作为键名。
+        （2）、WeakMap 的键名所指向的对象不计入垃圾回收机制。
+        （3）、没有keys() 、values() 、entries() 遍历操作。
+        （4）、没有size 属性。
+        （5）、不支持clear() 方法。 
+        -- */
+        console.hr('----------分割线----------');
+
+        T('3、应用');
+        T('（1）、以DOM 节点作为键名的场景应用');
+        {
+            let body = document.getElementsByTagName('body')[0];
+            let bodyWeakMap = new WeakMap();
+            bodyWeakMap.set(body, { timesClicked: 0 });
+
+            body.addEventListener('click', function () {
+                let bodyData = bodyWeakMap.get(body);
+                bodyData.timesClicked++;
+                console.log(bodyData.timesClicked);
+            }, false);
+        }
+        console.hr('----------分割线----------');
+
+        T('（2）、部署私有属性');
+        {
+            const _counter = new WeakMap();
+            const _action = new WeakMap();
+
+            class Countdown {
+                constructor(counter, action) {
+                    _counter.set(this, counter);
+                    _action.set(this, action);
+                }
+                dec() {
+                    let counter = _counter.get(this);
+                    if (counter < 1) return;
+                    counter--;
+                    _counter.set(this, counter);
+                    if (counter === 0) {
+                        _action.get(this)();
+                    }
+                }
+            }
+
+            const c = new Countdown(2, () => console.log('DONE'));
+
+            c.dec()
+            c.dec()
+        }
+        console.hr('----------分割线----------');
+
+        T('五、map 和 array数据结构对比');
+        {
+            let map = new Map();
+            let array = [];
+
+            //  增
+            map.set('Tony', 1)
+                .set('Pepper', 2);
+            array.push({ 'Tony': 1 })
+            array.push({ 'Pepper': 2 });
+            console.log(map);
+            console.log(array);
+            console.hr('----------分割线----------');
+
+            // 删
+            map.delete('Tony');
+            let index = array.findIndex(item => item.Tony);
+            array.splice(index, 1);
+            console.log(map);
+            console.log(array);
+            console.hr('----------分割线----------');
+
+            // 改
+            map.set('Pepper', 1);
+            array.forEach(item => item.Pepper ? item.Pepper = 1 : '');
+            console.log(map);
+            console.log(array);
+            console.hr('----------分割线----------');
+
+            //  查
+            let mapExist = map.has('Pepper');
+            let Pepper = map.get('Pepper');
+            let arrayExist = array.find(item => item.Pepper);
+            console.log(mapExist);
+            console.log(Pepper);
+            console.log(arrayExist);
+        }
+        console.hr('----------分割线----------');
+
+        T('六、set 和 array数据结构对比');
+        {
+            let set = new Set();
+            let array = [];
+            let Pepper = { Pepper: 1 };
+
+            // 增
+            set.add({ 'Tony': 1 })
+                .add(Pepper);
+            array.push({ 'Tony': 1 });
+            array.push({ 'Pepper': 2 });
+            console.log(set);
+            console.log(array);
+            console.hr('----------分割线----------');
+
+            // 删
+            set.forEach(item => item.Tony ? set.delete(item) : '');
+            let index = array.findIndex(item => item.Tony);
+            array.splice(index, 1);
+            console.log(set);
+            console.log(array);
+            console.hr('----------分割线----------');
+
+            // 改
+            set.forEach(item => item.Pepper ? item.Pepper = 1 : '');
+            array.forEach(item => item.Pepper ? item.Pepper = 1 : '');
+            console.log(set);
+            console.log(array);
+            console.hr('----------分割线----------');
+
+            // 查
+            let setExist = set.has(Pepper);
+            let arrayExist = array.find(item => item.Pepper);
+            console.log(setExist);
+            console.log(arrayExist);
+        }
+        console.hr('----------分割线----------');
+
+        T('七、map，set，object对比');
+        {
+
+            let map = new Map();
+            let set = new Set();
+            let obj = {};
+            let Tony = { Tony: 1 };
+            let Pepper = { Pepper: 2 };
+
+            // 增
+            map.set('Tony', 1)
+                .set('Pepper', 2);
+            set.add(Tony)
+                .add(Pepper);
+            obj['Tony'] = 1;
+            obj.Pepper = 2;
+            console.log(map);
+            console.log(set);
+            console.log(obj);
+            console.hr('----------分割线----------');
+
+            // 删
+            map.delete('Tony');
+            set.delete(Tony);
+            delete obj.Tony;
+            console.log(map);
+            console.log(set);
+            console.log(obj);
+            console.hr('----------分割线----------');
+
+            // 改
+            map.set('Pepper', 1);
+
+            /* --
+            引用类型的值保存，如果不知道他的指针，就需要遍历整个 set 结构来修改
+            set.forEach(item => item.Pepper ? item.Pepper = 1 : '');
+            这里是因为 set 保存的是引用类型的值，所以可以直接修改引用（内存指针） 
+            -- */
+            Pepper.Pepper = 1;
+            obj['Pepper'] = 1;
+            console.log(map);
+            console.log(set);
+            console.log(obj);
+            console.hr('----------分割线----------');
+
+            // 查
+            console.log(map.has('Pepper'));
+            console.log(map.get('Pepper'));
+            console.log(set.has(Pepper));
+            console.log('Pepper' in obj);
+
+        }
+        console.hr('----------分割线----------');
+    </script>
+    <script>
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+
+</html>

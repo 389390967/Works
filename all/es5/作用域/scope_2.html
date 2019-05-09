@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>全局与局部作用域解析、作用域链</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../../css/monokai.css">
+</head>
+
+<body>
+    <h1>全局与局部作用域解析、作用域链</h1>
+
+    <div class="ctn">
+        <pre><code id="code"></code></pre>
+    </div>
+
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
+    <script>
+        var Rica = 'Rica';
+    </script>
+
+    <script id='jsCo'>
+        T('一、全局的从上到下');
+        console.log('我是上一个<script>标签中的：' + Rica);
+        console.hr('----------分割线----------');
+
+        {
+            var a = 1;
+            function fn1() {
+                console.log(a);						// undefined
+                var a = 2;
+            }
+            fn1();
+            console.log(a);							// 1
+        }
+        /* --
+        第一步：预解析，找var function 参数 放到仓库
+        a = undefined;
+        fn1 = function fn1() {
+                console.log(a);
+                var a = 2;
+            }
+        
+        第二步：逐行执行代码
+        表达式：a = 1;
+        函数调用：fn1();执行函数调用的时候又开始了一个函数的作用域
+        函数里面的第一步预解析 a = undefined;
+        函数里面的第二步逐行执行代码 console.log(a);
+        -- */
+        console.hr('----------分割线----------');
+
+        T('二、作用域链的由里到外');
+        {
+            var a = 1;
+            function fn1() {
+                console.log(a);						// 1
+                a = 2;
+            }
+            fn1();
+            console.log(a);							// 2
+        }
+        /* --
+        第一步：预解析，找var function 参数 放到仓库
+        a = undefined;
+        fn1 = function fn1() {
+                console.log(a);
+                a = 2;
+            }
+        
+        第二步：逐行执行代码
+        表达式：a = 1;
+        函数调用：fn1();执行函数调用的时候又开始了一个函数的作用域
+        函数 fn1 里面没有 var function 所以不用预解析
+        直接开始执行console.log(a);
+        console.log(a) 的时候在 fn1 预解析的小仓库中找不 a，js解析器会顺着 作用域链 找到上一级的 a = 1
+        -- */
+    </script>
+
+    <script>
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+
+</html>

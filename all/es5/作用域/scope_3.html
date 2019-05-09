@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>调用局部数据、全局声明、for嵌套函数中i取值</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../../css/monokai.css">
+</head>
+
+<body>
+    <h1>调用局部数据、全局声明、for嵌套函数中i取值</h1>
+
+    <div class="ctn">
+        <pre><code id="code"></code></pre>
+    </div>
+
+    <input type="button" value="按钮1" />
+    <input type="button" value="按钮2" />
+    <input type="button" value="按钮3" />
+
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
+    <script>
+        var Rica = 'Rica';
+    </script>
+
+    <script id='jsCo'>
+        {
+            var a = 1;
+            function fn1(a) { // 参数a 等于函数fn1域内的 var a 
+                console.log(a); // 1
+                a = 2; // 因为参数a 被声明了，所以 a = 2 改变的的只是fn1内部的a 
+            }
+            fn1(a);
+            console.log(a); // 1
+        }
+        console.hr('----------分割线----------');
+
+        {
+            console.log(fn2);		// FF 不能对下面的函数进行预解析
+            if (true) {
+                function fn2() {
+                    console.log(123);
+                }
+            }
+        }
+        console.hr('----------分割线----------');
+
+        window.onload = function () {
+            var aBtn = document.getElementsByTagName('input');
+
+            for (var i = 0; i < aBtn.length; i++) {
+                aBtn[i].onclick = function () {
+                    console.log(i);
+
+                    for (var i = 0; i < aBtn.length; i++) { // 在这个地方i被重新预解析了，所以console.log(i)出来的是undefined
+                        aBtn[i].style.background = 'yellow';
+                    }
+                };
+            }
+        };
+        console.hr('----------分割线----------');
+    </script>
+
+    <script>
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+
+</html>

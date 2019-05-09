@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Decorator</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../../css/monokai.css">
+</head>
+
+<body>
+    <h1>Decorator</h1>
+    <ul class="note list-style-dot">
+        <li>Decorator是一个函数用来修改类的行为</li>
+    </ul>
+
+    <div class="ctn">
+        <pre><code id="code"></code></pre>
+    </div>
+
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
+    <script id="jsCo">
+        {
+            let readonly = function (target, name, descriptor) {
+                descriptor.writable = false;
+                return descriptor
+            };
+
+            class Test {
+                @readonly
+                time() {
+                    return '2017-03-11'
+                }
+            }
+
+            let test = new Test();
+
+            // test.time=function(){
+            //   console.log('reset time');
+            // };
+
+            console.log(test.time());
+        }
+
+
+        {
+            let typename = function (target, name, descriptor) {
+                target.myname = 'hello';
+            }
+
+            @typename
+            class Test {
+
+            }
+
+            console.log('类修饰符', Test.myname);
+            // 第三方库修饰器的js库：core-decorators; npm install core-decorators
+        }
+
+        {
+            let log = (type) => {
+                return function (target, name, descriptor) {
+                    let src_method = descriptor.value;
+                    descriptor.value = (...arg) => {
+                        src_method.apply(target, arg);
+                        console.log(`log ${type}`);
+                    }
+                }
+            }
+
+            class AD {
+                @log('show')
+                show() {
+                    console.log('ad is show');
+                }
+
+                @log('click')
+                click() {
+                    console.log('ad is click');
+                }
+            }
+
+            let ad = new AD();
+            ad.show();
+            ad.click();
+        }
+
+    </script>
+    <script>
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+
+</html>

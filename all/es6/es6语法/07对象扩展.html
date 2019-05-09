@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ES6对象扩展</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../../css/monokai.css">
+</head>
+
+<body>
+    <h1>ES6对象扩展</h1>
+    <ul class="note list-style-dot">
+        <li>总结</li>
+        <li>参数默认值</li>
+        <li>rest 参数</li>
+        <li>name 属性</li>
+        <li>箭头函数</li>
+        <li>this绑定</li>
+        <li>尾调用</li>
+    </ul>
+
+    <div class="ctn">
+        <pre><code id="code"></code></pre>
+    </div>
+
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
+    <script id="jsCo">
+        T('一、简洁表示法');
+        {
+            let o = 1;
+            let k = 2;
+            let es5 = {
+                o: o,
+                k: k
+            };
+            let es6 = {
+                o,
+                k
+            };
+            console.log(es5);
+            console.log(es6);
+
+            let es5_method = {
+                hello: function () {
+                    console.log('hello');
+                }
+            };
+            let es6_method = {
+                hello() {
+                    console.log('hello');
+                }
+            };
+            console.log(es5_method.hello(), es6_method.hello());
+        }
+        console.hr('----------分割线----------');
+
+        T('二、属性表达式');
+        {
+            let a = 'b';
+            let es5_obj = {
+                a: 'c',
+            };
+
+            let es6_obj = {
+                [a]: 'c'
+            }
+
+            console.log(es5_obj);
+            console.log(es6_obj);
+        }
+        console.hr('----------分割线----------');
+
+        T('三、新增API');
+        {
+            console.log('字符串', Object.is('abc', 'abc'), 'abc' === 'abc');
+            console.log('数组', Object.is([], []), [] === []);
+            // Object.is 和 === 在功能上没区别
+
+            console.log('拷贝', Object.assign({ a: 'a' }, { b: 'b' }));
+
+            let test = { k: 123, o: 456 };
+            for (let [key, value] of Object.entries(test)) {
+                console.log([key, value]);
+            }
+        }
+
+        {
+            /* --
+            扩展运算符
+            let {a,b,...c}={a:'test',b:'kill',c:'ddd',d:'ccc'};
+            c={
+              c:'ddd',
+              d:'ccc'
+            } 
+            -- */
+        }
+
+    </script>
+    <script>
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+
+</html>

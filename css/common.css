@@ -101,8 +101,8 @@ td:nth-child(1),th:nth-child(1){color:#ff502c;text-align:center}
 .yellow{color:#E7DB74;}
 .yellow *{color:#E7DB74!important;}
 .yellow-1{color:#FD971F!important;}
-.gray{color:#666666!important;}
-.gray *{color:#666666!important;}
+.gray{color:#666666;}
+.gray *{color:#666666;}
 .white{color:#fff;}
 .pre-title{color:#ff502c;font-size:16px;}
 .pre-title *{color:#ff502c!important;font-size:16px;font-weight:normal!important;}

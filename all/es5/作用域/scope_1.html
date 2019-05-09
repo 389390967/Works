@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>作用域概念-预解析规则、表达式</title>
+    <link rel="shortcut icon" href="../../../img/ico.ico">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../../css/monokai.css">
+</head>
+
+<body>
+    <h1>作用域概念-预解析规则、表达式</h1>
+
+    <ul class="note">
+        <li>一、作用域</li>
+        <li>解析：js代码起作用的空间或区域</li>
+        <li>作用：对js代码读写</li>
+    </ul>
+
+    <div class="ctn">
+        <pre><code id="code"></code></pre>
+    </div>
+
+    <script src="../../../js/common.js"></script>
+    <script src="../../../js/highlight.min.js"></script>
+    <script id='jsCo'>
+        T('二、浏览器/js解析器(它的运行简单的分为两步)');
+        T('第一步：预解析，js解析器先找 var、function、参数 等声明');
+        /* --
+        1、找到 var 的时候，并不会去读 var 后面变量的值，而是先将 var 的变量定义为 undefined 放到仓库里，如：a = undefined；
+        所以所有的变量，在代码正式运行之前，都提前赋了一个值：未定义（undefined）。
+        2、找到 function 的时候，所有函数在代码正式运行之前都是一个函数块，如 function(){ alert("123");} ；遇到重名的只留下一个，变量和函数重名了只留下函数。
+        -- */
+
+        {
+            console.log(a); // undefined
+            console.log(fn); // function fn(params) { }
+            var a = 'Rica';
+            function fn(params) { };
+            // 不会先执行console.log(); 而是先找到var a、function fn， 将a定义为 undefined，fn定义为function fn(params) { }，然后放到仓库里。
+        }
+
+        T('第二步：逐行解读代码');
+        // 1、第一步把信息预解析到一个仓库里，逐行执行代码时会先在这个仓库中找信息。
+        {
+            console.log(b);
+            // 打印的是 undefined 而不是"1"，因为执行的代码的时候先从仓库中读到 b = undefined;
+            var b = 1;
+            console.log(b);
+        }
+
+        // 2、遇到表达式（如：+、-、*、/、%、参数）才会改变仓库里面的变量的值，如：a = 1。
+        console.log(test);					// function test (){ console.log(4); }
+        var test = 1;
+        console.log(test);					// 1
+        function test() { console.log(2); }
+        console.log(test);					// 1
+        var test = 3;
+        console.log(test);					// 3
+        function test() { console.log(4); }
+        console.log(test);					// 3
+
+        console.log(typeof test);
+
+        test();
+
+        preTi('谨记：从上到下，从里到外。');
+    </script>
+    <script>
+        appendCode('jsCo', 'code');
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+
+</html>
